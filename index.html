@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>메뉴 추천 페이지</title>
+    <style>
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .category-section {
+            margin-bottom: 20px;
+        }
+        .btn-group label {
+            width: 70px;
+            text-align: center;
+            margin: 5px;
+        }
+        #recommendButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #videoContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">뭐먹지?</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="category-container">
+            <div class="category-section">
+                <h3>나라별</h3>
+                <div class="btn-group" role="group" aria-label="Nation category group">
+                    <input type="checkbox" class="btn-check" id="nation-all" autocomplete="off" data-category="전체_나라">
+                    <label class="btn btn-outline-primary" for="nation-all">전체</label>
+
+                    <input type="checkbox" class="btn-check" id="nation-korean" autocomplete="off" data-category="한식">
+                    <label class="btn btn-outline-primary nation-button" for="nation-korean">한식</label>
+
+                    <input type="checkbox" class="btn-check" id="nation-japanese" autocomplete="off" data-category="일식">
+                    <label class="btn btn-outline-primary nation-button" for="nation-japanese">일식</label>
+
+                    <input type="checkbox" class="btn-check" id="nation-chinese" autocomplete="off" data-category="중식">
+                    <label class="btn btn-outline-primary nation-button" for="nation-chinese">중식</label>
+
+                    <input type="checkbox" class="btn-check" id="nation-western" autocomplete="off" data-category="양식">
+                    <label class="btn btn-outline-primary nation-button" for="nation-western">양식</label>
+                </div>
+            </div>
+            <div class="category-section">
+                <h3>시간별</h3>
+                <div class="btn-group" role="group" aria-label="Time category group">
+                    <input type="checkbox" class="btn-check" id="time-all" autocomplete="off" data-category="전체_시간">
+                    <label class="btn btn-outline-primary" for="time-all">전체</label>
+
+                    <input type="checkbox" class="btn-check" id="time-morning" autocomplete="off" data-category="아침">
+                    <label class="btn btn-outline-primary time-button" for="time-morning">아침</label>
+
+                    <input type="checkbox" class="btn-check" id="time-lunch" autocomplete="off" data-category="점심">
+                    <label class="btn btn-outline-primary time-button" for="time-lunch">점심</label>
+
+                    <input type="checkbox" class="btn-check" id="time-dinner" autocomplete="off" data-category="저녁">
+                    <label class="btn btn-outline-primary time-button" for="time-dinner">저녁</label>
+
+                    <input type="checkbox" class="btn-check" id="time-night" autocomplete="off" data-category="야식">
+                    <label class="btn btn-outline-primary time-button" for="time-night">야식</label>
+                </div>
+            </div>
+        </div>
+
+        <button id="recommendButton" class="btn btn-primary">메뉴추천!</button>
+
+        <div id="menuContainer" style="display: none;">
+            <h2>오늘은 이거다!</h2>
+            <p id="recommendedMenu"></p>
+        </div>
+
+        <div id="videoContainer" style="display: none;">
+            <div id="videoContent"></div>
+        </div>
+    </main>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuData = [
+            { name: '짜장면', categories: ['중식', '점심', '저녁','야식'], video: 'https://www.youtube.com/embed/v8Y_oHBFotE?si=JT7VEX_xBL2rOrkF&amp;start=179' },
+            { name: '탕수육', categories: ['중식', '점심', '저녁','야식'], video: 'https://www.youtube.com/embed/xx6HdrulgPM?si=6qom9iCFl-e2XzNP&amp;start=44' },
+            { name: '김치찌개', categories: ['한식', '점심', '저녁'], video: 'https://www.youtube.com/embed/fOuPsNp94hA?si=YXqgIjuaMPw-OyQ3&amp;start=93' },
+            { name: '비빔밥', categories: ['한식', '점심', '저녁'], video: 'https://www.youtube.com/embed/Nx5vi905knk?si=J4H7bRJL8QB3IHDC&amp;start=123' },
+            { name: '라면', categories: ['한식', '점심', '저녁','야식'], video: 'https://www.youtube.com/embed/x94_2x_-p0Q?si=934pY4affgQWJV2d&amp;start=45' },
+            { name: '라멘', categories: ['일식', '점심', '저녁'], video: 'https://www.youtube.com/embed/DbkXaZTQK_k?si=ZKMW23S-Nm_yzseZ&amp;start=168' },
+            { name: '토스트', categories: ['양식', '아침'], video: 'https://www.youtube.com/embed/TCDPXisHsfA?si=47yZZX7wvjmFYLb1&amp;start=204' },
+            { name: '팬케이크', categories: ['양식', '아침'], video: 'https://www.youtube.com/embed/hNfcXgYNS84?si=7WIp9p9wto_KkdSs&amp;start=182' },
+            { name: '스테이크', categories: ['양식', '점심','저녁'], video: 'https://www.youtube.com/embed/XX7h3z0me1s?si=Se8z3kKqgveplHRb&amp;start=265' },
+        ];
+
+        let selectedCategories = [];
+        let selectedTimeCategory = null;
+
+        // 나라별, 시간별 카테고리 선택 로직
+        document.querySelectorAll('.btn-check').forEach(button => {
+            button.addEventListener('change', function() {
+                const category = this.getAttribute('data-category');
+
+                if (category.includes('나라')) {
+                    if (category === "전체_나라") {
+                        // 전체 나라 선택 시
+                        selectedCategories = ["한식", "일식", "중식", "양식"];
+                        document.querySelectorAll('.nation-button').forEach(btn => {
+                            btn.previousElementSibling.checked = false;
+                        });
+                        this.checked = true;
+                    } else {
+                        // 다른 나라 선택 시 전체 나라 버튼 해제
+                        document.querySelector('#nation-all').checked = false;
+
+                        if (this.checked) {
+                            selectedCategories.push(category);
+                        } else {
+                            selectedCategories = selectedCategories.filter(cat => cat !== category);
+                        }
+                    }
+                } else if (category.includes('시간')) {
+                    if (category === "전체_시간") {
+                        // 전체 시간 선택 시
+                        selectedTimeCategory = null;
+                        document.querySelectorAll('.time-button').forEach(btn => {
+                            btn.previousElementSibling.checked = false;
+                        });
+                        this.checked = true;
+                    } else {
+                        // 다른 시간 선택 시 전체 시간 버튼 해제
+                        document.querySelector('#time-all').checked = false;
+
+                        if (this.checked) {
+                            selectedTimeCategory = category;
+                        } else {
+                            selectedTimeCategory = null;
+                        }
+                    }
+                }
+            });
+        });
+
+        // 메뉴 추천 버튼 클릭 이벤트
+        document.getElementById('recommendButton').addEventListener('click', function() {
+            let filteredMenus;
+
+            if (selectedCategories.length === 0) {
+                filteredMenus = menuData;
+            } else {
+                filteredMenus = menuData.filter(menu =>
+                    selectedCategories.some(cat => menu.categories.includes(cat))
+                );
+            }
+
+            if (selectedTimeCategory) {
+                filteredMenus = filteredMenus.filter(menu => menu.categories.includes(selectedTimeCategory));
+            }
+
+            if (filteredMenus.length > 0) {
+                const randomMenu = filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
+
+                document.getElementById('recommendedMenu').innerText = randomMenu.name;
+                document.getElementById('menuContainer').style.display = 'block';
+
+                const iframe = document.createElement('iframe');
+                iframe.width = "560";
+                iframe.height = "315";
+                iframe.src = randomMenu.video;
+                iframe.frameBorder = "0";
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+
+                document.getElementById('videoContent').innerHTML = '';
+                document.getElementById('videoContent').appendChild(iframe);
+                document.getElementById('videoContainer').style.display = 'block';
+            } else {
+                alert('선택한 카테고리에 맞는 메뉴가 없습니다.');
+            }
+        });
+    });
+
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
