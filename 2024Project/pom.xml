@@ -3,23 +3,15 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cs.dit</groupId>
-<<<<<<< HEAD
-    <artifactId>controller</artifactId>
-    <name>board</name>
-    <packaging>jar</packaging>
-=======
     <artifactId>board</artifactId>
     <name>project</name>
     <packaging>war</packaging>
->>>>>>> branch 'main' of https://github.com/99JeonJongMin/Project.git
     <version>1.0.0-BUILD-SNAPSHOT</version>
     <properties>
         <java-version>1.8</java-version>
         <org.springframework-version>3.1.1.RELEASE</org.springframework-version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
         <org.slf4j-version>1.6.6</org.slf4j-version>
-        <maven.compiler.source>11</maven.compiler.source> <!-- 11로 수정 -->
-        <maven.compiler.target>11</maven.compiler.target> <!-- 11로 수정 -->
     </properties>
     <dependencies>
         <!-- Spring -->
@@ -148,16 +140,11 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-<<<<<<< HEAD
-                    <source>11</source> <!-- 11로 수정 -->
-                    <target>11</target> <!-- 11로 수정 -->
-=======
                     <source>1.8</source>
                     <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
->>>>>>> branch 'main' of https://github.com/99JeonJongMin/Project.git
                 </configuration>
             </plugin>
 
