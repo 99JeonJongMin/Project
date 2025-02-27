@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import cs.dit.domain.MemberVO;
 import cs.dit.mapper.MemberMapper;
-import lombok.extern.log4j.Log4j;
-@Log4j
 @Service
 public class MemberServicempl implements MemberService {
 	

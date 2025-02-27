@@ -16,7 +16,6 @@ import cs.dit.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@Log4j
 public class MemberController {
 	
 	@Autowired
@@ -25,7 +24,6 @@ public class MemberController {
 
 	@PostMapping("/memreg")
 	public String memreg(MemberVO member, RedirectAttributes rttr) {
-		log.info("memreg" + member);
 		
 		int count = service.memreg(member);
 		
@@ -58,7 +56,6 @@ public class MemberController {
 	
 	@GetMapping("/memreg")
 	public void memreg() {
-		log.info("register----------------------------");
 	}
 	
 	

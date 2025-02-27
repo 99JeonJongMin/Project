@@ -11,11 +11,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
-import lombok.extern.log4j.Log4j;
 
 @RequestMapping("/board/*")
 @Controller
-@Log4j
 public class BoardController {
 	
 	@Autowired
@@ -23,31 +21,26 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public void list(Model model) {
-		log.info("list----------------------------");
 		model.addAttribute("list", service.getList());
 	}
 	
 	@GetMapping("/list2")
 	public void list2(Model model) {
-		log.info("list2----------------------------");
 		model.addAttribute("list", service.getList2());
 	}
 
 	@GetMapping("/index")
 	public void index(Model model) {
-		log.info("index----------------------------");
 		model.addAttribute("index", service.getList());
 	}
 	
 	@GetMapping("/login")
 	public void login(Model model) {
-		log.info("login----------------------------");
 		model.addAttribute("login", service.getList());
 	}
 	
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
-		log.info("register" + board);
 		
 		int count = service.register(board);
 		
@@ -59,12 +52,10 @@ public class BoardController {
 	
 	@GetMapping("/register")
 	public void register() {
-		log.info("register----------------------------");
 	}
 	
 	@GetMapping("/modifyBoard")
 	public void modifyBoard() {
-		log.info("register----------------------------");
 	}
 	
 	@GetMapping({"/get", "/modify"})
@@ -75,7 +66,6 @@ public class BoardController {
 	// POST method for modifying a board
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
-		log.info("modify " + board);
 		
 		// Call the service to update the board
 		int count = service.modify(board);
@@ -90,7 +80,6 @@ public class BoardController {
 	// POST method for deleting a board
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
-		log.info("remove bno: " + bno);
 		
 		// Call the service to delete the board
 		int count = service.remove(bno);

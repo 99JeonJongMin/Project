@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cs.dit.domain.BoardVO;
-import cs.dit.domain.MemberVO;
 import cs.dit.mapper.BoardMapper;
-import lombok.extern.log4j.Log4j;
-@Log4j
 @Service
 public class BoardServiceImpl implements BoardService {
 	
@@ -22,7 +19,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> getList() {
 		
-		log.info(mapper.getList());
 		
 		List<BoardVO> list = mapper.getList();
 
@@ -33,7 +29,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> getList2() {
 		
-		log.info(mapper.getList2());
 		
 		List<BoardVO> list = mapper.getList2();
 
