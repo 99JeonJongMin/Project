@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cs.dit</groupId>
@@ -22,21 +22,20 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter Web -->
+        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version> <!-- ${spring.boot.version}을 통해 일관된 버전 관리 -->
+            <version>${spring.boot.version}</version>
         </dependency>
-
-        <!-- HikariCP for database connection pool -->
+        
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>5.0.1</version>
         </dependency>
 
-        <!-- Lombok (used for getter, setter, and other boilerplate code generation) -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -44,21 +43,21 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- AspectJ for Aspect Oriented Programming -->
+        <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.21</version>
         </dependency>
 
-        <!-- Logback for logging functionality -->
+        <!-- Logging (Logback) -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
 
-        <!-- Jakarta Servlet API -->
+        <!-- Jakarta Servlet -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -66,7 +65,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JUnit 5 for unit testing -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -82,9 +81,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
+                <configuration>
+                    <mainClass>cs.dit.BoardApplication</mainClass> <!-- 메인 클래스 경로 지정 -->
+                </configuration>
             </plugin>
 
-            <!-- Java Compiler Plugin for JDK 17 -->
+            <!-- Java Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -92,7 +94,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>  <!-- 인코딩 설정 -->
+                    <encoding>UTF-8</encoding>  <!-- 인코딩 설정 추가 -->
                 </configuration>
             </plugin>
         </plugins>
