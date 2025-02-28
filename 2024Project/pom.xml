@@ -8,38 +8,57 @@
     <artifactId>board</artifactId>
     <name>project</name>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.0-BUILD-SNAPSHOT</version>
 
     <properties>
         <java.version>17</java.version>
         <spring.boot.version>3.2.2</spring.boot.version>
         <logback.version>1.4.11</logback.version>
         <junit.version>5.10.0</junit.version>
+        <org.aspectj-version>1.6.10</org.aspectj-version>
+        <org.slf4j-version>1.6.6</org.slf4j-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter (Spring MVC 포함) -->
+        <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version>
+            <version>${spring.boot.version}</version> <!-- ${spring.boot.version}을 통해 일관된 버전 관리 -->
         </dependency>
 
-        <!-- AspectJ -->
+        <!-- HikariCP for database connection pool -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version>
+        </dependency>
+
+        <!-- Lombok (used for getter, setter, and other boilerplate code generation) -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>  <!-- 최신 버전 사용 -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- AspectJ for Aspect Oriented Programming -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.9.21</version>
         </dependency>
 
-        <!-- Logging (Logback) -->
+        <!-- Logback for logging functionality -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
 
-        <!-- Jakarta Servlet API (Spring 6 이상은 Jakarta EE 사용) -->
+        <!-- Jakarta Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -47,54 +66,13 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JSTL -->
-        <dependency>
-            <groupId>jakarta.servlet.jsp.jstl</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-
-        <!-- JUnit 5 -->
+        <!-- JUnit 5 for unit testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-		    <version>4.0.1</version>  <!-- 최신 버전으로 변경 -->
-		    <scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>javax.servlet.jsp</groupId>
-		    <artifactId>javax.servlet.jsp-api</artifactId>
-		    <version>2.3.3</version>  <!-- JSP API도 최신으로 변경 -->
-		    <scope>provided</scope>
-		</dependency>
-		
-				<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.2</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>taglibs</groupId>
-		    <artifactId>standard</artifactId>
-		    <version>1.1.2</version>
-		</dependency>
-				
     </dependencies>
 
     <build>
@@ -106,7 +84,7 @@
                 <version>${spring.boot.version}</version>
             </plugin>
 
-            <!-- Java Compiler Plugin -->
+            <!-- Java Compiler Plugin for JDK 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -114,15 +92,8 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <release>${java.version}</release>
+                    <encoding>UTF-8</encoding>  <!-- 인코딩 설정 -->
                 </configuration>
-            </plugin>
-
-            <!-- WAR Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
             </plugin>
         </plugins>
     </build>

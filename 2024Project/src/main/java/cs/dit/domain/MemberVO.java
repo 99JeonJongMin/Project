@@ -40,4 +40,8 @@ public class MemberVO {
 		 this.passwd = passwd;
 	        
 	    }
+	public String getPasswd() {
+		
+		return this.passwd;
+	}
 }
