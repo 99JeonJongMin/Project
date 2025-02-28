@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
-import lombok.extern.log4j.Log4j;
 
 @Controller
 public class MemberController {

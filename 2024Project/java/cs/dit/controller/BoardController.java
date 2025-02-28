@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
-import lombok.extern.log4j.Log4j;
 
 @RequestMapping("/board/*")
 @Controller
@@ -24,7 +23,7 @@ public class BoardController {
 	public void list(Model model) {
 		model.addAttribute("list", service.getList());
 	}
-	
+	 
 	@GetMapping("/list2")
 	public void list2(Model model) {
 		model.addAttribute("list", service.getList2());
