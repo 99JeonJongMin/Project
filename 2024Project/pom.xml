@@ -40,9 +40,14 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-           <version>1.2.11</version> <!-- Logback 1.2.x 버전 사용 -->
+           <version>1.4.11</version> <!-- Logback 1.2.x 버전 사용 -->
         </dependency>
-
+		
+		 <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-reload4j</artifactId>
+        <version>1.7.36</version> <!-- SLF4J와 Reload4j 간 연결을 위한 의존성 -->
+    </dependency>
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
