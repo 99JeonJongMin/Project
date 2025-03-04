@@ -32,7 +32,7 @@ public class BoardController {
 	@GetMapping("/index")
 	public void index(Model model) {
 		model.addAttribute("index", service.getList());
-	}
+	}	
 	
 	@GetMapping("/login")
 	public void login(Model model) {

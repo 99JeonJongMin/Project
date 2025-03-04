@@ -1,4 +1,5 @@
 cs\dit\service\BoardServiceImpl.class
+cs\dit\BoardApplication.class
 cs\dit\domain\MemberVO.class
 cs\dit\service\BoardService.class
 cs\dit\controller\BoardController.class
