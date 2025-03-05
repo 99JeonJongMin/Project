@@ -12,13 +12,15 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring.boot.version>3.4.3</spring.boot.version>
+        <spring.boot.version>3.0.4</spring.boot.version> <!-- Spring Boot 3.0.x -->
         <logback.version>1.4.11</logback.version>
         <junit.version>5.10.0</junit.version>
-        <org.aspectj-version>1.6.10</org.aspectj-version>
-        <org.slf4j-version>1.7.36</org.slf4j-version>
+        <org.aspectj-version>1.9.9</org.aspectj-version> <!-- AspectJ 최신 버전 -->
+        <org.slf4j-version>2.0.0-alpha1</org.slf4j-version> <!-- SLF4J 최신 버전 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+  		<maven.compiler.target>1.6</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -32,26 +34,26 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version> <!-- 사용 중인 Spring Boot 버전과 호환되는 버전을 사용 -->
+            <version>2.2.0</version> <!-- Spring Boot 3.x 호환 버전 -->
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>6.2.3</version> <!-- 현재 사용 중인 Spring 버전에 맞춰 수정 -->
+            <version>6.0.5</version> <!-- Spring 6.0.x 버전 -->
         </dependency>
 
         <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version> <!-- SLF4J 최신 버전 -->
+            <version>${org.slf4j-version}</version>
         </dependency>
 
         <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.12</version> <!-- Logback 버전 조정 -->
+            <version>1.4.11</version> <!-- Logback 최신 버전 -->
         </dependency>
 
         <!-- Lombok -->
@@ -64,17 +66,21 @@
 
         <!-- Jakarta Servlet API -->
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0</version>
-            <scope>provided</scope>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.21</version>
+            <version>1.9.9</version> <!-- 최신 버전 -->
         </dependency>
 
         <!-- JUnit 5 -->
@@ -89,12 +95,12 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.10</version>
+            <version>3.5.10</version> <!-- MyBatis 최신 안정 버전 -->
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.0</version> <!-- Spring Boot 3.x 호환 버전 -->
         </dependency>
 
         <!-- MySQL Connector -->
@@ -140,17 +146,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.2.0</version> <!-- Maven Resources 최신 버전 -->
                 <executions>
                     <execution>
-                        <id>resources</id> <!-- execution id 명시적 지정 -->
+                        <id>resources</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>resources</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>test-resources</id> <!-- execution id 명시적 지정 -->
+                        <id>test-resources</id>
                         <phase>process-test-resources</phase>
                         <goals>
                             <goal>testResources</goal>
@@ -175,17 +181,17 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
-                        <version>2.6</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
-                                <id>resources-eclipse</id> <!-- execution id 명시적 지정 -->
+                                <id>resources-eclipse</id>
                                 <phase>process-resources</phase>
                                 <goals>
                                     <goal>resources</goal>
                                 </goals>
                             </execution>
                             <execution>
-                                <id>test-resources-eclipse</id> <!-- execution id 명시적 지정 -->
+                                <id>test-resources-eclipse</id>
                                 <phase>process-test-resources</phase>
                                 <goals>
                                     <goal>testResources</goal>
