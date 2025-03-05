@@ -6,6 +6,7 @@ cs\dit\controller\BoardController.class
 cs\dit\domain\BoardVO.class
 cs\dit\mapper\MemberMapper.class
 cs\dit\mapper\BoardMapper.class
+cs\dit\config\MyBatisConfig.class
 cs\dit\controller\BoardController$RootController.class
 cs\dit\controller\MemberController.class
 cs\dit\service\MemberService.class
