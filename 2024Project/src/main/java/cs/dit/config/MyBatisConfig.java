@@ -17,16 +17,24 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"cs.dit.domain", "cs.dit.service", "cs.dit.controller"}) // 기존 XML의 context:component-scan 대체
 public class MyBatisConfig {
 
-    @Bean
-    public DataSource dataSource() {
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-        hikariConfig.setJdbcUrl("jdbc:mysql://root:SBTTUYnZfNNatCJukJSEoIcDhkavuMRO@mainline.proxy.rlwy.net:58440/railway");
-        hikariConfig.setUsername("jmax");
-        hikariConfig.setPassword("1111");
+	@Bean
+	public DataSource dataSource() {
+	    HikariConfig hikariConfig = new HikariConfig();
+	    hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-        return new HikariDataSource(hikariConfig);
-    }
+	    // 환경 변수에서 직접 읽기
+	    String host = System.getenv("MYSQL_HOST");
+	    String port = System.getenv("MYSQL_PORT");
+	    String database = System.getenv("MYSQL_DATABASE");
+	    String username = System.getenv("MYSQL_USER");
+	    String password = System.getenv("MYSQL_PASSWORD");
+
+	    hikariConfig.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
+	    hikariConfig.setUsername(username);
+	    hikariConfig.setPassword(password);
+
+	    return new HikariDataSource(hikariConfig);
+	}
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
