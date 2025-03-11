@@ -9,7 +9,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -21,7 +20,6 @@ public class MyBatisConfig {
 	public DataSource dataSource() {
 	    HikariConfig hikariConfig = new HikariConfig();
 	    hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-
 	    // 환경 변수에서 직접 읽기
 	    String host = System.getenv("MYSQL_HOST");
 	    String port = System.getenv("MYSQL_PORT");
