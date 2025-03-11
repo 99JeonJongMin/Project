@@ -37,7 +37,7 @@
   </head>
   <body>
   <%@include file="/WEB-INF/views/includes/header.jsp"%>
-    <link rel="stylesheet" href="/resources/css/style.css" />
+    <link href="/css/sign.css" rel="stylesheet" />
     <div>
       <link href="./resources/css/sign.css" rel="stylesheet" />
 

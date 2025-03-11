@@ -1,16 +1,6 @@
 package cs.dit.domain;
-
-
-
-
 import java.sql.Date;
-
 import lombok.Data;
-
-
-
-
-
 @Data
 public class MemberVO {
 	private String userid, passwd, name,email;

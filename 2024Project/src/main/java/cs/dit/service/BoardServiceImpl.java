@@ -13,9 +13,6 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private  BoardMapper mapper;
 	
-	
-	
-	
 	@Override
 	public List<BoardVO> getList() {
 		
