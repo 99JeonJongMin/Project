@@ -20,8 +20,8 @@ public class MyBatisConfig {
     @Bean
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/jmaxdb");
+        hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+        hikariConfig.setJdbcUrl("mysql://root:SBTTUYnZfNNatCJukJSEoIcDhkavuMRO@mainline.proxy.rlwy.net:58440/railway");
         hikariConfig.setUsername("jmax");
         hikariConfig.setPassword("1111");
 
