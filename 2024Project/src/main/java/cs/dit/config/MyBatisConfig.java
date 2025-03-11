@@ -21,7 +21,7 @@ public class MyBatisConfig {
     public DataSource dataSource() {
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-        hikariConfig.setJdbcUrl("mysql://root:SBTTUYnZfNNatCJukJSEoIcDhkavuMRO@mainline.proxy.rlwy.net:58440/railway");
+        hikariConfig.setJdbcUrl("jdbc:mysql://root:SBTTUYnZfNNatCJukJSEoIcDhkavuMRO@mainline.proxy.rlwy.net:58440/railway");
         hikariConfig.setUsername("jmax");
         hikariConfig.setPassword("1111");
 
@@ -40,3 +40,4 @@ public class MyBatisConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
+
