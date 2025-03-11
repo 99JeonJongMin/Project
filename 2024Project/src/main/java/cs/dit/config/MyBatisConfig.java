@@ -23,11 +23,11 @@ public class MyBatisConfig {
 	    hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 	    // 환경 변수에서 직접 읽기
-	    String host = System.getenv("MYSQL_HOST");
-	    String port = System.getenv("MYSQL_PORT");
-	    String database = System.getenv("MYSQL_DATABASE");
-	    String username = System.getenv("MYSQL_USER");
-	    String password = System.getenv("MYSQL_PASSWORD");
+	    String host = System.getenv("mysql.railway.internal");
+	    String port = System.getenv("3306");
+	    String database = System.getenv("railway");
+	    String username = System.getenv("root");
+	    String password = System.getenv("SBTTUYnZfNNatCJukJSEoIcDhkavuMRO");
 
 	    hikariConfig.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
 	    hikariConfig.setUsername(username);

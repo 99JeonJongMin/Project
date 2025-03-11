@@ -13,9 +13,9 @@
     <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
     
     <!-- ✅ 환경 변수 기반으로 설정 -->
-    <property name="jdbcUrl" value="jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"/>
-    <property name="username" value="${MYSQL_USER}"/>
-    <property name="password" value="${MYSQL_PASSWORD}"/>
+    <property name="jdbcUrl" value="jdbc:mysql://mysql.railway.internal:3306/railway"/>
+    <property name="username" value="root"/>
+    <property name="password" value="SBTTUYnZfNNatCJukJSEoIcDhkavuMRO"/>
 </bean>
 
 <!-- ✅ HikariCP DataSource 빈 추가 -->
