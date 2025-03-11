@@ -10,7 +10,7 @@
 	
 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     <!-- ✅ MySQL용 드라이버로 변경 -->
-    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
     
     <!-- ✅ 환경 변수 기반으로 설정 -->
     <property name="jdbcUrl" value="jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"/>
