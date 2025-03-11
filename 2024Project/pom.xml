@@ -12,78 +12,79 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring.boot.version>3.0.4</spring.boot.version> <!-- Spring Boot 3.0.x -->
+        <spring.boot.version>3.0.4</spring.boot.version>
         <logback.version>1.4.11</logback.version>
         <junit.version>5.10.0</junit.version>
-        <org.aspectj-version>1.9.9</org.aspectj-version> <!-- AspectJ 최신 버전 -->
-        <org.slf4j-version>2.0.0-alpha1</org.slf4j-version> <!-- SLF4J 최신 버전 -->
+        <aspectj.version>1.9.9</aspectj.version>
+        <slf4j.version>2.0.0</slf4j.version>
+        <mybatis.spring.version>3.0.0</mybatis.spring.version>
+        <mariadb.version>3.1.4</mariadb.version>
+        <lombok.version>1.18.30</lombok.version>
+        <jsp.jstl.version>3.0.0</jsp.jstl.version>
+        <spring.orm.version>6.0.5</spring.orm.version>
+        <tomcat.version>10.1.13</tomcat.version>
+        <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-  		<maven.compiler.target>1.6</maven.compiler.target>
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version> <!-- Spring Boot 3.x 호환 버전 -->
+            <version>${mybatis.spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>6.0.5</version> <!-- Spring 6.0.x 버전 -->
+            <version>${spring.orm.version}</version>
         </dependency>
 
-        <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j-version}</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version> <!-- Logback 최신 버전 -->
+            <version>${logback.version}</version>
         </dependency>
 
-        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jakarta Servlet API -->
         <dependency>
-            <groupId>jakarta.servlet.jsp.jstl</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+		    <groupId>jakarta.servlet.jsp.jstl</groupId>
+		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		    <version>${jsp.jstl.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.glassfish.web</groupId>
+		    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+		    <version>${jsp.jstl.version}</version>
+		</dependency>
 
-        <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.9</version> <!-- 최신 버전 -->
+            <version>${aspectj.version}</version>
         </dependency>
 
-        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -91,35 +92,35 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- MyBatis -->
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.10</version> <!-- MyBatis 최신 안정 버전 -->
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>3.0.0</version> <!-- Spring Boot 3.x 호환 버전 -->
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>${mariadb.version}</version>
         </dependency>
 
-        <!-- MySQL Connector -->
+        <!-- JSP 실행을 위한 추가 라이브러리 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.27</version>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+             <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${jakarta.servlet.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>cs.dit.BoardApplication</mainClass> <!-- 메인 클래스 경로 지정 -->
+                    <mainClass>cs.dit.BoardApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -130,11 +131,10 @@
                 </executions>
             </plugin>
 
-            <!-- Java Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -142,11 +142,10 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Resources Plugin (Added to resolve lifecycle mapping issues) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version> <!-- Maven Resources 최신 버전 -->
+                <version>${maven.resources.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>resources</id>
@@ -166,41 +165,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>eclipse</id>
-            <activation>
-                <property>
-                    <name>eclipse.platform</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <executions>
-                            <execution>
-                                <id>resources-eclipse</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>resources</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>test-resources-eclipse</id>
-                                <phase>process-test-resources</phase>
-                                <goals>
-                                    <goal>testResources</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
