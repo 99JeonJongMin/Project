@@ -42,7 +42,8 @@ public class MyBatisConfig {
 
         // JDBC URL 설정
         String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
-        
+        System.out.println("JDBC URL: " + jdbcUrl);
+
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(username);
         config.setPassword(password);
