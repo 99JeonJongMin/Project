@@ -6,35 +6,44 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
 @MapperScan("cs.dit.mapper") // MyBatis 매퍼 스캔
 @ComponentScan(basePackages = {"cs.dit.domain", "cs.dit.service", "cs.dit.controller"}) // 기존 XML의 context:component-scan 대체
 public class MyBatisConfig {
-	
-	 	@Value("${spring.datasource.url}")
-	    private String url;
+    
+    private final Environment env;
 
-	    @Value("${spring.datasource.username}")
-	    private String username;
+    public MyBatisConfig(Environment env) {
+        this.env = env;
+    }
 
-	    @Value("${spring.datasource.password}")
-	    private String password;
-	    
-	@Bean
-	public DataSource dataSource() {
-		  HikariConfig config = new HikariConfig();
-	        config.setJdbcUrl(url);
-	        config.setUsername(username);
-	        config.setPassword(password);
-	        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	        return new HikariDataSource(config);
-	}
+    @Bean
+    public DataSource dataSource() {
+        HikariConfig config = new HikariConfig();
+
+        // 환경 변수에서 DB 설정값 불러오기
+        String host = env.getProperty("MYSQLHOST", "mysql.railway.internal");
+        String port = env.getProperty("MYSQLPORT", "3306");
+        String database = env.getProperty("MYSQLDATABASE", "railway");
+        String username = env.getProperty("MYSQLUSER", "root");
+        String password = env.getProperty("MYSQLPASSWORD", "password");
+
+        // JDBC URL 설정
+        String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
+        
+        config.setJdbcUrl(jdbcUrl);
+        config.setUsername(username);
+        config.setPassword(password);
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        
+        return new HikariDataSource(config);
+    }
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
@@ -48,4 +57,3 @@ public class MyBatisConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
-
