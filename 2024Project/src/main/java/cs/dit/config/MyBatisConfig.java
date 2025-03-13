@@ -33,6 +33,12 @@ public class MyBatisConfig {
         String database = env.getProperty("MYSQLDATABASE", "railway");
         String username = env.getProperty("MYSQLUSER", "root");
         String password = env.getProperty("MYSQLPASSWORD", "password");
+        
+        System.out.println("MYSQLHOST: " + host);
+        System.out.println("MYSQLPORT: " + port);
+        System.out.println("MYSQLDATABASE: " + database);
+        System.out.println("MYSQLUSER: " + username);
+        System.out.println("MYSQLPASSWORD: " + password);
 
         // JDBC URL 설정
         String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
@@ -43,6 +49,8 @@ public class MyBatisConfig {
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         
         return new HikariDataSource(config);
+        
+        
     }
 
     @Bean
