@@ -24,5 +24,5 @@ public interface BoardMapper {
     BoardVO read(long bno);
     
     @Update("UPDATE board SET title = #{title}, content = #{content}, writer = #{writer}, updateDate = now() WHERE bno = #{bno}")
-    int update(BoardVO board);
+    int update(BoardVO board); 
 }
