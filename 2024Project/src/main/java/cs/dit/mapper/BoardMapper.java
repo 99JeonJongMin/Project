@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 import cs.dit.domain.BoardVO;
 
-@Mapper // MyBatis 매퍼 어노테이션 추가
 public interface BoardMapper {
     
     @Select("SELECT * FROM mboard")

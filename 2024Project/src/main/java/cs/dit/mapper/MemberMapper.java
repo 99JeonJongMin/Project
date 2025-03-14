@@ -3,7 +3,7 @@ package cs.dit.mapper;
 import org.apache.ibatis.annotations.*;
 import cs.dit.domain.MemberVO;
 
-@Mapper
+
 public interface MemberMapper {
 
     @Insert("INSERT INTO member (userid, passwd, name, email) VALUES (#{userid}, #{passwd}, #{name}, #{email})")
