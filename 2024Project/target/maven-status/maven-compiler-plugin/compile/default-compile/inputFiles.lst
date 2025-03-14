@@ -1,6 +1,7 @@
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\service\BoardServiceImpl.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\config\MyBatisConfig.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\repository\UserRepository.java
+C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\service\MemberServiceImpl.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\domain\UserEntity.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\service\MemberService.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\mapper\MemberMapper.java
@@ -10,5 +11,4 @@ C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\service\Boar
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\domain\MemberVO.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\controller\MemberController.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\domain\BoardVO.java
-C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\service\MemberServicempl.java
 C:\Users\Administrator\git\Project\2024Project\src\main\java\cs\dit\controller\BoardController.java
