@@ -2,8 +2,11 @@ package cs.dit.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import cs.dit.domain.BoardVO;
 
+@Mapper
 public interface BoardMapper {
 	public List<BoardVO> getList();
 	

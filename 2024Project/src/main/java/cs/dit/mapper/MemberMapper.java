@@ -1,7 +1,10 @@
 package cs.dit.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import cs.dit.domain.MemberVO;
 
+@Mapper
 public interface MemberMapper {
     public int insertmember(MemberVO member);
 
