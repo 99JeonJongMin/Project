@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "cs.dit.mapper") // MyBatis 매퍼 스캔
+@MapperScan("cs.dit.mapper") // MyBatis 매퍼 스캔
 @ComponentScan(basePackages = {"cs.dit.domain", "cs.dit.service", "cs.dit.controller"}) // 기존 XML의 context:component-scan 대체
 public class MyBatisConfig {
     
