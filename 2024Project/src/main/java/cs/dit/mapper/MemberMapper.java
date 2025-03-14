@@ -12,3 +12,4 @@ public interface MemberMapper {
     @Select("SELECT userid, passwd FROM member WHERE userid = #{userid} AND passwd = #{passwd}")
     MemberVO login(MemberVO member); // ✅ MemberVO 객체를 직접 받도록 수정
 }
+ 
