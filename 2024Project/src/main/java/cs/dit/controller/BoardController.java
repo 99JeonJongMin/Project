@@ -30,9 +30,11 @@ public class BoardController {
 	}
 
 	@GetMapping("/index")
-	public void index(Model model) {
-		model.addAttribute("index", service.getList());
+	public String index(Model model) {
+	    model.addAttribute("index", service.getList());
+	    return "board/index"; // 📌 JSP 뷰를 명시적으로 지정
 	}
+
 	
 	@GetMapping("/login")
 	public void login(Model model) {
@@ -53,7 +55,7 @@ public class BoardController {
 	@GetMapping("/register")
 	public void register() {
 	}
-	
+	 
 	@GetMapping("/modifyBoard")
 	public void modifyBoard() {
 	}
