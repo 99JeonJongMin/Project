@@ -34,6 +34,8 @@ public class MyBatisConfig {
         String username = env.getProperty("MYSQLUSER", "root");
         String password = env.getProperty("MYSQLPASSWORD", "password");
         
+        
+        
         System.out.println("MYSQLHOST: " + host);
         System.out.println("MYSQLPORT: " + port);
         System.out.println("MYSQLDATABASE: " + database);
@@ -42,7 +44,15 @@ public class MyBatisConfig {
 
         // JDBC URL 설정
         String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
-        System.out.println("JDBC URL: " + jdbcUrl);
+        
+        if (jdbcUrl == null || username == null || password == null) {
+            throw new IllegalStateException(
+                "🚨 환경변수가 설정되지 않았습니다! 🚨\n" +
+                "MYSQL_URL=" + jdbcUrl + "\n" +
+                "MYSQLUSER=" + username + "\n" +
+                "MYSQLPASSWORD=" + (password == null ? "null" : "****")
+            );
+        }
 
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(username);
