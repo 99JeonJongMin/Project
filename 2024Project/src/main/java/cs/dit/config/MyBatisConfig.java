@@ -5,48 +5,68 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = {"cs.dit.domain", "cs.dit.service", "cs.dit.controller"}) // 기존 XML의 context:component-scan 대체
 public class MyBatisConfig {
+    
+    private final Environment env;
+
+    public MyBatisConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {
+        HikariConfig hikariConfig = new HikariConfig();
+
+        // 환경변수를 사용하여 DB 정보 설정
+        hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy"); // log4jdbc 사용
+        hikariConfig.setJdbcUrl(System.getenv("MYSQL_URL"));
+        hikariConfig.setUsername(System.getenv("MYSQLUSER"));
+        hikariConfig.setPassword(System.getenv("MYSQLPASSWORD"));
         HikariConfig config = new HikariConfig();
-
-        // ✅ 환경 변수에서 DB 정보 가져오기 (Railway 또는 로컬 환경 대응)
-        String host = System.getenv().getOrDefault("MYSQLHOST", "localhost");
-        String port = System.getenv().getOrDefault("MYSQLPORT", "3306");
-        String database = System.getenv().getOrDefault("MYSQLDATABASE", "jmaxdb");
-        String username = System.getenv().getOrDefault("MYSQLUSER", "jmax");
-        String password = System.getenv().getOrDefault("MYSQLPASSWORD", "1111");
-
-        // ✅ JDBC URL 설정 (MySQL 또는 MariaDB 사용 가능)
-        String jdbcUrl = String.format(
-            "jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8",
-            host, port, database
-        );
-
-        // ✅ 환경 변수 정보 출력 (보안상 비밀번호는 제외)
-        System.out.println("✅ 데이터베이스 연결 정보:");
+        // 환경 변수에서 DB 설정값 불러오기
+        String host = env.getProperty("MYSQLHOST", "mysql.railway.internal");
+        String port = env.getProperty("MYSQLPORT", "3306");
+        String database = env.getProperty("MYSQLDATABASE", "railway");
+        String username = env.getProperty("MYSQLUSER", "root");
+        String password = env.getProperty("MYSQLPASSWORD", "password");
+        
+        
+        
         System.out.println("MYSQLHOST: " + host);
         System.out.println("MYSQLPORT: " + port);
         System.out.println("MYSQLDATABASE: " + database);
         System.out.println("MYSQLUSER: " + username);
-        System.out.println("MYSQLPASSWORD: ****"); // 보안상 비밀번호 출력 X
+        System.out.println("MYSQLPASSWORD: " + password);
+ 
+        // JDBC URL 설정
+        String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
+        
+        if (jdbcUrl == null || username == null || password == null) {
+            throw new IllegalStateException(
+                "🚨 환경변수가 설정되지 않았습니다! 🚨\n" +
+                "MYSQL_URL=" + jdbcUrl + "\n" +
+                "MYSQLUSER=" + username + "\n" +
+                "MYSQLPASSWORD=" + (password == null ? "null" : "****")
+            );
+        }
 
-        // ✅ HikariCP 설정
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(username);
         config.setPassword(password);
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 적용
-
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        
         return new HikariDataSource(config);
+        
+        
     }
 
     @Bean
