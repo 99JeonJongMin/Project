@@ -9,44 +9,36 @@ body {
 /* 버튼 컨테이너 */
 .category-section {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px; /* 버튼 간격 */
-    padding: 10px;
-    max-width: 600px; /* 최대 너비 제한 */
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 600px;
     margin: auto;
 }
 
-/* ✅ 모든 버튼 크기를 동일하게 맞추기 */
+/* ✅ 버튼 그룹을 동일한 너비로 정렬 */
+.category-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* ✅ 모든 버튼 크기를 동일하게 설정 */
 .category-button {
     flex: 1 1 calc(20% - 10px); /* 한 줄에 5개씩 균등 배치 */
-    min-width: 100px; /* 최소 크기 설정 */
-    max-width: 120px; /* 최대 크기 제한 */
+    min-width: 80px;
+    max-width: 120px;
     padding: 12px 15px;
     font-size: 1rem;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     background-color: #f8f9fa;
-    color: #333; /* 기본 글자 색상을 검은색으로 설정 */
+    color: #333;
     transition: background-color 0.3s, color 0.3s;
     text-align: center;
-}
-
-/* ✅ '전체' 버튼도 같은 크기로 설정 */
-.all-button-nation,
-.all-button-time {
-    flex: 1 1 calc(20% - 10px); /* 한 줄에 5개씩 동일 크기 설정 */
-    text-align: center;
-}
-
-/* ✅ 버튼 클릭(선택) 시 글자 색상 변경 */
-.category-button.selected,
-.category-button:active,
-.category-button:focus {
-    background-color: #007bff; /* 파란색 배경 */
-    color: white; /* 글씨 색상 유지 */
-    font-weight: bold;
 }
 
 /* 버튼 호버 효과 */
@@ -54,17 +46,18 @@ body {
     background-color: #dcdcdc;
 }
 
-/* ✅ 반응형 태블릿 - 한 줄에 5개 유지 */
-@media screen and (max-width: 1024px) {
-    .category-button {
-        flex: 1 1 calc(20% - 10px); /* 한 줄에 5개 유지 */
-    }
+/* ✅ 버튼 클릭 시 스타일 */
+.category-button.selected,
+.category-button:active,
+.category-button:focus {
+    background-color: #007bff;
+    color: white !important;
 }
 
-/* ✅ 반응형 모바일 - 한 줄에 5개 유지 */
+/* ✅ 반응형 - 태블릿 & 모바일에서도 한 줄에 5개 유지 */
 @media screen and (max-width: 768px) {
     .category-section {
-        gap: 6px;
+        gap: 10px;
         max-width: 100%;
         padding: 5px;
     }
@@ -73,14 +66,7 @@ body {
         flex: 1 1 calc(20% - 10px);
         font-size: 0.9rem;
         padding: 8px 10px;
-        min-width: 80px;
+        min-width: 70px;
         max-width: 100px;
-    }
-}
-
-/* ✅ 더 작은 화면에서도 한 줄에 5개 유지 */
-@media screen and (max-width: 480px) {
-    .category-button {
-        flex: 1 1 calc(20% - 8px);
     }
 }

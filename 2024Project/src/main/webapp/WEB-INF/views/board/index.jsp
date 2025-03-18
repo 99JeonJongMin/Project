@@ -16,7 +16,6 @@
                 <button class="category-button nation-button" data-category="일식">일식</button>
                 <button class="category-button nation-button" data-category="중식">중식</button>
                 <button class="category-button nation-button" data-category="양식">양식</button>
-                <br>
                 <button class="category-button all-button-time" data-category="전체_시간">전체</button>
                 <button class="category-button time-button" data-category="아침">아침</button>
                 <button class="category-button time-button" data-category="점심">점심</button>
