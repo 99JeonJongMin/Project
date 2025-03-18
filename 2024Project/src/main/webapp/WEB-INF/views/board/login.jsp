@@ -141,7 +141,7 @@
                 <c:if test="${not empty error}">
                 <div class="alert alert-danger">${error}</div>
             </c:if>
-              <form class="sign-in9-form" action="/login" method="post">
+              <form class="sign-in9-form" action="/board/login" method="post">
 			    <div class="mb-3">
 			        <label for="userid" class="form-label">아이디</label>
 			        <input type="text" id="userid" name="userid" required placeholder="아이디" class="form-control" /> <!-- type 변경 -->
