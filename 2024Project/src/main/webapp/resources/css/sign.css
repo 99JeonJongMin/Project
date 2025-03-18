@@ -1,21 +1,42 @@
-/* ✅ 페이지 기본 스타일 */
+/* ✅ 전체 페이지 스타일 */
 body {
     font-family: 'Noto Sans', sans-serif;
     background-color: #f8f9fa;
-    text-align: center;
 }
 
 /* ✅ 컨테이너 스타일 */
-.container {
-    max-width: 500px;
+.signup-container {
+    max-width: 900px;
+    margin: 50px auto;
     background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
 }
 
-/* ✅ 입력 폼 스타일 */
+/* ✅ 반응형 레이아웃 */
+.signup-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ✅ 이미지 스타일 */
+.signup-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    display: block;
+}
+
+/* ✅ 폼 스타일 */
+.signup-form {
+    flex: 1;
+    padding: 20px;
+}
+
+/* ✅ 입력 필드 스타일 */
 .form-control {
     border-radius: 5px;
 }
@@ -36,18 +57,19 @@ body {
     background-color: #0056b3;
 }
 
-/* ✅ 이미지 스타일 */
-.signup-image {
-    max-width: 100%;
-    border-radius: 10px;
-    display: block;
-    margin: 0 auto 20px;
-}
-
-/* ✅ 반응형 (태블릿 및 모바일) */
+/* ✅ 모바일 최적화 */
 @media (max-width: 768px) {
-    .container {
-        max-width: 90%;
-        padding: 20px;
+    .signup-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .signup-image {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .signup-form {
+        width: 100%;
     }
 }
