@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = {"cs.dit.domain", "cs.dit.service", "cs.dit.controller"}) // 기존 XML의 context:component-scan 대체
 public class MyBatisConfig {
-    
+     
     private final Environment env;
 
     public MyBatisConfig(Environment env) {
