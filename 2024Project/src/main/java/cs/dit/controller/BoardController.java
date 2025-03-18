@@ -19,6 +19,9 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	public BoardController() {
+        System.out.println("✅ BoardController Initialized!");  // 🚀 서버 콘솔에서 확인
+    }
 	@GetMapping("/list")
 	public void list(Model model) {
 		model.addAttribute("list", service.getList());
@@ -62,7 +65,16 @@ public class BoardController {
 	
 	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
-		model.addAttribute("board", service.get(bno));
+	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
+	    BoardVO board = service.get(bno);
+
+	    if (board == null) {
+	        System.out.println("❌ 게시글을 찾을 수 없습니다.");
+	    } else {
+	        System.out.println("✅ 게시글 조회 성공: " + board.getTitle());
+	    }
+
+	    model.addAttribute("board", board);
 	}
 	
 	// POST method for modifying a board

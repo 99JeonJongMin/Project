@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class BoardVO {
-	private Long bno;
+	private int bno;
 	private String title, content, writer;
 	private Date regdate, updatedate;
 	public String delete(long bno) {

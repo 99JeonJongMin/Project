@@ -33,13 +33,14 @@
                                 <tbody>
                                    
                                     <c:forEach var="board" items="${list}">
-                                     <tr class="odd gradeX">
-                                        <td><c:out value="${board.bno}"/></td>
-                                        <td><a href="/board/get?bno?="<c:out value="${board.bno}"/>><c:out value="${board.title}"/></a></td>
-                                        <td><c:out value="${board.writer}"/></td>
-                                        <td><c:out value="${board.regdate}"/></td>
-                                        </c:forEach>
-                                    </tr>
+									    <tr class="odd gradeX">
+									        <td><c:out value="${board.bno}"/></td>
+									        <td><a href="/board/get?bno=<c:out value='${board.bno}'/>"><c:out value="${board.title}"/></a></td>
+									        <td><c:out value="${board.writer}"/></td>
+									        <td><c:out value="${board.regdate}"/></td>
+									    </tr>
+									</c:forEach> 
+
                                    
                                 </tbody>
                             </table>
@@ -81,10 +82,10 @@
 			</div>
 			
 			<script type="text/javascript">
-			$(document).ready(function(){
-			var result = '<c:out value="${result}"/>';
-			
-			checkModal(result);
+				$(document).ready(function(){
+				    var result = "${result}";  // ✅ EL(Expression Language) 직접 할당
+				    checkModal(result);
+
 			
 			function checkModal(result){
 			

@@ -5,8 +5,9 @@
 <mapper namespace="cs.dit.mapper.BoardMapper">
 
   	<select id="getList" resultType="cs.dit.domain.BoardVO">
-            select * from mboard 
-  	</select>
+	    SELECT bno AS bno, title, content, writer, regdate, updatedate FROM board
+	</select>
+
   	
   	<select id="getList2" resultType="cs.dit.domain.BoardVO">
             select * from board 

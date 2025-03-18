@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-<!-- 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" /> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/jinsookdb"/> -->
-	    <property name="driverClassName"  value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	    <property name="jdbcUrl"  value="${MYSQL_URL}"/>
-		<property name="username" value= "${MYSQLUSER}"/>
-		<property name="password" value= "${MYSQLPASSWORD}" />
-	</bean> 
-	
-	
-	<bean id = "dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-		<constructor-arg  ref="hikariConfig" />
-	</bean> 
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-	    <!-- ✅ MySQL용 드라이버로 변경 -->
-	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-	    
-	    <!-- ✅ 환경 변수 기반으로 설정 -->
-	    <property name="jdbcUrl" value="jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"/>
-	    <property name="username" value="${MYSQL_USER}"/>
-	    <property name="password" value="${MYSQL_PASSWORD}"/>
-	</bean>
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+           http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring-1.2.xsd">
 
-	<!-- ✅ HikariCP DataSource 빈 추가 -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-	    <constructor-arg ref="hikariConfig"/>
-	</bean>
+    <!-- ✅ Spring 환경 변수 사용 가능하도록 설정 -->
+    <context:property-placeholder location="classpath:database.properties"/>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	    <property name="dataSource" ref="dataSource"/>
-	</bean>
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:component-scan base-package="cs.dit.domain"/>
-	<context:component-scan base-package="cs.dit.service"/>
-	<context:component-scan base-package="cs.dit.controller"/>
-	<mybatis-spring:scan base-package="cs.dit.mapper"/>
+    <!-- ✅ HikariCP 설정 (MariaDB 사용) -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mariadb://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}?serverTimezone=UTC&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="${MYSQLUSER}"/>
+        <property name="password" value="${MYSQLPASSWORD}"/>
+    </bean>
+
+    <!-- ✅ HikariCP DataSource 빈 설정 -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <!-- ✅ MyBatis SqlSessionFactory 설정 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- ✅ MyBatis Mapper Scan 설정 -->
+    <mybatis-spring:scan base-package="cs.dit.mapper"/>
+
+    <!-- ✅ Spring Component Scan 설정 -->
+    <context:component-scan base-package="cs.dit.domain"/>
+    <context:component-scan base-package="cs.dit.service"/>
+    <context:component-scan base-package="cs.dit.controller"/>
+
 </beans>

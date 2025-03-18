@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -48,14 +48,14 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 150px; padding-right: 150px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="./index">MOMOK.GG</a>
+            <a class="navbar-brand" href="/board/index">MOMOK.GG</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="./list">메뉴추천게시판</a>
-                    <a class="nav-link" href="./list2">자유게시판</a>
+                    <a class="nav-link" href="/board/list">메뉴추천게시판</a>
+                    <a class="nav-link" href="/board/list2">자유게시판</a>
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">관리자</a>
                 </div>
                 <div class="navbar-nav ms-auto me-3">
@@ -70,7 +70,7 @@
                         } else { 
                     %>
                         <!-- 로그인하지 않은 상태면 로그인 버튼 표시 -->
-                        <a class="nav-link active" href="./login">로그인</a>
+                        <a class="nav-link active" href="/board/login">로그인</a>
                     <% 
                         } 
                     %>
