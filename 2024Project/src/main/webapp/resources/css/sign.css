@@ -22,12 +22,24 @@ body {
     justify-content: space-between;
 }
 
-/* ✅ 이미지 스타일 */
+/* ✅ 이미지 스타일 (모바일에서는 숨김) */
 .signup-image {
     width: 100%;
     max-width: 400px;
     border-radius: 10px;
     display: block;
+}
+
+/* ✅ 모바일에서는 이미지 숨기기 */
+@media (max-width: 768px) {
+    .signup-image {
+        display: none;
+    }
+
+    .signup-form {
+        width: 100%;
+        padding: 20px;
+    }
 }
 
 /* ✅ 폼 스타일 */
@@ -37,6 +49,10 @@ body {
 }
 
 /* ✅ 입력 필드 스타일 */
+.form-group {
+    text-align: left; /* ✅ 모바일에서도 좌측 정렬 유지 */
+}
+
 .form-control {
     border-radius: 5px;
 }
@@ -55,21 +71,4 @@ body {
 
 .btn-submit:hover {
     background-color: #0056b3;
-}
-
-/* ✅ 모바일 최적화 */
-@media (max-width: 768px) {
-    .signup-row {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .signup-image {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .signup-form {
-        width: 100%;
-    }
 }
