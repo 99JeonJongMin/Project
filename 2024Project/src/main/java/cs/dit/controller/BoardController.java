@@ -55,8 +55,8 @@ public class BoardController {
 		return "redirect:/board/list2";
 	}
 	
-	@GetMapping("/register")
-	public void register() {
+	@GetMapping("/memreg")
+	public void memreg() {
 	}
 	 
 	@GetMapping("/modifyBoard")
