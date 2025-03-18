@@ -52,15 +52,15 @@
             <a href="./memreg" class="btn btn-outline-primary">회원가입</a>
 
             <!-- ✅ 소셜 로그인 -->
-            <button class="social-login-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Facebook_logo_%28square%29.png" alt="페이스북">
-                페이스북으로 로그인하기
-            </button>
-
-            <button class="social-login-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="구글">
-                구글 계정으로 로그인하기
-            </button>
+			<button class="social-login-btn">
+			  <img src="/resources/images/google-icon.png" alt="구글 로그인" class="social-icon">
+			  구글 계정으로 로그인하기
+			</button>
+			
+			<button class="social-login-btn">
+			  <img src="/resources/images/facebook-icon.png" alt="페이스북 로그인" class="social-icon">
+			  페이스북으로 로그인하기
+			</button>
         </div>
     </div>
 
