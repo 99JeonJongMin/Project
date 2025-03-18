@@ -1,145 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<%@include file="/WEB-INF/views/includes/header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>로그인</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ✅ Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- CSS 파일 불러오기 -->
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/index.css' />">
-	 	 	 
-<main style="margin-top: 100px;">
-    <div class="category-container">
-        <div class="category-section">
-            <!-- 나라별 카테고리 -->
-            <div class="category-group">
-                <button class="category-button all-button-nation" data-category="전체_나라">전체</button>
-                <button class="category-button nation-button" data-category="한식">한식</button>
-                <button class="category-button nation-button" data-category="일식">일식</button>
-                <button class="category-button nation-button" data-category="중식">중식</button>
-                <button class="category-button nation-button" data-category="양식">양식</button>
+    <!-- ✅ Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/login.css' />">
+</head>
+<body>
+
+    <!-- ✅ 네비게이션 바 (header.jsp에서 포함) -->
+    <%@ include file="/WEB-INF/views/includes/header.jsp" %>
+
+    <!-- ✅ 로그인 폼 -->
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center mb-4">로그인</h2>
+
+            <!-- ✅ 오류 메시지 출력 -->
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
+
+            <form action="/login" method="post">
+                <div class="mb-3">
+                    <label for="userid" class="form-label">아이디</label>
+                    <input type="text" id="userid" name="userid" class="form-control" required placeholder="아이디 입력">
+                </div>
+
+                <div class="mb-3">
+                    <label for="passwd" class="form-label">비밀번호</label>
+                    <input type="password" id="passwd" name="passwd" class="form-control" required placeholder="비밀번호 입력">
+                    <a href="#" class="form-text">비밀번호를 잊으셨나요?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary">로그인</button>
+            </form>
+
+            <div class="sign-in-divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">OR</span>
+                <div class="divider-line"></div>
             </div>
 
-            <!-- 시간별 카테고리 -->
-            <div class="category-group">
-                <button class="category-button all-button-time" data-category="전체_시간">전체</button>
-                <button class="category-button time-button" data-category="아침">아침</button>
-                <button class="category-button time-button" data-category="점심">점심</button>
-                <button class="category-button time-button" data-category="저녁">저녁</button>
-                <button class="category-button time-button" data-category="야식">야식</button>
-            </div>
+            <a href="./memreg" class="btn btn-outline-primary">회원가입</a>
+
+            <!-- ✅ 소셜 로그인 -->
+            <button class="social-login-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Facebook_logo_%28square%29.png" alt="페이스북">
+                페이스북으로 로그인하기
+            </button>
+
+            <button class="social-login-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="구글">
+                구글 계정으로 로그인하기
+            </button>
         </div>
     </div>
 
-    <button id="recommendButton" style="margin-bottom: 70px;">오늘은이거다!</button>
+    <!-- ✅ Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div id="menuContainer" style="display: none;">
-        <h2 id="recommendedMenu"></h2>
-    </div>
-
-    <!-- ✅ 반응형 YouTube 영상 -->
-    <div id="videoContainer" style="display: none;">
-        <div class="video-wrapper">
-            <div id="videoContent"></div>
-        </div>
-    </div>
-</main>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    let menuData = [];
-
-    // ✅ AJAX로 DB에서 메뉴 데이터 가져오기
-    fetch('/api/menu/list')
-        .then(response => response.json())
-        .then(data => {
-            menuData = data;
-        })
-        .catch(error => console.error("메뉴 데이터를 불러오는 중 오류 발생:", error));
-
-    // ✅ 버튼 선택 로직 (나라별)
-    document.querySelectorAll('.nation-button, .all-button-nation').forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            
-            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
-            if (category === "전체_나라") {
-                document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
-                this.classList.add('selected');
-            } else {
-                document.querySelector('.all-button-nation').classList.remove('selected'); // 전체 해제
-                document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
-                this.classList.add('selected');
-            }
-        });
-    });
-
-    // ✅ 버튼 선택 로직 (시간별)
-    document.querySelectorAll('.time-button, .all-button-time').forEach(button => {
-        button.addEventListener('click', function() {
-            const category = this.getAttribute('data-category');
-            
-            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
-            if (category === "전체_시간") {
-                document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
-                this.classList.add('selected');
-            } else {
-                document.querySelector('.all-button-time').classList.remove('selected'); // 전체 해제
-                document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
-                this.classList.add('selected');
-            }
-        });
-    });
-
-    // ✅ 메뉴 추천 버튼 클릭 이벤트
-    document.getElementById('recommendButton').addEventListener('click', function() {
-        if (menuData.length === 0) {
-            alert("메뉴 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
-            return;
-        }
-
-        const selectedNation = document.querySelector('.nation-button.selected') 
-                               ? document.querySelector('.nation-button.selected').getAttribute('data-category') 
-                               : "전체_나라";
-
-        const selectedTime = document.querySelector('.time-button.selected') 
-                             ? document.querySelector('.time-button.selected').getAttribute('data-category') 
-                             : "전체_시간";
-
-        let filteredMenus = menuData;
-
-        // ✅ 나라별 필터링
-        if (selectedNation !== "전체_나라") {
-            filteredMenus = filteredMenus.filter(menu => menu.category === selectedNation);
-        }
-
-        // ✅ 시간별 필터링
-        if (selectedTime !== "전체_시간") {
-            filteredMenus = filteredMenus.filter(menu => menu.time === selectedTime);
-        }
-
-        if (filteredMenus.length > 0) {
-            const randomMenu = filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
-            document.getElementById('recommendedMenu').innerText = randomMenu.name;
-            document.getElementById('menuContainer').style.display = 'block';
-
-            const iframe = document.createElement('iframe');
-            iframe.src = randomMenu.videoUrl;
-            iframe.allowFullscreen = true;
-            iframe.classList.add('responsive-video');
-
-            document.getElementById('videoContent').innerHTML = '';
-            document.getElementById('videoContent').appendChild(iframe);
-            document.getElementById('videoContainer').style.display = 'block';
-        } else {
-            alert('선택한 카테고리에 맞는 메뉴가 없습니다.');
-        }
-    });
-});
-
-</script>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
