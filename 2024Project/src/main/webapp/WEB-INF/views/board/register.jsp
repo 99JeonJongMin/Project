@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -98,7 +99,10 @@
             <!-- ✅ 우측: 입력 폼 -->
             <div class="signup-form">
                 <h2 class="mb-4">회원가입</h2>
-
+				<!-- ✅ 이메일 중복 오류 메시지 표시 -->
+				    <c:if test="${not empty error}">
+				        <div class="alert alert-danger">${error}</div>
+				    </c:if>
                 <form action="/memreg" method="post">
                     <div class="mb-3 form-group">
                         <label class="form-label" for="userid">아이디</label>

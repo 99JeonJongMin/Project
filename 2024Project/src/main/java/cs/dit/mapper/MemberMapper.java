@@ -1,14 +1,19 @@
 package cs.dit.mapper;
 
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+
 import cs.dit.domain.MemberVO;
 
-@Mapper
 public interface MemberMapper {
+	
+	@Insert("INSERT INTO member (userid, passwd, name, email, join_date) VALUES (#{userid}, #{passwd}, #{name}, #{email}, now())")
+	int insertMember(MemberVO member);
 
-    @Insert("INSERT INTO member (userid, passwd, name, email) VALUES (#{userid}, #{passwd}, #{name}, #{email})")
-    int insertmember(MemberVO member);
+	@Select("SELECT * FROM member WHERE userid = #{userid}")
+	MemberVO getMemberById(String userid);
 
-    @Select("SELECT userid, passwd FROM member WHERE userid = #{userid} AND passwd = #{passwd}")
-    MemberVO login(MemberVO member); // ✅ MemberVO 객체를 직접 받도록 수정
+	// ✅ 이메일 중복 체크
+	@Select("SELECT COUNT(*) FROM member WHERE email = #{email}")
+	int countByEmail(String email);
 }

@@ -20,18 +20,25 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-
+	// ✅ 회원가입 (이메일 중복 체크 추가)
 	@PostMapping("/memreg")
 	public String memreg(MemberVO member, RedirectAttributes rttr) {
 		
-		int count = service.memreg(member);
-		
-		if(count==1)
-			rttr.addFlashAttribute("memreg", "registered");
-		
-		return "redirect:/board/login";
+	    // ✅ 이메일 중복 체크
+	    if (service.isEmailExists(member.getEmail())) {
+	        rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 에러 메시지 저장
+	        return "redirect:/board/memreg"; // 회원가입 페이지로 리다이렉트
+	    }
+
+	    int count = service.memreg(member);
+	    
+	    if(count == 1)
+	        rttr.addFlashAttribute("memreg", "registered");
+
+	    return "redirect:/board/login";
 	}
 	
+	// ✅ 로그인 처리
 	@PostMapping("/login")
 	public String login(@RequestParam String userid, @RequestParam String passwd, RedirectAttributes rttr, HttpSession session) {
 	    boolean isAuthenticated = service.authenticate(userid, passwd);
@@ -45,17 +52,14 @@ public class MemberController {
 	    }
 	}
 
+	// ✅ 로그아웃 처리
 	@GetMapping("/logout")
     public String logout(HttpSession session) {
-        // 세션 무효화
-        session.invalidate();
-        // index 페이지로 리디렉션
+        session.invalidate(); // 세션 무효화
         return "redirect:/board/index";
     }
 	
 	@GetMapping("/memreg")
 	public void memreg() {
 	}
-	
-	
 }
