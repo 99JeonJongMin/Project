@@ -8,28 +8,28 @@
 	 	 
 
 
-    <main align="center"  style="margin-top: 100px;">
-        <div class="category-container">
-    <div class="category-section">
-	        <!-- 나라별 카테고리 -->
-	        <div class="category-group">
-	            <button class="category-button all-button-nation" data-category="전체_나라">전체</button>
-	            <button class="category-button nation-button" data-category="한식">한식</button>
-	            <button class="category-button nation-button" data-category="일식">일식</button>
-	            <button class="category-button nation-button" data-category="중식">중식</button>
-	            <button class="category-button nation-button" data-category="양식">양식</button>
-	        </div>
-	
-	        <!-- 시간별 카테고리 -->
-	        <div class="category-group">
-	            <button class="category-button all-button-time" data-category="전체_시간">전체</button>
-	            <button class="category-button time-button" data-category="아침">아침</button>
-	            <button class="category-button time-button" data-category="점심">점심</button>
-	            <button class="category-button time-button" data-category="저녁">저녁</button>
-	            <button class="category-button time-button" data-category="야식">야식</button>
-	        </div>
-	    </div>
-	</div>
+    <main  style="margin-top: 100px;">
+      <div class="category-container">
+		    <div class="category-section">
+		        <!-- 나라별 카테고리 -->
+		        <div class="category-group">
+		            <button class="category-button all-button-nation" data-category="전체_나라">전체</button>
+		            <button class="category-button nation-button" data-category="한식">한식</button>
+		            <button class="category-button nation-button" data-category="일식">일식</button>
+		            <button class="category-button nation-button" data-category="중식">중식</button>
+		            <button class="category-button nation-button" data-category="양식">양식</button>
+		        </div>
+		
+		        <!-- 시간별 카테고리 -->
+		        <div class="category-group">
+		            <button class="category-button all-button-time" data-category="전체_시간">전체</button>
+		            <button class="category-button time-button" data-category="아침">아침</button>
+		            <button class="category-button time-button" data-category="점심">점심</button>
+		            <button class="category-button time-button" data-category="저녁">저녁</button>
+		            <button class="category-button time-button" data-category="야식">야식</button>
+		        </div>
+		    </div>
+		</div>
 
 
         <button id="recommendButton" style="margin-bottom: 70px;">오늘은이거다!</button> <!-- 버튼 아래 공간 추가 -->
