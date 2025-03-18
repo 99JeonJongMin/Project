@@ -6,25 +6,23 @@ body {
     text-align: center;
 }
 
-/* 카테고리 버튼 */
-.category-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
+/* 카테고리 버튼 컨테이너 */
 .category-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 8px; /* 버튼 사이 여백 */
     padding: 10px;
+    max-width: 600px; /* 최대 너비 제한 */
+    margin: auto;
 }
 
+/* 버튼 스타일 */
 .category-button {
-    padding: 10px 15px;
+    flex: 1; /* 가변 크기 조절 */
+    min-width: 80px; /* 너무 작아지는 것 방지 */
+    max-width: 120px; /* 너무 커지는 것 방지 */
+    padding: 10px 12px;
     font-size: 1rem;
     border-radius: 5px;
     border: none;
@@ -33,6 +31,14 @@ body {
     transition: 0.3s;
 }
 
+/* '전체' 버튼은 한 줄 차지하도록 */
+.all-button-nation,
+.all-button-time {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+/* 버튼 호버 효과 */
 .category-button:hover {
     background-color: #dcdcdc;
 }
@@ -76,9 +82,17 @@ body {
 
 /* 반응형 미디어 쿼리 */
 @media screen and (max-width: 768px) {
+    .category-section {
+        gap: 6px; /* 모바일에서는 버튼 간격을 줄임 */
+        max-width: 100%;
+        padding: 5px;
+    }
+
     .category-button {
         font-size: 0.9rem;
-        padding: 8px 12px;
+        padding: 8px 10px;
+        min-width: 70px; /* 모바일에서 버튼 크기 최소화 */
+        max-width: 110px;
     }
 
     #recommendButton {
