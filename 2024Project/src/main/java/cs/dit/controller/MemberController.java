@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
 
+@RequestMapping("/board")  // ✅ 컨트롤러 전체에 /board 경로 설정
 @Controller
 public class MemberController {
 
@@ -66,5 +68,7 @@ public class MemberController {
     }
 
     @GetMapping("/memreg")
-    public void memreg() {}
+    public String memreg() {  // ✅ void -> String 반환 타입 변경
+        return "memreg";  // ✅ memreg.jsp를 반환
+    }
 }
