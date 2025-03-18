@@ -45,27 +45,29 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const menuData = [
-        { name: '짜장면', categories: ['중식', '점심', '저녁', '야식'], video: 'https://www.youtube.com/embed/v8Y_oHBFotE?start=179' },
-        { name: '탕수육', categories: ['중식', '점심', '저녁', '야식'], video: 'https://www.youtube.com/embed/xx6HdrulgPM?start=44' },
-        { name: '김치찌개', categories: ['한식', '점심', '저녁'], video: 'https://www.youtube.com/embed/fOuPsNp94hA?start=93' },
-        { name: '비빔밥', categories: ['한식', '점심', '저녁'], video: 'https://www.youtube.com/embed/Nx5vi905knk?start=123' },
-        { name: '라면', categories: ['한식', '점심', '저녁', '야식'], video: 'https://www.youtube.com/embed/x94_2x_-p0Q?start=45' },
-        { name: '라멘', categories: ['일식', '점심', '저녁'], video: 'https://www.youtube.com/embed/DbkXaZTQK_k?start=168' },
-        { name: '토스트', categories: ['양식', '아침'], video: 'https://www.youtube.com/embed/TCDPXisHsfA?start=204' },
-        { name: '팬케이크', categories: ['양식', '아침'], video: 'https://www.youtube.com/embed/hNfcXgYNS84?start=182' },
-        { name: '스테이크', categories: ['양식', '점심', '저녁'], video: 'https://www.youtube.com/embed/XX7h3z0me1s?start=265' },
-    ];
+    let menuData = [];
+
+    // ✅ AJAX로 DB에서 메뉴 데이터 가져오기
+    fetch('/api/menu/list')
+        .then(response => response.json())
+        .then(data => {
+            menuData = data;
+        })
+        .catch(error => console.error("메뉴 데이터를 불러오는 중 오류 발생:", error));
 
     document.getElementById('recommendButton').addEventListener('click', function() {
-        let filteredMenus = menuData;
-        const randomMenu = filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
+        if (menuData.length === 0) {
+            alert("메뉴 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+            return;
+        }
+
+        const randomMenu = menuData[Math.floor(Math.random() * menuData.length)];
 
         document.getElementById('recommendedMenu').innerText = randomMenu.name;
         document.getElementById('menuContainer').style.display = 'block';
 
         const iframe = document.createElement('iframe');
-        iframe.src = randomMenu.video;
+        iframe.src = randomMenu.videoUrl;
         iframe.allowFullscreen = true;
         iframe.classList.add('responsive-video');
 
@@ -75,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
