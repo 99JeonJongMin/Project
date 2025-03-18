@@ -55,27 +55,86 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error("메뉴 데이터를 불러오는 중 오류 발생:", error));
 
+    // ✅ 버튼 선택 로직 (나라별)
+    document.querySelectorAll('.nation-button, .all-button-nation').forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
+            if (category === "전체_나라") {
+                document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+            } else {
+                document.querySelector('.all-button-nation').classList.remove('selected'); // 전체 해제
+                document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+            }
+        });
+    });
+
+    // ✅ 버튼 선택 로직 (시간별)
+    document.querySelectorAll('.time-button, .all-button-time').forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
+            if (category === "전체_시간") {
+                document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+            } else {
+                document.querySelector('.all-button-time').classList.remove('selected'); // 전체 해제
+                document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('selected');
+            }
+        });
+    });
+
+    // ✅ 메뉴 추천 버튼 클릭 이벤트
     document.getElementById('recommendButton').addEventListener('click', function() {
         if (menuData.length === 0) {
             alert("메뉴 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
             return;
         }
 
-        const randomMenu = menuData[Math.floor(Math.random() * menuData.length)];
+        const selectedNation = document.querySelector('.nation-button.selected') 
+                               ? document.querySelector('.nation-button.selected').getAttribute('data-category') 
+                               : "전체_나라";
 
-        document.getElementById('recommendedMenu').innerText = randomMenu.name;
-        document.getElementById('menuContainer').style.display = 'block';
+        const selectedTime = document.querySelector('.time-button.selected') 
+                             ? document.querySelector('.time-button.selected').getAttribute('data-category') 
+                             : "전체_시간";
 
-        const iframe = document.createElement('iframe');
-        iframe.src = randomMenu.videoUrl;
-        iframe.allowFullscreen = true;
-        iframe.classList.add('responsive-video');
+        let filteredMenus = menuData;
 
-        document.getElementById('videoContent').innerHTML = '';
-        document.getElementById('videoContent').appendChild(iframe);
-        document.getElementById('videoContainer').style.display = 'block';
+        // ✅ 나라별 필터링
+        if (selectedNation !== "전체_나라") {
+            filteredMenus = filteredMenus.filter(menu => menu.category === selectedNation);
+        }
+
+        // ✅ 시간별 필터링
+        if (selectedTime !== "전체_시간") {
+            filteredMenus = filteredMenus.filter(menu => menu.time === selectedTime);
+        }
+
+        if (filteredMenus.length > 0) {
+            const randomMenu = filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
+            document.getElementById('recommendedMenu').innerText = randomMenu.name;
+            document.getElementById('menuContainer').style.display = 'block';
+
+            const iframe = document.createElement('iframe');
+            iframe.src = randomMenu.videoUrl;
+            iframe.allowFullscreen = true;
+            iframe.classList.add('responsive-video');
+
+            document.getElementById('videoContent').innerHTML = '';
+            document.getElementById('videoContent').appendChild(iframe);
+            document.getElementById('videoContainer').style.display = 'block';
+        } else {
+            alert('선택한 카테고리에 맞는 메뉴가 없습니다.');
+        }
     });
 });
+
 </script>
 
 
