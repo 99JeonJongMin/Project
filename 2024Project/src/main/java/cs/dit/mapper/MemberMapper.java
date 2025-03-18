@@ -12,9 +12,13 @@ public interface MemberMapper {
 
     // ✅ 로그인 시 사용자 정보 조회
     @Select("SELECT userid, passwd FROM member WHERE userid = #{userid} AND passwd = #{passwd}")
-    MemberVO login(MemberVO member); // ✅ MemberVO 객체 반환
+    MemberVO login(MemberVO member);
 
-    // ✅ 이메일 중복 확인
+    // ✅ 이메일 중복 체크
     @Select("SELECT COUNT(*) FROM member WHERE email = #{email}")
     int countByEmail(String email);
+
+    // ✅ 아이디 중복 체크 추가
+    @Select("SELECT COUNT(*) FROM member WHERE userid = #{userid}")
+    int countByUserId(String userid);
 }

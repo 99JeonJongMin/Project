@@ -12,12 +12,19 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper mapper;
 
-    // ✅ 회원가입 (이메일 중복 체크 포함)
+    // ✅ 회원가입 (이메일 & 아이디 중복 체크 포함)
     @Override
     public int memreg(MemberVO member) {
-        if (isEmailExists(member.getEmail())) {
-            return 0; // 이메일 중복이면 회원가입 실패
+        // ✅ 아이디 중복 체크
+        if (isUserIdExists(member.getUserid())) {
+            return -1; // 아이디 중복이면 회원가입 실패
         }
+
+        // ✅ 이메일 중복 체크
+        if (isEmailExists(member.getEmail())) {
+            return -2; // 이메일 중복이면 회원가입 실패
+        }
+
         return mapper.insertmember(member);
     }
 
@@ -25,12 +32,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean authenticate(String userid, String passwd) {
         MemberVO member = mapper.login(new MemberVO(userid, passwd));
-
         return member != null && member.getPasswd().equals(passwd);
     }
 
     // ✅ 이메일 중복 체크
+    @Override
     public boolean isEmailExists(String email) {
         return mapper.countByEmail(email) > 0;
+    }
+
+    // ✅ 아이디 중복 체크 추가
+    @Override
+    public boolean isUserIdExists(String userid) {
+        return mapper.countByUserId(userid) > 0;
     }
 }

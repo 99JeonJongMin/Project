@@ -14,27 +14,36 @@ import cs.dit.service.MemberService;
 
 @Controller
 public class MemberController {
-	
+
     @Autowired
     private MemberService service;
-	
-    // ✅ 회원가입 (이메일 중복 체크 포함)
+
+    // ✅ 회원가입 (아이디 & 이메일 중복 체크 추가)
     @PostMapping("/memreg")
     public String memreg(MemberVO member, RedirectAttributes rttr) {
 
-        if (service.isEmailExists(member.getEmail())) {
-            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다.");
+        int result = service.memreg(member);
+
+        if (result == -1) {
+            rttr.addFlashAttribute("error", "이미 사용 중인 아이디입니다."); // 아이디 중복 시 에러 메시지
             return "redirect:/board/memreg"; // 회원가입 페이지로 이동
         }
 
-        int count = service.memreg(member);
+        if (result == -2) {
+            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 이메일 중복 시 에러 메시지
+            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
+        }
 
-        if (count == 1)
+        if (result == 1) {
             rttr.addFlashAttribute("memreg", "registered");
+            return "redirect:/board/login"; // 회원가입 성공 시 로그인 페이지로 이동
+        }
 
-        return "redirect:/board/login";
+        // 만약 예상치 못한 오류가 발생했을 경우
+        rttr.addFlashAttribute("error", "회원가입 중 오류가 발생했습니다.");
+        return "redirect:/board/memreg";
     }
-	
+
     // ✅ 로그인 처리
     @PostMapping("/login")
     public String login(@RequestParam String userid, @RequestParam String passwd, RedirectAttributes rttr, HttpSession session) {
@@ -55,7 +64,7 @@ public class MemberController {
         session.invalidate();
         return "redirect:/board/index";
     }
-	
+
     @GetMapping("/memreg")
     public void memreg() {}
 }
