@@ -19,31 +19,32 @@ public class MyBatisConfig {
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
 
-        // ✅ [로컬 개발 환경] DB 정보
-        String host = "localhost"; // 로컬 MySQL 서버
-        String port = "3306";
-        String database = "jmaxdb";
-        String username = "jmax";
-        String password = "1111"; // ⚠ 보안상 환경변수로 관리하는 것이 좋음
+        // ✅ 환경 변수에서 DB 정보 가져오기 (Railway 또는 로컬 환경 대응)
+        String host = System.getenv().getOrDefault("MYSQLHOST", "localhost");
+        String port = System.getenv().getOrDefault("MYSQLPORT", "3306");
+        String database = System.getenv().getOrDefault("MYSQLDATABASE", "jmaxdb");
+        String username = System.getenv().getOrDefault("MYSQLUSER", "jmax");
+        String password = System.getenv().getOrDefault("MYSQLPASSWORD", "1111");
 
-        // ✅ JDBC URL 설정 (log4jdbc 사용하여 SQL 로그 출력 가능)
+        // ✅ JDBC URL 설정 (MySQL 또는 MariaDB 사용 가능)
         String jdbcUrl = String.format(
-            "jdbc:mariadb://localhost:3306/jmaxdb?serverTimezone=UTC&characterEncoding=UTF-8",
+            "jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8",
             host, port, database
         );
 
-        System.out.println("✅ [로컬 개발] 데이터베이스 연결 정보:");
+        // ✅ 환경 변수 정보 출력 (보안상 비밀번호는 제외)
+        System.out.println("✅ 데이터베이스 연결 정보:");
         System.out.println("MYSQLHOST: " + host);
         System.out.println("MYSQLPORT: " + port);
         System.out.println("MYSQLDATABASE: " + database);
         System.out.println("MYSQLUSER: " + username);
         System.out.println("MYSQLPASSWORD: ****"); // 보안상 비밀번호 출력 X
 
-       
+        // ✅ HikariCP 설정
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(username);
         config.setPassword(password);
-        config.setDriverClassName("org.mariadb.jdbc.Driver"); 
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 적용
 
         return new HikariDataSource(config);
     }
