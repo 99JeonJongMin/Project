@@ -24,50 +24,33 @@ public class MyBatisConfig {
 
     @Bean
     public DataSource dataSource() {
-        HikariConfig hikariConfig = new HikariConfig();
-
-        // 환경변수를 사용하여 DB 정보 설정
-        hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy"); // log4jdbc 사용
-        hikariConfig.setJdbcUrl(System.getenv("MYSQL_URL"));
-        hikariConfig.setUsername(System.getenv("MYSQLUSER"));
-        hikariConfig.setPassword(System.getenv("MYSQLPASSWORD"));
         HikariConfig config = new HikariConfig();
-        // 환경 변수에서 DB 설정값 불러오기
+
+        // ✅ 환경변수를 `env.getProperty()` 방식으로 통일
         String host = env.getProperty("MYSQLHOST", "mysql.railway.internal");
         String port = env.getProperty("MYSQLPORT", "3306");
         String database = env.getProperty("MYSQLDATABASE", "railway");
         String username = env.getProperty("MYSQLUSER", "root");
         String password = env.getProperty("MYSQLPASSWORD", "password");
-        
-        
-        
+
+        // ✅ 환경변수 출력 (비밀번호 제외)
+        System.out.println("✅ MySQL 연결 정보:");
         System.out.println("MYSQLHOST: " + host);
         System.out.println("MYSQLPORT: " + port);
         System.out.println("MYSQLDATABASE: " + database);
         System.out.println("MYSQLUSER: " + username);
-        System.out.println("MYSQLPASSWORD: " + password);
- 
-        // JDBC URL 설정
+
+        // ✅ JDBC URL 설정
         String jdbcUrl = String.format("jdbc:mysql://%s:%s/%s?serverTimezone=UTC&characterEncoding=UTF-8", host, port, database);
-        
-        if (jdbcUrl == null || username == null || password == null) {
-            throw new IllegalStateException(
-                "🚨 환경변수가 설정되지 않았습니다! 🚨\n" +
-                "MYSQL_URL=" + jdbcUrl + "\n" +
-                "MYSQLUSER=" + username + "\n" +
-                "MYSQLPASSWORD=" + (password == null ? "null" : "****")
-            );
-        }
 
         config.setJdbcUrl(jdbcUrl);
         config.setUsername(username);
         config.setPassword(password);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        
+
         return new HikariDataSource(config);
-        
-        
     }
+
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
