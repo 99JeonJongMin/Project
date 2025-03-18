@@ -27,7 +27,7 @@ body {
 
 /* ✅ 모든 버튼 크기를 동일하게 설정 */
 .category-button {
-    flex: 1 1 calc(20% - 10px); /* 한 줄에 5개씩 균등 배치 */
+    flex: 1 1 20%; /* ✅ 모든 화면에서 한 줄에 5개 유지 */
     min-width: 80px;
     max-width: 120px;
     padding: 12px 15px;
@@ -44,7 +44,7 @@ body {
 /* ✅ '전체' 버튼도 같은 크기로 설정 */
 .all-button-nation,
 .all-button-time {
-    flex: 1 1 calc(20% - 10px); /* 한 줄에 5개씩 균등 배치 */
+    flex: 1 1 20%; /* ✅ 한 줄에 5개씩 균등 배치 */
     text-align: center;
 }
 
@@ -61,7 +61,7 @@ body {
     color: white !important;
 }
 
-/* ✅ 반응형 - 태블릿 & 모바일에서도 한 줄에 5개 유지 */
+/* ✅ 반응형 - 모든 기기에서 한 줄에 5개 유지 */
 @media screen and (max-width: 768px) {
     .category-section {
         gap: 10px;
@@ -76,10 +76,17 @@ body {
     }
 
     .category-button {
-        flex: 1 1 calc(20% - 10px);
+        flex: 1 1 20%; /* ✅ 한 줄에 5개씩 유지 */
         font-size: 0.9rem;
         padding: 8px 10px;
         min-width: 70px;
         max-width: 100px;
+    }
+}
+
+/* ✅ 더 작은 화면에서도 한 줄에 5개 유지 */
+@media screen and (max-width: 480px) {
+    .category-button {
+        flex: 1 1 20%; /* ✅ 한 줄에 5개 유지 */
     }
 }
