@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
 
-@RequestMapping("/board/*")
+@RequestMapping("/board")
 @Controller
 public class BoardController {
 	

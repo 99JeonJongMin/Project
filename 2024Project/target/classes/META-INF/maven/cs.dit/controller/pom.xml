@@ -163,6 +163,9 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <compilerArgs>
+			            <arg>-parameters</arg>  <!-- 🔥 필수 옵션 추가 -->
+			        </compilerArgs>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
