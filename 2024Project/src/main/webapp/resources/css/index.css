@@ -1,0 +1,92 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* 카테고리 버튼 */
+.category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.category-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    transition: 0.3s;
+}
+
+.category-button:hover {
+    background-color: #dcdcdc;
+}
+
+/* 추천 버튼 */
+#recommendButton {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#recommendButton:hover {
+    background-color: #218838;
+}
+
+/* 메뉴 결과 컨테이너 */
+#menuContainer {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* 유튜브 영상 반응형 */
+#videoContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#videoContent iframe {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+/* 반응형 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+    .category-button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    #recommendButton {
+        font-size: 1rem;
+        padding: 12px 18px;
+    }
+
+    #menuContainer {
+        font-size: 1.2rem;
+    }
+}

@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-	<%@include file="/WEB-INF/views/includes/header.jsp"
-	 	 %>
+<%@include file="/WEB-INF/views/includes/header.jsp"%>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/index.css' />">
+	 	 
+	 	 
 
 
     <main align="center"  style="margin-top: 100px;">
