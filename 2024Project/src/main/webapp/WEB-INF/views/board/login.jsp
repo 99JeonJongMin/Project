@@ -65,34 +65,7 @@
               </div>
             </div>
           </div>
-          <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var errorMessage = "${error}";
-
-        if (errorMessage) {
-            // alert로 표시
-            alert(errorMessage);
-
-            // 또는 모달로 표시
-            showErrorModal(errorMessage);
-        }
-
-        function showErrorModal(message) {
-            const modalTitle = "로그인 실패";
-            const modalBody = message;
-
-            // 모달 내용 업데이트
-            document.getElementById("footerModalLabel").innerText = modalTitle;
-            document.querySelector("#footerModal .modal-body").innerText = modalBody;
-
-            // 모달 표시
-            const modal = new bootstrap.Modal(document.getElementById("footerModal"));
-            modal.show();
-        }
-    });
-</script>
-    
-
+          
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
