@@ -111,7 +111,7 @@
                     <div class="alert alert-danger">${error}</div>
                 </c:if>
 
-                <form action="/memreg" method="post">
+                <form action="/board/memreg" method="post">
                     <div class="mb-3 form-group">
                         <label class="form-label" for="userid">아이디</label>
                         <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력" required>
