@@ -159,7 +159,7 @@
                 <span>OR</span>
                 <div class="sign-in9-divider3"></div>
               </div>
-              <a href="/board/memreg" class="sign-in9-link2">회원가입</a>
+              <a href="<c:url value='/board/memreg' />" class="sign-in9-link2">회원가입</a>
               <div class="sign-in9-container7">
                 <button class="sign-in9-button2">
                   <svg viewBox="0 0 877.7142857142857 1024">

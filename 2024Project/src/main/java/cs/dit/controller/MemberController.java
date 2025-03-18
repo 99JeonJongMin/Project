@@ -68,7 +68,9 @@ public class MemberController {
     }
 
     @GetMapping("/memreg")
-    public String memreg() {  // ✅ void -> String 반환 타입 변경
-        return "memreg";  // ✅ memreg.jsp를 반환
+    public String memreg() {  
+        return "board/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
     }
+
+    
 }
