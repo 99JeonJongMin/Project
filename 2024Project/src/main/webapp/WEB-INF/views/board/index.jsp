@@ -47,7 +47,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     let menuData = [];
 
-    // ✅ AJAX로 DB에서 메뉴 데이터 가져오기
+    // ✅ AJAX로 변경된 API에서 데이터 가져오기
     fetch('/api/menu/list')
         .then(response => response.json())
         .then(data => {
@@ -59,13 +59,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.nation-button, .all-button-nation').forEach(button => {
         button.addEventListener('click', function() {
             const category = this.getAttribute('data-category');
-            
-            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
             if (category === "전체_나라") {
                 document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected');
             } else {
-                document.querySelector('.all-button-nation').classList.remove('selected'); // 전체 해제
+                document.querySelector('.all-button-nation').classList.remove('selected');
                 document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected');
             }
@@ -76,20 +74,18 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.time-button, .all-button-time').forEach(button => {
         button.addEventListener('click', function() {
             const category = this.getAttribute('data-category');
-            
-            // ✅ '전체' 버튼이 눌리면 다른 버튼 해제
             if (category === "전체_시간") {
                 document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected');
             } else {
-                document.querySelector('.all-button-time').classList.remove('selected'); // 전체 해제
+                document.querySelector('.all-button-time').classList.remove('selected');
                 document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('selected');
             }
         });
     });
 
-    // ✅ 메뉴 추천 버튼 클릭 이벤트
+    // ✅ 메뉴 추천 버튼 클릭 이벤트 (변경된 구조 적용)
     document.getElementById('recommendButton').addEventListener('click', function() {
         if (menuData.length === 0) {
             alert("메뉴 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
@@ -111,9 +107,9 @@ document.addEventListener("DOMContentLoaded", function() {
             filteredMenus = filteredMenus.filter(menu => menu.category === selectedNation);
         }
 
-        // ✅ 시간별 필터링
+        // ✅ 시간별 필터링 (menu.time → menu.times.includes(selectedTime)로 변경)
         if (selectedTime !== "전체_시간") {
-            filteredMenus = filteredMenus.filter(menu => menu.time === selectedTime);
+            filteredMenus = filteredMenus.filter(menu => menu.times.includes(selectedTime));
         }
 
         if (filteredMenus.length > 0) {
@@ -134,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
 
 </script>
 
