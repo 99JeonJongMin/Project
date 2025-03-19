@@ -33,18 +33,12 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
-
-
-
 	@Override
 	public int register(BoardVO board) {
 		// TODO Auto-generated method stub
 		
 		
 		int i = mapper.insert(board);
-		
-		
-		
 		return i;
 	}
 	

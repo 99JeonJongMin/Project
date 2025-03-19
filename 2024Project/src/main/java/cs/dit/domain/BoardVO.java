@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	private int bno;
-	private String title, content, writer;
+	private String title, content, writer,link;
 	private Date regdate, updatedate;
 	public String delete(long bno) {
 		// TODO Auto-generated method stub
