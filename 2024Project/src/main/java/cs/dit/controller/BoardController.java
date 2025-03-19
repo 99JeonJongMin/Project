@@ -69,8 +69,12 @@ public class BoardController {
 	public void register() {
 	}
 	 
-	@GetMapping("/modifyBoard")
-	public void modifyBoard() {
+	@GetMapping("/boardmodify")
+	public void boardmodify() {
+	}
+	
+	@GetMapping("/menumodify")
+	public void menumodify() {
 	}
 	
 	@GetMapping({"/get", "/modify"})
