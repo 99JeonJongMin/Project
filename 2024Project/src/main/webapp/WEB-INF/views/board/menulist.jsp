@@ -35,7 +35,7 @@
                             <c:forEach var="board" items="${list2}">
                                 <tr class="odd gradeX">
                                     <td><c:out value="${board.bno}"/></td>
-                                    <td><a href="/board/get?bno=<c:out value='${board.bno}'/>"><c:out value="${board.title}"/></a></td>
+                                    <td><a href="/board/menuget?bno=<c:out value='${board.bno}'/>"><c:out value="${board.title}"/></a></td>
                                     <td><c:out value="${board.writer}"/></td>
                                     <td><c:out value="${board.regdate}"/></td>
                                 </tr> 
