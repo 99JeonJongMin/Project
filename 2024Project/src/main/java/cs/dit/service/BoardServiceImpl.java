@@ -47,6 +47,18 @@ public class BoardServiceImpl implements BoardService {
 		
 		return i;
 	}
+	
+	@Override
+	public int menuregister(BoardVO board) {
+		// TODO Auto-generated method stub
+		
+		
+		int i = mapper.menuinsert(board);
+		
+		
+		
+		return i;
+	}
 
 	
 

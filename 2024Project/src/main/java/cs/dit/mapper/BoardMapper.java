@@ -17,6 +17,9 @@ public interface BoardMapper {
     @Insert("INSERT INTO board (title, content, writer) VALUES (#{title}, #{content}, #{writer})")
     int insert(BoardVO board);
     
+    @Insert("INSERT INTO mboard (title, content,link, writer) VALUES (#{title}, #{content},#{link}, #{writer})")
+    int menuinsert(BoardVO board);
+    
     @Delete("DELETE FROM board WHERE bno = #{bno}")
     int delete(Long bno);
     

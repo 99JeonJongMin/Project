@@ -22,12 +22,12 @@ public class BoardController {
 	public BoardController() {
         System.out.println("✅ BoardController Initialized!");  // 🚀 서버 콘솔에서 확인
     }
-	@GetMapping("/list")
+	@GetMapping("/boardlist")
 	public void list(Model model) {
 		model.addAttribute("list", service.getList());
 	}
 	
-	@GetMapping("/list2")
+	@GetMapping("/menulist")
 	public void list2(Model model) {
 		model.addAttribute("list", service.getList2());
 	}
@@ -52,7 +52,17 @@ public class BoardController {
 		if(count==1)
 			rttr.addFlashAttribute("result", "registered");
 		
-		return "redirect:/board/list2";
+		return "redirect:/board/boardlist";
+	}
+	@PostMapping("/menuregister")
+	public String menuregister(BoardVO board, RedirectAttributes rttr) {
+		
+		int count = service.menuregister(board);
+		
+		if(count==1)
+			rttr.addFlashAttribute("result", "registered");
+		
+		return "redirect:/board/menulist";
 	}
 	
 	@GetMapping("/register")

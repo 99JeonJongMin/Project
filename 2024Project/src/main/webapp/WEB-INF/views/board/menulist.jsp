@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-outline-primary" href="/board/modifyBoard" role="button">글쓰기</a>
+    <a class="btn btn-outline-primary" href="/board/menumodify" role="button">글쓰기</a>
 </div>
 
 

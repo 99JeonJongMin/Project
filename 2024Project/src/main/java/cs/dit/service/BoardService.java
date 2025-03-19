@@ -12,6 +12,8 @@ public interface BoardService {
 	
 	public int register(BoardVO board);
 	
+	public int menuregister(BoardVO board);
+	
 	
 	public BoardVO get();
 	

@@ -21,8 +21,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="/board/list">메뉴추천게시판</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/board/list2">자유게시판</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/board/menulist">메뉴추천게시판</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/board/boardlist">자유게시판</a></li>
                     <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">관리자</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
