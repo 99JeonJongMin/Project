@@ -8,10 +8,10 @@ import cs.dit.domain.BoardVO;
 @Mapper // MyBatis 매퍼 어노테이션 추가
 public interface BoardMapper {
     
-    @Select("SELECT * FROM mboard")
+    @Select("SELECT * FROM board")
     List<BoardVO> getList();
     
-    @Select("SELECT * FROM board")
+    @Select("SELECT * FROM mboard")
     List<BoardVO> getList2();
     
     @Insert("INSERT INTO board (title, content, writer) VALUES (#{title}, #{content}, #{writer})")

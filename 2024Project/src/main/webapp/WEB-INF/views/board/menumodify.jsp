@@ -57,6 +57,11 @@
                 <label>내용</label>
                 <textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요"></textarea>
             </div>
+            
+            <div class="form-group">
+                <label>링크</label>
+                <textarea class="form-control" rows="5" name="link" placeholder="링크를 입력하세요"></textarea>
+            </div>
 
             <div class="form-group">
                 <label>작성자</label>
