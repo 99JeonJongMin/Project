@@ -48,20 +48,20 @@
         <form role="form">
             <div class="form-group">
                 <label>제목</label>
-                <input class="form-control" name="title" value="<c:out value='${mboard.title}'/>" readonly>
+                <input class="form-control" name="title" value="<c:out value='${board.title}'/>" readonly>
             </div>
             <div class="form-group">
                 <label>내용</label>
-                <textarea class="form-control" rows="5" name="content" readonly><c:out value="${mboard.content}"/></textarea>
+                <textarea class="form-control" rows="5" name="content" readonly><c:out value="${board.content}"/></textarea>
             </div>
             <div class="form-group">
                 <label>작성자</label>
-                <input class="form-control" name="writer" value="<c:out value='${mboard.writer}'/>" readonly>
+                <input class="form-control" name="writer" value="<c:out value='${board.writer}'/>" readonly>
             </div>
             <div class="form-group">
                 <!-- Modify 버튼 조건부 렌더링 -->
-                <c:if test="${mboard.writer == sessionScope.userid}">
-                    <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${mboard.bno}'/>'">수정</button>
+                <c:if test="${board.writer == sessionScope.userid}">
+                    <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${board.bno}'/>'">수정</button>
                 </c:if>
                  <button type="button" class="btn btn-secondary" onclick="window.location.href='list2'">목록으로</button>
             </div>
