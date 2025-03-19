@@ -29,7 +29,7 @@ public class BoardController {
 	
 	@GetMapping("/menulist")
 	public void list2(Model model) {
-		model.addAttribute("list", service.getList2());
+		model.addAttribute("list2", service.getList2());
 	}
 
 	@GetMapping("/index")
