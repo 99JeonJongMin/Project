@@ -6,40 +6,6 @@
 
 <%@include file="../includes/header.jsp"%>
 
-<style>
-    /* 화면 중앙 정렬 스타일 */
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start; /* 수직 정렬을 위쪽으로 */
-        height: 90vh; /* 화면의 90% 높이 */
-        padding-top: 50px; /* 상단 여백 추가 */
-    }
-
-    .form-box {
-        width: 400px; /* 폼 너비 */
-        padding: 20px; /* 내부 여백 */
-        background-color: #f9f9f9; /* 배경 색상 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-        border-radius: 8px; /* 모서리 둥글게 */
-        text-align: center; /* 폼 제목 중앙 정렬 */
-    }
-
-    .form-title {
-        font-size: 24px; /* 제목 크기 */
-        font-weight: bold; /* 제목 두껍게 */
-        margin-bottom: 20px; /* 제목과 폼 필드 간격 */
-        color: #333; /* 제목 색상 */
-    }
-
-    .form-box .form-group {
-        margin-bottom: 15px; /* 각 필드 간격 */
-    }
-
-    .form-box button {
-        width: 100%; /* 버튼 전체 너비 */
-    }
-</style>
 
 <div class="form-container">
     <div class="form-box">

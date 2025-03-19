@@ -1,107 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-	<%@include file="../includes/header.jsp"
-	 	 %>
-		 
-         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">메뉴추천게시판</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            본인이 추천하고 싶은 메뉴를 게시해주세요.
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                           <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>제목</th>
-                                        <th>작성자</th>
-                                        <th>날짜</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   
-                                    <c:forEach var="board" items="${list}">
-									    <tr class="odd gradeX">
-									        <td><c:out value="${board.bno}"/></td>
-									        <td><a href="/board/get?bno=<c:out value='${board.bno}'/>"><c:out value="${board.title}"/></a></td>
-									        <td><c:out value="${board.writer}"/></td>
-									        <td><c:out value="${board.regdate}"/></td>
-									    </tr>
-									</c:forEach> 
 
-                                   
-                                </tbody>
-                            </table>
-                            <!-- /.table-responsive -->
-                            
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-                
-      
-            </div>
-            <!-- /.row -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<%@ include file="../includes/header.jsp" %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">메뉴추천게시판</h1>
         </div>
-        <!-- /#page-wrapper -->
-       
-        <!-- The Modal -->
-        
-			<div class="modal fade" id="myModal">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <!-- Modal Header -->
-			      <div class="modal-header">
-			        <h4 class="modal-title">Modal Heading</h4>
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			      </div>
-			      <!-- Modal body -->
-			      <div class="modal-body">
-			        Modal body..
-			      </div>
-			      <!-- Modal footer -->
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			
-			<script type="text/javascript">
-				$(document).ready(function(){
-				    var result = "${result}";  // ✅ EL(Expression Language) 직접 할당
-				    checkModal(result);
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    추천해주고 싶은 메뉴가 있다면 작성해 주세요!
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="board" items="${list2}">
+                                <tr class="odd gradeX">
+                                    <td><c:out value="${board.bno}"/></td>
+                                    <td><a href="/board/get?bno=<c:out value='${board.bno}'/>"><c:out value="${board.title}"/></a></td>
+                                    <td><c:out value="${board.writer}"/></td>
+                                    <td><c:out value="${board.regdate}"/></td>
+                                </tr> 
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-outline-primary" href="/board/modifyBoard" role="button">글쓰기</a>
+</div>
 
-			
-			function checkModal(result){
-			
-			if(result ===''){ 
-				return;
-			}else if(result ==='registered'){
-			$(".modal-title").html("게시글 등록");
-			$(".modal-body").html("새 게시글이 등록되었습니다.");
-				$("#myModal").modal("show");
-			}
-			}
-			});
 
-</script>
-
-        
-<%@include file="../includes/footer.jsp"%>
-
-    
+<%@ include file="../includes/footer.jsp" %>
