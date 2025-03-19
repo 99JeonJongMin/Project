@@ -10,22 +10,25 @@
     <div class="category-container">
         <div class="category-section">
             <!-- 나라별 카테고리 -->
-            <div class="category-group">
-                <button class="category-button all-button-nation" data-category="전체_나라">전체</button>
-                <button class="category-button nation-button" data-category="한식">한식</button>
-                <button class="category-button nation-button" data-category="일식">일식</button>
-                <button class="category-button nation-button" data-category="중식">중식</button>
-                <button class="category-button nation-button" data-category="양식">양식</button>
-            </div>
+			<div class="category-group">
+			    <button class="category-button all-button-nation" data-category="전체_나라">전체</button>
+			    <button class="category-button nation-button" data-category="한식">한식</button>
+			    <button class="category-button nation-button" data-category="일식">일식</button>
+			    <button class="category-button nation-button" data-category="중식">중식</button>
+			    <button class="category-button nation-button" data-category="양식">양식</button>
+			    <button class="category-button nation-button" data-category="기타">기타</button> <!-- ✅ 기타 추가 -->
+			</div>
 
-            <!-- 시간별 카테고리 -->
-            <div class="category-group">
-                <button class="category-button all-button-time" data-category="전체_시간">전체</button>
-                <button class="category-button time-button" data-category="아침">아침</button>
-                <button class="category-button time-button" data-category="점심">점심</button>
-                <button class="category-button time-button" data-category="저녁">저녁</button>
-                <button class="category-button time-button" data-category="야식">야식</button>
-            </div>
+			<!-- 시간별 카테고리 -->
+			<div class="category-group">
+			    <button class="category-button all-button-time" data-category="전체_시간">전체</button>
+			    <button class="category-button time-button" data-category="아침">아침</button>
+			    <button class="category-button time-button" data-category="점심">점심</button>
+			    <button class="category-button time-button" data-category="저녁">저녁</button>
+			    <button class="category-button time-button" data-category="야식">야식</button>
+			    <button class="category-button time-button" data-category="간식">간식</button> <!-- ✅ 간식 추가 -->
+			</div>
+
         </div>
     </div>
 
