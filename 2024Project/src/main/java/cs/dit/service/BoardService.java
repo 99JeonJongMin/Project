@@ -17,11 +17,15 @@ public interface BoardService {
 	
 	public BoardVO get();
 	
+	public BoardVO menuget();
+	
 	public int modify(BoardVO board);
 	
 	public int remove(Long Bno);
 
 	public BoardVO get(Long bno);
+	
+	public BoardVO menuget(Long bno);
 	
 	
 	

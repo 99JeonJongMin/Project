@@ -26,6 +26,9 @@ public interface BoardMapper {
     @Select("SELECT * FROM board WHERE bno = #{bno}")
     BoardVO read(long bno);
     
+    @Select("SELECT * FROM mboard WHERE bno = #{bno}")
+    BoardVO menuread(long bno);
+    
     @Update("UPDATE board SET title = #{title}, content = #{content}, writer = #{writer}, updateDate = now() WHERE bno = #{bno}")
     int update(BoardVO board); 
 }

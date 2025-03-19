@@ -91,6 +91,20 @@ public class BoardController {
 	    model.addAttribute("board", board);
 	}
 	
+	@GetMapping({"/menuget", "/menumodify"})
+	public void menuget(@RequestParam("bno") Long bno, Model model) {
+	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
+	    BoardVO board = service.menuget(bno);
+
+	    if (board == null) {
+	        System.out.println("❌ 게시글을 찾을 수 없습니다.");
+	    } else {
+	        System.out.println("✅ 게시글 조회 성공: " + board.getTitle());
+	    }
+
+	    model.addAttribute("board", board);
+	}
+	
 	// POST method for modifying a board
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {

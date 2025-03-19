@@ -62,6 +62,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.read(bno);
 	}
+	
+	@Override
+	public BoardVO menuget(Long bno) {
+		// TODO Auto-generated method stub
+		return mapper.menuread(bno);
+	}
 
 
 
@@ -88,6 +94,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public BoardVO menuget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
