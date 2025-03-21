@@ -3,6 +3,8 @@ package cs.dit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,14 +47,19 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
-		
-		int count = service.register(board);
-		
-		if(count==1)
-			rttr.addFlashAttribute("result", "registered");
-		
-		return "redirect:/board/boardlist";
+	public String register(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
+	    if (result.hasErrors()) {
+	        rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
+	        return "redirect:/board/register";
+	    }
+
+	    int count = service.register(board);
+
+	    if (count == 1) {
+	        rttr.addFlashAttribute("result", "registered");
+	    }
+
+	    return "redirect:/board/boardlist";
 	}
 	@PostMapping("/menuregister")
 	public String menuregister(BoardVO board, RedirectAttributes rttr) {
@@ -116,7 +123,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "modified");
 		}
 		
-		return "redirect:/board/list2";
+		return "redirect:/board/boardlist";
 	}
 	
 	// POST method for deleting a board

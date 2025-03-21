@@ -41,9 +41,25 @@
     }
 </style>
 
+<script>
+    function validateForm() {
+        let title = document.forms["boardForm"]["title"].value.trim();
+        let content = document.forms["boardForm"]["content"].value.trim();
+
+        if (title === "" || content === "") {
+            alert("제목과 내용을 입력해주세요.");
+            return false; // 폼 제출 방지
+        }
+        return true;
+    }
+</script>
+
 <div class="form-container">
     <div class="form-box">
         <!-- 폼 제목 -->
+        <c:if test="${not empty errorMessage}">
+		    <p style="color: red; font-weight: bold;">${errorMessage}</p>
+		</c:if>
         <div class="form-title">게시글 작성</div>
         
         <!-- 폼 시작 -->
