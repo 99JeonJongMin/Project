@@ -6,15 +6,13 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@SpringBootApplication
-@ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
-@ComponentScan(basePackages = {"cs.dit.controller", "cs.dit.service", "cs.dit.mapper", "cs.dit.config"})  // ✅ 컨트롤러 강제 스캔
-@EnableWebMvc  // 🚀 Boot 3.x에서 명확하게 MVC 설정을 활성화
+@SpringBootApplication  // 🔥 `exclude = {SecurityAutoConfiguration.class}` 제거
+@ServletComponentScan
+@ComponentScan("cs.dit")  // ✅ 명확하게 패키지 스캔 설정
 public class BoardApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
@@ -22,7 +20,6 @@ public class BoardApplication implements WebMvcConfigurer {
         SpringApplication.run(BoardApplication.class, args);
     }
 
-    // ✅ JSP ViewResolver 설정 (Spring Boot에서 JSP 사용 가능하도록)
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -31,7 +28,6 @@ public class BoardApplication implements WebMvcConfigurer {
         return resolver;
     }
 
-    // ✅ 정적 리소스 핸들링 (기존 servlet-context.xml에서 설정했던 것과 동일)
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")

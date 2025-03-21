@@ -15,20 +15,19 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll() // ✅ 모든 경로 접근 허용
+                .requestMatchers("/**").permitAll()
             )
-            .csrf(csrf -> csrf.disable()) // ✅ CSRF 보호 비활성화 (필요에 따라)
-            .formLogin(login -> login.disable()) // ✅ 기본 로그인 폼 비활성화
+            .csrf(csrf -> csrf.disable()) 
+            .formLogin(login -> login.disable()) 
             .logout(logout -> logout
-                .logoutUrl("/board/logout") // ✅ 로그아웃 URL 지정
-                .logoutSuccessUrl("/board/index") // ✅ 로그아웃 후 리다이렉트할 경로
+                .logoutUrl("/board/logout")
+                .logoutSuccessUrl("/board/index")
                 .permitAll()
             );
 
         return http.build();
     }
 
-    // 🔥 `BCryptPasswordEncoder` 빈을 수동으로 등록
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
