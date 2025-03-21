@@ -13,17 +13,17 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper mapper;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;  // 👉 `@Autowired`로 DI 받기
 
-    // ✅ 회원가입
+    // ✅ 회원가입 (아이디 & 이메일 중복 체크)
     @Override
     public int memreg(MemberVO member) {
-        if (isUserIdExists(member.getUserid())) return -1;
-        if (isEmailExists(member.getEmail())) return -2;
+        if (countByUserId(member.getUserid()) > 0) return -1; // 👉 아이디 중복 체크
+        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
 
-        // 👉 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(member.getPasswd());
-        member.setPasswd(encodedPassword);
+        // 🔒 비밀번호 암호화 후 저장
+        member.setPasswd(passwordEncoder.encode(member.getPasswd()));
 
         return mapper.insertmember(member);
     }
@@ -31,24 +31,29 @@ public class MemberServiceImpl implements MemberService {
     // ✅ 로그인 처리
     @Override
     public boolean authenticate(String userid, String passwd) {
-        MemberVO member = mapper.findByUserId(userid); // login() 말고 userid만으로 찾기
+        MemberVO member = mapper.findByUserId(userid); // 👉 ID 기반 조회
 
-        // 👉 비밀번호 비교 (matches)
-        return member != null && passwordEncoder.matches(passwd, member.getPasswd());
+        if (member == null) return false; // ❌ 사용자 없음
+
+        // 🔒 암호화된 비밀번호 비교 (BCrypt의 `matches` 사용)
+        return passwordEncoder.matches(passwd, member.getPasswd());
     }
 
+    // ✅ 이메일 중복 검사
     @Override
     public boolean isEmailExists(String email) {
         return mapper.countByEmail(email) > 0;
     }
 
+    // ✅ 아이디 중복 검사
     @Override
     public boolean isUserIdExists(String userid) {
         return mapper.countByUserId(userid) > 0;
     }
-    
+
+    // ✅ 아이디 개수 조회
     @Override
     public int countByUserId(String userid) {
-        return mapper.countByUserId(userid);  // ✅ MyBatis 매퍼에서 아이디 개수 조회
+        return mapper.countByUserId(userid);
     }
 }
