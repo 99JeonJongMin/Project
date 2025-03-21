@@ -35,8 +35,14 @@
         margin-bottom: 15px; /* 각 필드 간격 */
     }
 
-    .form-box button {
-        width: 100%; /* 버튼 전체 너비 */
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
     }
 </style>
 
@@ -58,13 +64,25 @@
                 <label>작성자</label>
                 <input class="form-control" name="writer" value="<c:out value='${board.writer}'/>" readonly>
             </div>
-            <div class="form-group">
-                <!-- Modify 버튼 조건부 렌더링 -->
+            
+            <!-- 버튼 그룹 -->
+            <div class="btn-group">
+                <!-- 목록으로 이동 버튼 -->
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist'">목록으로</button>
+
+                <!-- 수정 버튼 (작성자 또는 admin만 가능) -->
                 <c:if test="${board.writer == sessionScope.userid}">
                     <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${board.bno}'/>'">수정</button>
                 </c:if>
-                 <button type="button" class="btn btn-secondary" onclick="window.location.href='list2'">목록으로</button>
             </div>
+
+            <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
+            <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
+                <form action="/board/remove" method="post" style="margin-top: 10px;">
+                    <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
+                    <button type="submit" class="btn btn-danger btn-block">삭제</button>
+                </form>
+            </c:if>
         </form>
     </div>
 </div>
