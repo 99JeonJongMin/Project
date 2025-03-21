@@ -28,9 +28,9 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 🔥 `BCryptPasswordEncoder` 빈을 수동으로 등록
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // ✅ 비밀번호 해싱 기능 유지
+        return new BCryptPasswordEncoder();
     }
-    
 }
