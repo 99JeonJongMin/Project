@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/board")
 @Controller
@@ -138,6 +139,12 @@ public class BoardController {
 		}
 		
 		return "redirect:/board/boardlist";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate(); // 세션 무효화
+	    return "redirect:/board/index"; // 메인 페이지로 리디렉트
 	}
 	
 	@Controller

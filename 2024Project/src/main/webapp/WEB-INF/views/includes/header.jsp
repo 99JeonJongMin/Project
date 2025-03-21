@@ -31,7 +31,7 @@
                         String user = (String) session.getAttribute("userid");
                         if (user != null) { 
                     %>
-                        <li class="nav-item"><a class="nav-link active" href="/logout">로그아웃</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/board/logout">로그아웃</a></li>
                     <% 
                         } else { 
                     %>
@@ -43,13 +43,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- 로그아웃 처리를 위한 logout.jsp -->
-    <%
-        if (request.getRequestURI().contains("logout")) {
-            session.invalidate();
-            response.sendRedirect("index");
-        }
     %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
