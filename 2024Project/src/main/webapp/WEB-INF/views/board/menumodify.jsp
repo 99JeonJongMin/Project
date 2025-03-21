@@ -45,11 +45,25 @@
         let content = document.forms["boardForm"]["content"].value.trim();
         let link = document.forms["boardForm"]["link"].value.trim();
 
-        if (title === "" || content === "" || link === "") {
-            alert("제목, 내용, 링크를 모두 입력해주세요.");
-            return false; // 폼 제출 방지
+        let urlPattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w\d-]+(\/.*)?$/;
+
+        if (title === "") {
+            alert("제목을 입력해주세요.");
+            return false;
         }
-        return true; // 유효성 검사가 통과되면 제출 허용
+        if (content === "") {
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+        if (link === "") {
+            alert("링크를 입력해주세요.");
+            return false;
+        }
+        if (!urlPattern.test(link)) {
+            alert("올바른 URL 형식을 입력해주세요. (예: https://example.com)");
+            return false;
+        }
+        return true;
     }
 </script>
 
@@ -57,7 +71,9 @@
     <div class="form-box">
         <!-- 오류 메시지 출력 -->
         <c:if test="${not empty errorMessage}">
-            <p style="color: red; font-weight: bold; margin-bottom: 15px;">${errorMessage}</p>
+            <div style="background-color: #ffdddd; color: red; border: 1px solid red; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                ${errorMessage}
+            </div>
         </c:if>
 
         <!-- 폼 제목 -->
@@ -72,24 +88,22 @@
 
             <div class="form-group">
                 <label>내용</label>
-                <textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="3" name="content" placeholder="내용을 입력하세요"></textarea>
             </div>
             
             <div class="form-group">
                 <label>링크</label>
-                <textarea class="form-control" rows="5" name="link" placeholder="링크를 입력하세요"></textarea>
+                <textarea class="form-control" rows="3" name="link" placeholder="링크를 입력하세요"></textarea>
             </div>
 
             <div class="form-group">
                 <label>작성자</label>
-                <!-- 세션에서 userid 값을 가져와 value에 설정 -->
                 <input class="form-control" name="writer" value="<c:out value='${sessionScope.userid}'/>" readonly />
             </div> 
 
             <button type="submit" class="btn btn-primary">작성하기</button>
             <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/menulist'">목록으로</button>
         </form>
-        <!-- 폼 종료 -->
     </div>
 </div>
 

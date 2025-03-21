@@ -98,7 +98,7 @@ public class BoardController {
 	    model.addAttribute("board", board);
 	}
 
-	@GetMapping({"/menuget", "/menumodify"})
+	@GetMapping("/menuget")
 	public void menuget(@RequestParam("bno") Long bno, Model model) {
 	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
 	    BoardVO board = service.menuget(bno);
