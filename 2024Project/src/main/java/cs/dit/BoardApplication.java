@@ -22,8 +22,8 @@ public class BoardApplication extends SpringBootServletInitializer {
         System.out.println("✅ BoardApplication 실행됨!");
         SpringApplication.run(BoardApplication.class, args);
     }
-
-    // ✅ JSP 뷰 리졸버 설정 (JSP 파일을 찾을 수 있도록 설정)
+ 
+    // ✅ JSP 뷰 리졸버 설정 (JSP 파일을 찾을 수 있도록 설정) 
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
