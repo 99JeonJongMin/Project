@@ -13,7 +13,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // 🔥 기본 보안 설정 제거
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // 🔥 Spring Security 기본 설정 제거
 @ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
 @ComponentScan(basePackages = {"cs.dit.controller", "cs.dit.service", "cs.dit.mapper", "cs.dit.config", "cs.dit.domain"})  // ✅ 컨트롤러 강제 스캔
 public class BoardApplication extends SpringBootServletInitializer {
@@ -23,7 +23,7 @@ public class BoardApplication extends SpringBootServletInitializer {
         SpringApplication.run(BoardApplication.class, args);
     }
 
-    // ✅ 뷰 리졸버 설정 (JSP 사용을 위한 설정)
+    // ✅ JSP 뷰 리졸버 설정 (JSP 파일을 찾을 수 있도록 설정)
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -33,7 +33,7 @@ public class BoardApplication extends SpringBootServletInitializer {
     }
 }
 
-// ✅ DispatcherServlet 설정 추가
+// ✅ DispatcherServlet 설정 추가 (이 코드가 있어야 DispatcherServletPath 오류 해결 가능)
 @Configuration
 class ServletConfig {
     @Bean
