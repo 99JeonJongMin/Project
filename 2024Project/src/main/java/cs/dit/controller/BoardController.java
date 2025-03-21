@@ -130,7 +130,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "removed");
 		}
 		
-		return "redirect:/board/list";
+		return "redirect:/board/boardlist";
 	}
 	
 	@Controller
