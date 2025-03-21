@@ -39,10 +39,32 @@
         display: flex;
         justify-content: space-between;
         gap: 10px;
+        margin-top: 20px;
     }
 
     .btn {
         flex: 1;
+    }
+
+    .delete-btn {
+        background-color: #dc3545;
+        border: none;
+        color: white;
+        padding: 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+        flex: 1;
+    }
+
+    .delete-btn:hover {
+        background-color: #a71d2a;
+    }
+
+    .form-box form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>
 
@@ -74,16 +96,17 @@
                 <c:if test="${board.writer == sessionScope.userid}">
                     <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${board.bno}'/>'">수정</button>
                 </c:if>
-            </div>
-
-            <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
-            <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
-                <form action="/board/remove" method="post" style="margin-top: 10px;">
-                    <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
-                    <button type="submit" class="btn btn-danger btn-block">삭제</button>
-                </form>
-            </c:if>
-        </form>
+                </div>
+ 			</form>
+                <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
+                <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
+                    <form action="/board/remove" method="post" style="margin: 0; flex: 1;">
+                        <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
+                        <button type="submit" class="delete-btn">삭제</button>
+                    </form>
+                </c:if>
+            
+       
     </div>
 </div>
 
