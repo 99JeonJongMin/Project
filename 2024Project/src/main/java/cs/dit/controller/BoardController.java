@@ -140,6 +140,18 @@ public class BoardController {
 		
 		return "redirect:/board/boardlist";
 	}
+	@PostMapping("/menuremove")
+	public String menuremove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+		
+		// Call the service to delete the board
+		int count = service.menuremove(bno);
+		
+		if(count == 1) {
+			rttr.addFlashAttribute("result", "removed");
+		}
+		
+		return "redirect:/board/menulist";
+	}
 	
 	@Controller
 	public class RootController {

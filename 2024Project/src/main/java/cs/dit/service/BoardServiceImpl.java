@@ -78,6 +78,13 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.delete(bno);
 
 	}
+	
+	@Override
+	public int menuremove(Long bno) {
+		// TODO Auto-generated method stub
+		return mapper.menudelete(bno);
+
+	}
 
 
 

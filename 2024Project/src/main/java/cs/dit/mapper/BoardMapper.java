@@ -23,6 +23,9 @@ public interface BoardMapper {
     @Delete("DELETE FROM board WHERE bno = #{bno}")
     int delete(Long bno);
     
+    @Delete("DELETE FROM mboard WHERE bno = #{bno}")
+    int menudelete(Long bno);
+    
     @Select("SELECT * FROM board WHERE bno = #{bno}")
     BoardVO read(long bno);
     

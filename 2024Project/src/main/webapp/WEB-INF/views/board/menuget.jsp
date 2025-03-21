@@ -65,9 +65,10 @@
             <div class="form-group">
             </div>
         </form>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/menulist'">목록으로</button>
                 <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
         <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
-            <form action="/board/remove" method="post" style="margin-top: 15px;">
+            <form action="/board/menuremove" method="post" style="margin-top: 15px;">
                 <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
                 <button type="submit" class="btn btn-danger btn-block">삭제</button>
             </form>

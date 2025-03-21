@@ -22,6 +22,8 @@ public interface BoardService {
 	public int modify(BoardVO board);
 	
 	public int remove(Long Bno);
+	
+	public int menuremove(Long Bno);
 
 	public BoardVO get(Long bno);
 	
