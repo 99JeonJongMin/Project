@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.MemberVO;
@@ -72,7 +73,12 @@ public class MemberController {
         response.addCookie(cookie);
         return "redirect:/board/index";
     }
-
+    @GetMapping("/checkUserId")
+    @ResponseBody
+    public String checkUserId(@RequestParam String userid) {
+        int count = MemberService.countByUserId(userid);
+        return (count == 0) ? "available" : "unavailable";
+    }
     @GetMapping("/memreg")
     public String memreg() {  
         return "board/memreg";  // ✅ 올바른 JSP 뷰 경로 지정

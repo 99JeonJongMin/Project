@@ -46,4 +46,9 @@ public class MemberServiceImpl implements MemberService {
     public boolean isUserIdExists(String userid) {
         return mapper.countByUserId(userid) > 0;
     }
+    
+    @Override
+    public int countByUserId(String userid) {
+        return mapper.countByUserId(userid);  // ✅ MyBatis 매퍼에서 아이디 개수 조회
+    }
 }
