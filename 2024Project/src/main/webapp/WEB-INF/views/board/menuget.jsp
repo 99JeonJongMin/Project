@@ -10,33 +10,33 @@
     .form-container {
         display: flex;
         justify-content: center;
-        align-items: flex-start; /* 수직 정렬을 위쪽으로 */
-        height: 90vh; /* 화면의 90% 높이 */
-        padding-top: 50px; /* 상단 여백 추가 */
+        align-items: flex-start;
+        height: 90vh;
+        padding-top: 50px;
     }
 
     .form-box {
-        width: 400px; /* 폼 너비 */
-        padding: 20px; /* 내부 여백 */
-        background-color: #f9f9f9; /* 배경 색상 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-        border-radius: 8px; /* 모서리 둥글게 */
-        text-align: center; /* 폼 제목 중앙 정렬 */
+        width: 400px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
     }
 
     .form-title {
-        font-size: 24px; /* 제목 크기 */
-        font-weight: bold; /* 제목 두껍게 */
-        margin-bottom: 20px; /* 제목과 폼 필드 간격 */
-        color: #333; /* 제목 색상 */
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
     }
 
     .form-box .form-group {
-        margin-bottom: 15px; /* 각 필드 간격 */
+        margin-bottom: 15px;
     }
 
     .form-box button {
-        width: 100%; /* 버튼 전체 너비 */
+        width: 100%;
     }
 </style>
 
@@ -62,14 +62,15 @@
                 <label>작성자</label>
                 <input class="form-control" name="writer" value="<c:out value='${mboard.writer}'/>" readonly>
             </div>
-            <div class="form-group">
-            </div>
         </form>
+
+        <!-- 목록으로 이동 버튼 -->
         <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/menulist'">목록으로</button>
-                <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
-        <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
+
+        <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
+        <c:if test="${mboard.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
             <form action="/board/menuremove" method="post" style="margin-top: 15px;">
-                <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
+                <input type="hidden" name="bno" value="<c:out value='${mboard.bno}'/>">
                 <button type="submit" class="btn btn-danger btn-block">삭제</button>
             </form>
         </c:if>
