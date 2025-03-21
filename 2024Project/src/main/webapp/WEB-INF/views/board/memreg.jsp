@@ -27,10 +27,10 @@
                 return false;
             }
 
-            // ✅ 비밀번호 정규식 검사 (8~20자, 영문+숫자+특수문자)
-            let pwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
+            // ✅ 비밀번호 정규식 검사 (8~20자, 영문+숫자 필수, 특수문자는 선택 사항)
+            let pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
             if (!pwPattern.test(password)) {
-                alert("비밀번호는 8~20자의 영문, 숫자, 특수문자를 포함해야 합니다.");
+                alert("비밀번호는 8~20자의 영문과 숫자를 포함해야 합니다. (특수문자는 선택 사항)");
                 return false;
             }
 
@@ -81,7 +81,7 @@
             <div class="signup-form">
                 <h2 class="mb-4">회원가입</h2>
 
-                <!-- ✅ 아이디 & 이메일 중복 오류 메시지 표시 -->
+                <!-- ✅ 오류 메시지 표시 -->
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         ${error}
@@ -114,7 +114,7 @@
                     <!-- ✅ 비밀번호 입력 -->
                     <div class="mb-3 form-group">
                         <label class="form-label" for="passwd">비밀번호</label>
-                        <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력 (8~20자, 영문+숫자+특수문자)" required>
+                        <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력 (8~20자, 영문+숫자)" required>
                     </div>
 
                     <!-- ✅ 비밀번호 확인 -->

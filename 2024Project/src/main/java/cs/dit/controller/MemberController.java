@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cs.dit.domain.MemberVO;  
+import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
 
 @RequestMapping("/board")  // ✅ 컨트롤러 전체에 /board 경로 설정

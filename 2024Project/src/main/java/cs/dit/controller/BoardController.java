@@ -134,7 +134,7 @@ public class BoardController {
 		// Call the service to delete the board
 		int count = service.remove(bno);
 		
-		if(count == 1) { 
+		if(count == 1) {
 			rttr.addFlashAttribute("result", "removed");
 		}
 		

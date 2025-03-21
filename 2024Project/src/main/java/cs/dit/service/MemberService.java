@@ -7,6 +7,7 @@ public interface MemberService {
 	public boolean authenticate(String userid, String passwd);
 	public boolean isEmailExists(String email);
 	public boolean isUserIdExists(String userid);
+	public int countByUserId(String userid);
 }
 
  
