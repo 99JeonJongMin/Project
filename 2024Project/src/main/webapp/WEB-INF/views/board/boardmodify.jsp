@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-
 
 <%@include file="../includes/header.jsp"%>
 
@@ -11,33 +9,33 @@
     .form-container {
         display: flex;
         justify-content: center;
-        align-items: flex-start; /* 수직 정렬을 위쪽으로 */
-        height: 90vh; /* 화면의 90% 높이 */
-        padding-top: 50px; /* 상단 여백 추가 */
+        align-items: flex-start;
+        height: 90vh;
+        padding-top: 50px;
     }
 
     .form-box {
-        width: 400px; /* 폼 너비 */
-        padding: 20px; /* 내부 여백 */
-        background-color: #f9f9f9; /* 배경 색상 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-        border-radius: 8px; /* 모서리 둥글게 */
-        text-align: center; /* 폼 제목 중앙 정렬 */
+        width: 400px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
     }
 
     .form-title {
-        font-size: 24px; /* 제목 크기 */
-        font-weight: bold; /* 제목 두껍게 */
-        margin-bottom: 20px; /* 제목과 폼 필드 간격 */
-        color: #333; /* 제목 색상 */
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
     }
 
     .form-box .form-group {
-        margin-bottom: 15px; /* 각 필드 간격 */
+        margin-bottom: 15px;
     }
 
     .form-box button {
-        width: 100%; /* 버튼 전체 너비 */
+        width: 100%;
     }
 </style>
 
@@ -50,20 +48,22 @@
             alert("제목과 내용을 입력해주세요.");
             return false; // 폼 제출 방지
         }
-        return true;
+        return true; // 유효성 검사가 통과되면 제출 허용
     }
 </script>
 
 <div class="form-container">
     <div class="form-box">
-        <!-- 폼 제목 -->
+        <!-- 오류 메시지 출력 -->
         <c:if test="${not empty errorMessage}">
-		    <p style="color: red; font-weight: bold;">${errorMessage}</p>
-		</c:if>
+            <p style="color: red; font-weight: bold; margin-bottom: 15px;">${errorMessage}</p>
+        </c:if>
+
+        <!-- 폼 제목 -->
         <div class="form-title">게시글 작성</div>
         
         <!-- 폼 시작 -->
-        <form action="/board/register" method="post">
+        <form name="boardForm" action="/board/register" method="post" onsubmit="return validateForm()">
             <div class="form-group">
                 <label>제목</label>
                 <input class="form-control" name="title" placeholder="제목을 입력하세요">
@@ -81,7 +81,7 @@
             </div> 
 
             <button type="submit" class="btn btn-primary">작성하기</button>
-           <button type="reset" class="btn btn-secondary" onclick="location.href='/board/list2">목록으로</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist'">목록으로</button>
         </form>
         <!-- 폼 종료 -->
     </div>
