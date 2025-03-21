@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberMapper mapper;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // ✅ 생성자 주입 방식으로 통일
+    // ✅ 생성자 주입 방식으로 수정
     public MemberServiceImpl(MemberMapper mapper, BCryptPasswordEncoder passwordEncoder) {
         this.mapper = mapper;
         this.passwordEncoder = passwordEncoder;
