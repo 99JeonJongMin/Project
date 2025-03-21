@@ -37,4 +37,4 @@ public class BoardApplication implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
     }
-}
+} 

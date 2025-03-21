@@ -9,3 +9,4 @@ public interface MemberService {
 	public boolean isUserIdExists(String userid);
 }
 
+ 
