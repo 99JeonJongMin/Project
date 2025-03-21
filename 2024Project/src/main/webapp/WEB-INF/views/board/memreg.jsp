@@ -12,82 +12,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- ✅ Custom CSS -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/sign.css' />">
+    <link rel="stylesheet" href="/resources/css/sign.css">
 
-    <style>
-        /* ✅ 전체 페이지 스타일 */
-        body {
-            font-family: 'Noto Sans', sans-serif;
-            background-color: #f8f9fa;
+    <script>
+        function validatePassword() {
+            let password = document.getElementById("passwd").value;
+            let confirmPassword = document.getElementById("confirmPasswd").value;
+            
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+                return false;
+            }
+            return true;
         }
 
-        .signup-container {
-            max-width: 900px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* ✅ 반응형 그리드 레이아웃 */
-        .signup-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px; /* ✅ 간격 추가 */
-        }
-
-        /* ✅ 이미지 스타일 (모바일에서는 숨김) */
-        .signup-image {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            display: block;
-        }
-
-        /* ✅ 모바일에서는 이미지 숨기기 */
-        @media (max-width: 768px) {
-            .signup-image {
-                display: none;
+        function checkUserId() {
+            let userid = document.getElementById("userid").value;
+            if (userid.trim() === "") {
+                alert("아이디를 입력해주세요.");
+                return;
             }
 
-            .signup-form {
-                width: 100%;
-                padding: 20px;
-            }
+            fetch(`/board/checkUserId?userid=${userid}`)
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "available") {
+                        alert("사용 가능한 아이디입니다.");
+                    } else {
+                        alert("이미 사용 중인 아이디입니다.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
         }
+    </script>
 
-        /* ✅ 입력 필드 스타일 */
-        .form-group {
-            text-align: left; /* ✅ 모바일에서도 좌측 정렬 */
-        }
-
-        .form-control {
-            border-radius: 5px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            border: none;
-            transition: background 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: #0056b3;
-        }
-
-        /* ✅ 에러 메시지 간격 조정 */
-        .alert {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body>
 
@@ -98,7 +56,7 @@
         <div class="signup-row">
             <!-- ✅ 좌측: 이미지 (모바일에서는 숨김) -->
             <div>
-                <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDN8fGFic3RyYWN0fGVufDB8fHx8MTcxMDg3MDkzMHww&ixlib=rb-4.0.3&w=700" 
+                <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&w=700" 
                      alt="회원가입 이미지" class="signup-image">
             </div>
 
@@ -108,28 +66,29 @@
 
                 <!-- ✅ 아이디 & 이메일 중복 오류 메시지 표시 -->
                 <c:if test="${not empty error}">
-                    <div class="alert alert-danger">${error}</div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${error}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </c:if>
 
-                <form action="/board/memreg" method="post">
+                <form action="/board/memreg" method="post" onsubmit="return validatePassword()">
                     <div class="mb-3 form-group">
                         <label class="form-label" for="userid">아이디</label>
-                        <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력" required>
-                    </div>
-
-                    <div class="mb-3 form-group">
-                        <label class="form-label" for="name">이름</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="이름 입력" required>
-                    </div>
-
-                    <div class="mb-3 form-group">
-                        <label class="form-label" for="email">이메일</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="이메일 입력" required>
+                        <div class="input-group">
+                            <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력" required>
+                            <button type="button" class="btn btn-secondary" onclick="checkUserId()">중복 확인</button>
+                        </div>
                     </div>
 
                     <div class="mb-3 form-group">
                         <label class="form-label" for="passwd">비밀번호</label>
                         <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력" required>
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="confirmPasswd">비밀번호 확인</label>
+                        <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control" placeholder="비밀번호 재입력" required>
                     </div>
 
                     <button type="submit" class="btn-submit">회원가입</button>
