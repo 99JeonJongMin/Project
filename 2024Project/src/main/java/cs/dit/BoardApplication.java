@@ -6,14 +6,15 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@SpringBootApplication  // 🔥 보안 설정 제거 안 함 (Security 설정은 따로 관리)
+@SpringBootApplication
 @ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
 @ComponentScan(basePackages = {"cs.dit.controller", "cs.dit.service", "cs.dit.mapper", "cs.dit.config"})  // ✅ 컨트롤러 강제 스캔
-
+@EnableWebMvc  // 🚀 Boot 3.x에서 명확하게 MVC 설정을 활성화
 public class BoardApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {

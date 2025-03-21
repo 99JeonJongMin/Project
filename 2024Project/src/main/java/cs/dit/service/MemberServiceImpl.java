@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // 🔥 생성자를 이용한 의존성 주입
+    // 🔥 생성자를 이용한 의존성 주입 (빈 주입 오류 방지)
     @Autowired
     public MemberServiceImpl(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
