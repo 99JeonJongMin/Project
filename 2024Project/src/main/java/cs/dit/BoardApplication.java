@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // 🔥 기본 보안 설정 제거
 @ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
-@ComponentScan(basePackages = {"cs.dit.controller", "cs.dit.service", "cs.dit.mapper"})  // ✅ 컨트롤러 강제 스캔
+@ComponentScan(basePackages = {"cs.dit.controller", "cs.dit.service", "cs.dit.mapper", "cs.dit.config"})  // ✅ 컨트롤러 강제 스캔
 
 public class BoardApplication implements WebMvcConfigurer {
 
