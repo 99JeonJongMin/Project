@@ -43,7 +43,6 @@
             </div>
         </div>
     </nav>
-    %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYVxA1fOMpY1zFpGxjLYzE2wrKQ1hD3zpGnJlJx04pT3MCqJ6v5PH0t6" 
