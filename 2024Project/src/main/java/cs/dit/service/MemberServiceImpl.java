@@ -1,6 +1,5 @@
 package cs.dit.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +9,12 @@ import cs.dit.mapper.MemberMapper;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
-    private MemberMapper mapper;
-
+    private final MemberMapper mapper;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // 🔥 생성자를 이용한 의존성 주입 (빈 주입 오류 방지)
-    @Autowired
-    public MemberServiceImpl(BCryptPasswordEncoder passwordEncoder) {
+    // ✅ 생성자 주입 방식으로 통일
+    public MemberServiceImpl(MemberMapper mapper, BCryptPasswordEncoder passwordEncoder) {
+        this.mapper = mapper;
         this.passwordEncoder = passwordEncoder;
     }
 

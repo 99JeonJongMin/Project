@@ -16,6 +16,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/**").permitAll() // ✅ 모든 경로 접근 허용
+                .requestMatchers("/error").permitAll() // ✅ `/error` 페이지 접근 허용
             )
             .csrf(csrf -> csrf.disable()) // ✅ CSRF 보호 비활성화 (필요에 따라)
             .formLogin(login -> login.disable()) // ✅ 기본 로그인 폼 비활성화
@@ -30,6 +31,6 @@ public class SecurityConfig {
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); // ✅ 비밀번호 해싱 기능 유지
     }
 }
