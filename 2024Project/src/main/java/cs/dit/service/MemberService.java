@@ -10,3 +10,4 @@ public interface MemberService {
 	public int countByUserId(String userid);
 }
 
+ 

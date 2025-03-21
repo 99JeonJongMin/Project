@@ -1,0 +1,195 @@
+* [33me16da39[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnewTable[m[33m, [m[1;31morigin/newTable[m[33m)[m 네번째걸음
+* [33m1151529[m 세번째걸음
+* [33m8a974d9[m 두걸음씩
+* [33mb656df6[m 하나씩
+* [33m94ac0f1[m 떴냐
+* [33mdd66348[m 떴냐
+* [33m80593a4[m 쩨발
+* [33mb4046fb[m 제발
+* [33m2005644[m 살려줘제발
+* [33m8d78013[m deBuhg
+* [33ma79edd0[m DEBGGGG
+* [33md2688f6[m DEBUG
+* [33m1cb0776[m debug
+* [33m6dfc532[m debug
+* [33m8bf6ee7[m ++
+* [33m616a67c[m +++
+* [33mdbb11e5[m ++
+* [33m9cbea75[m 중복
+* [33m6297824[m 정규식
+* [33mab6c275[m 회원가입
+* [33m89f091c[m mboard
+* [33m40af31d[m menudelete
+* [33m36efc25[m logout
+* [33mb7cc50a[m boardControllerUpdate
+* [33me3e5517[m hd
+* [33mdf527dd[m logout
+* [33m25bf755[m delete
+* [33mef30b52[m ch
+* [33m0bdb4ef[m blank
+* [33m77c0962[m blank
+* [33m74ca34e[m '
+* [33m653d1b5[m admin!
+* [33mb5699aa[m adminUpdate
+* [33m6f3420c[m admin
+* [33m96dd02a[m a
+* [33mdf15a75[m 1111
+* [33mac88f33[m 1
+* [33m8783f95[m s
+* [33m2160645[m login
+* [33mb832e95[m 암호화
+* [33m667f812[m 기타,간식추가
+* [33mae2a5cd[m 구조변경
+* [33m01bb9db[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m menuget!
+* [33m7c12d63[m menuget
+* [33m1300996[m meenuget
+* [33m78459ee[m get
+* [33m62c5a02[m 2step
+* [33m7106f78[m 1step
+* [33m2269502[m menu
+* [33m6640a3d[m mboard
+* [33m79728e2[m boardMenu
+* [33m9cd14ac[m list
+* [33m56e5c5f[m lalalalalast
+* [33m990a1b8[m lalalalast
+* [33m004cf66[m lalalast
+* [33m44206db[m lalast
+* [33m4779a6d[m last
+* [33mb5ffa0c[m memreg
+* [33m3cbaba6[m cg
+* [33mec8d451[m change
+* [33m73e0128[m css
+* [33m418771e[m reg
+* [33m6e5e27d[m lg
+* [33m585fea9[m g
+* [33mcb52c9c[m login!
+* [33mceee96f[m login
+* [33m5cc2771[m reg
+* [33m9036913[m duplicate
+* [33m499ec02[m registerUp
+* [33mbf63efd[m register
+* [33me29c822[m test
+* [33m63a3823[m REGISTERCSS
+* [33m48da52a[m registerCSS
+*   [33madd9ff4[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+[32m|[m[33m\[m  
+[32m|[m * [33mcba7d1b[m Update README.md
+[32m|[m * [33mb7dc390[m Update README.md
+[32m|[m * [33mc873eda[m Update README.md
+* [33m|[m [33m93365db[m register
+[33m|[m[33m/[m  
+* [33m7b85ff9[m main
+* [33m6e35246[m 4
+*   [33mb114742[m Merge branch 'main' into check
+[34m|[m[35m\[m  
+[34m|[m * [33m3abcf99[m 1
+* [35m|[m [33ma369222[m Merge branch 'main' into check
+* [35m|[m [33mbadca23[m[33m ([m[1;31morigin/railway[m[33m, [m[1;32mrailway[m[33m)[m cssS
+* [35m|[m [33m15b2a58[m css
+* [35m|[m [33md0dfb93[m databaseUpdate
+* [35m|[m [33ma86c3e2[m menuDatabase
+* [35m|[m [33mb836f28[m youtube
+* [35m|[m [33mee61617[m nav
+* [35m|[m [33m5a747f4[m css
+* [35m|[m [33m436308e[m 5b
+* [35m|[m [33m8d53261[m 5button
+* [35m|[m [33mc41b2ab[m css
+* [35m|[m [33m9b16c37[m brDelete
+* [35m|[m [33m25208da[m againCSS
+* [35m|[m [33m766e664[m cssUpdate
+* [35m|[m [33m2ec7e3c[m cssUpdate
+* [35m|[m [33mfc16b1d[m css
+* [35m|[m [33mcb52c65[m railway
+* [35m|[m [33m9cef20c[m 20250318
+* [35m|[m [33m7207db5[m 20250318_railway
+[35m|[m[35m/[m  
+* [33mc3c5a31[m[33m ([m[1;31morigin/local_debug[m[33m, [m[1;32mlocal_debug[m[33m)[m 20250318_correctVersion
+* [33me46c1b1[m test
+* [33mbd56e38[m Update README.md
+*   [33m97b046e[m Merge branch 'railway'
+[36m|[m[1;31m\[m  
+[36m|[m * [33m38875c9[m success
+* [1;31m|[m [33me25f116[m log4j
+* [1;31m|[m   [33mb0f6236[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+[1;32m|[m[1;33m\[m [1;31m\[m  
+[1;32m|[m * [1;31m|[m [33m8288157[m Update README.md
+[1;32m|[m * [1;31m|[m [33mbfe0d77[m Update README.md
+[1;32m|[m * [1;31m|[m [33m801a2df[m Update README.md
+* [1;33m|[m [1;31m|[m [33mf630e52[m 20250311_7
+[1;33m|[m[1;33m/[m [1;31m/[m  
+* [1;31m|[m [33m36d5cd6[m Update README.md
+[1;33m|[m [1;31m|[m * [33m0dee49f[m[33m ([m[1;35mrefs/stash[m[33m)[m WIP on railway: faf0380 controller
+[1;33m|[m [1;31m|[m[1;31m/[m[1;35m|[m 
+[1;33m|[m [1;31m|[m * [33m933f3dd[m index on railway: faf0380 controller
+[1;33m|[m [1;31m|[m[1;31m/[m  
+[1;33m|[m * [33mfaf0380[m controller
+[1;33m|[m * [33mf32e141[m app
+[1;33m|[m * [33m158dd3d[m i d k
+[1;33m|[m * [33m1a0982d[m idk
+[1;33m|[m * [33m22d3a0d[m 1
+[1;33m|[m * [33med6e2d9[m mapper13
+[1;33m|[m * [33me993e92[m railway2
+[1;33m|[m * [33m39a63e1[m railway
+[1;33m|[m * [33m04842cd[m mapper
+[1;33m|[m * [33mc82526a[m mapper
+[1;33m|[m * [33m2b33e50[m correct
+[1;33m|[m * [33mac16146[m tired
+[1;33m|[m * [33mc6edcd9[m log
+[1;33m|[m * [33mca48116[m log
+[1;33m|[m * [33m362565b[m configconfig
+[1;33m|[m * [33mc666f40[m config
+[1;33m|[m * [33m6434461[m pom_versionUp
+[1;33m|[m * [33mac33cc3[m pom_versionUp
+[1;33m|[m * [33m411bce5[m change_POM
+[1;33m|[m * [33mafc8593[m 20250311_final
+[1;33m|[m * [33m855eebf[m 20250311
+[1;33m|[m * [33mb2cf1ce[m log4j_delete
+[1;33m|[m * [33mbed9a8a[m again_railway
+[1;33m|[m * [33mdba2252[m 20250311
+[1;33m|[m * [33mab71f47[m log4j_again
+[1;33m|[m * [33m9ffc47f[m delete_log4j
+[1;33m|[m * [33m8b5ac9d[m wy
+[1;33m|[m * [33mc0a2fa7[m why
+[1;33m|[m * [33m7493a87[m why
+[1;33m|[m * [33macc6c62[m 20250311_deleteLog4j
+[1;33m|[m * [33m2e98868[m 20250311_2nd
+[1;33m|[m * [33mb331ef8[m 20250311_var
+[1;33m|[m * [33m23a28dd[m 20250311_railway
+[1;33m|[m * [33m6936174[m 20250311_jdbc
+[1;33m|[m * [33mc12afb9[m 20250311_log4j
+[1;33m|[m[1;33m/[m  
+* [33mc116c15[m 20250311_localhost
+*   [33m3e1ab0b[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m505eaa4[m Initial commit
+* [33m456c1e9[m 20250311_pom
+* [33mcc005ac[m 20250305_BS
+* [33m222951f[m 20250305_BuildSuccess
+* [33m92c4f4c[m 20250305
+* [33m36e01b4[m 20250304
+* [33mc550df4[m 20250304
+* [33m9a37717[m 20250304
+* [33mfb28bb9[m 20250304_pom
+* [33mae6682c[m 20250304_main
+* [33m733a257[m 20250304
+* [33mb19122b[m mainclass_20250228
+*   [33m94e7c72[m 20250228_jm
+[32m|[m[33m\[m  
+[32m|[m * [33mb98f5a0[m Update pom.xml
+* [33m|[m [33m4320942[m 20250228
+[33m|[m[33m/[m  
+*   [33mb337694[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+[34m|[m[35m\[m  
+[34m|[m * [33m43e86c8[m Update pom.xml
+* [35m|[m [33m1244c43[m 20250227
+[35m|[m[35m/[m  
+* [33m7044769[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+*   [33m74ef902[m Merge branch 'main' of https://github.com/99JeonJongMin/Project.git into main
+[36m|[m[1;31m\[m  
+[36m|[m * [33m5fb4d0c[m Delete index.html
+* [1;31m|[m [33mf8dc923[m 20250227_pom
+[1;31m|[m[1;31m/[m  
+* [33mc9bd31d[m 20250227_JM
+* [33m46dca0b[m Update index.html
+* [33m933c29f[m Add files via upload
+* [33mab096fe[m Initial commit

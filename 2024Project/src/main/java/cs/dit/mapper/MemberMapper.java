@@ -25,3 +25,4 @@ public interface MemberMapper {
     @Select("SELECT * FROM member WHERE userid = #{userid}")
     MemberVO findByUserId(String userid);
 }
+ 

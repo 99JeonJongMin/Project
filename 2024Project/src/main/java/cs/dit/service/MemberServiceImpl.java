@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 
         return mapper.insertmember(member);
     }
-
+ 
     // ✅ 로그인 처리
     @Override
     public boolean authenticate(String userid, String passwd) {
