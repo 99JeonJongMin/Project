@@ -1,6 +1,7 @@
 package cs.dit.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cs.dit.domain.MemberVO;
@@ -12,18 +13,17 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper mapper;
 
-    // ✅ 회원가입 (이메일 & 아이디 중복 체크 포함)
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    // ✅ 회원가입
     @Override
     public int memreg(MemberVO member) {
-        // ✅ 아이디 중복 체크
-        if (isUserIdExists(member.getUserid())) {
-            return -1; // 아이디 중복이면 회원가입 실패
-        }
+        if (isUserIdExists(member.getUserid())) return -1;
+        if (isEmailExists(member.getEmail())) return -2;
 
-        // ✅ 이메일 중복 체크
-        if (isEmailExists(member.getEmail())) {
-            return -2; // 이메일 중복이면 회원가입 실패
-        }
+        // 👉 비밀번호 암호화
+        String encodedPassword = passwordEncoder.encode(member.getPasswd());
+        member.setPasswd(encodedPassword);
 
         return mapper.insertmember(member);
     }
@@ -31,17 +31,17 @@ public class MemberServiceImpl implements MemberService {
     // ✅ 로그인 처리
     @Override
     public boolean authenticate(String userid, String passwd) {
-        MemberVO member = mapper.login(new MemberVO(userid, passwd));
-        return member != null && member.getPasswd().equals(passwd);
+        MemberVO member = mapper.findByUserId(userid); // login() 말고 userid만으로 찾기
+
+        // 👉 비밀번호 비교 (matches)
+        return member != null && passwordEncoder.matches(passwd, member.getPasswd());
     }
 
-    // ✅ 이메일 중복 체크
     @Override
     public boolean isEmailExists(String email) {
         return mapper.countByEmail(email) > 0;
     }
 
-    // ✅ 아이디 중복 체크 추가
     @Override
     public boolean isUserIdExists(String userid) {
         return mapper.countByUserId(userid) > 0;

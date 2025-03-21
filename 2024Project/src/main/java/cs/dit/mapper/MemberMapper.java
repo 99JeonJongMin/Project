@@ -21,4 +21,7 @@ public interface MemberMapper {
     // ✅ 아이디 중복 체크 추가
     @Select("SELECT COUNT(*) FROM member WHERE userid = #{userid}")
     int countByUserId(String userid);
+    
+    @Select("SELECT * FROM member WHERE userid = #{userid}")
+    MemberVO findByUserId(String userid);
 }
