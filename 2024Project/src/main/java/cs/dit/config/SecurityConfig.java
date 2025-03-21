@@ -32,4 +32,5 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // ✅ 비밀번호 해싱 기능 유지
     }
+    
 }

@@ -3,24 +3,26 @@ package cs.dit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import cs.dit.domain.MemberVO;
 import cs.dit.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
-    private MemberMapper mapper;
+    private final MemberMapper mapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;  // 👉 `@Autowired`로 DI 받기
+    public MemberServiceImpl(MemberMapper mapper, BCryptPasswordEncoder passwordEncoder) {
+        this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     // ✅ 회원가입 (아이디 & 이메일 중복 체크)
     @Override
     public int memreg(MemberVO member) {
-        if (countByUserId(member.getUserid()) > 0) return -1; // 👉 아이디 중복 체크
-        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
+        if (isUserIdExists(member.getUserid())) return -1; // 👉 아이디 중복 체크
+        if (isEmailExists(member.getEmail())) return -2; // 👉 이메일 중복 체크
 
         // 🔒 비밀번호 암호화 후 저장
         member.setPasswd(passwordEncoder.encode(member.getPasswd()));
