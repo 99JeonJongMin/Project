@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
 
@@ -60,7 +59,7 @@ public class MemberController {
             return "redirect:/board/login";
         }
 
-        boolean isAuthenticated = service.authenticate(userid, passwd);
+        boolean isAuthenticated = service.authenticate(userid, passwd); 
 
         if (isAuthenticated) {
             session.setAttribute("userid", userid);
