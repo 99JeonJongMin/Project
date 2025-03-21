@@ -1,157 +1,88 @@
 package cs.dit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
 
 @RequestMapping("/board")
 @Controller
 public class BoardController {
-	
-	@Autowired
-	private BoardService service;
-	
-	public BoardController() {
-        System.out.println("✅ BoardController Initialized!");  // 🚀 서버 콘솔에서 확인
+    
+    @Autowired
+    private BoardService service;
+    
+    @GetMapping("/boardlist")
+    public void list(Model model) {
+        model.addAttribute("list", service.getList());
     }
-	@GetMapping("/boardlist")
-	public void list(Model model) {
-		model.addAttribute("list", service.getList());
-	}
-	
-	@GetMapping("/menulist")
-	public void list2(Model model) {
-		model.addAttribute("list2", service.getList2());
-	}
+    
+    @GetMapping("/menulist")
+    public void list2(Model model) {
+        model.addAttribute("list2", service.getList2());
+    }
 
-	@GetMapping("/index")
-	public String index(Model model) {
-	    model.addAttribute("index", service.getList());
-	    return "board/index"; // 📌 JSP 뷰를 명시적으로 지정
-	}
+    @GetMapping("/index")
+    public String index(Model model) {
+        model.addAttribute("index", service.getList());
+        return "board/index";
+    }
 
-	
-	@GetMapping("/login")
-	public void login(Model model) {
-		model.addAttribute("login", service.getList());
-	}
-	
-	@PostMapping("/register")
-	public String register(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
-	    if (result.hasErrors()) {
-	        rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
-	        return "redirect:/board/register";
-	    }
+    @GetMapping("/login")
+    public void login(Model model) {
+        model.addAttribute("login", service.getList());
+    }
+    
+    @PostMapping("/register")
+    public String register(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
+        if (result.hasErrors() || board.getTitle().trim().isEmpty() || board.getContent().trim().isEmpty()) {
+            rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
+            return "redirect:/board/register";
+        }
 
-	    int count = service.register(board);
+        int count = service.register(board);
+        if (count == 1) {
+            rttr.addFlashAttribute("result", "registered");
+        }
+        return "redirect:/board/boardlist";
+    }
 
-	    if (count == 1) {
-	        rttr.addFlashAttribute("result", "registered");
-	    }
+    @GetMapping({"/menuget", "/menumodify"})
+    public void menuget(@RequestParam("bno") Long bno, Model model) {
+        BoardVO board = service.menuget(bno);
+        if (board == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.");
+        }
+        model.addAttribute("mboard", board);
+    }
+    
+    @PostMapping("/remove")
+    public String remove(@RequestParam("bno") Long bno, @RequestParam("type") String type, RedirectAttributes rttr) {
+        int count = service.remove(bno);
+        if (count == 1) {
+            rttr.addFlashAttribute("result", "removed");
+        }
+        return type.equals("menu") ? "redirect:/board/menulist" : "redirect:/board/boardlist";
+    }
 
-	    return "redirect:/board/boardlist";
-	}
-	@PostMapping("/menuregister")
-	public String menuregister(BoardVO board, RedirectAttributes rttr) {
-		
-		int count = service.menuregister(board);
-		
-		if(count==1)
-			rttr.addFlashAttribute("result", "registered");
-		
-		return "redirect:/board/menulist";
-	}
-	
-	@GetMapping("/register")
-	public void register() {
-	}
-	 
-	@GetMapping("/boardmodify")
-	public void boardmodify() {
-	}
-	
-	@GetMapping("/menumodify")
-	public void menumodify() {
-	}
-	
-	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("bno") Long bno, Model model) {
-	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
-	    BoardVO board = service.get(bno);
-
-	    if (board == null) {
-	        System.out.println("❌ 게시글을 찾을 수 없습니다.");
-	    } else {
-	        System.out.println("✅ 게시글 조회 성공: " + board.getTitle());
-	    }
-
-	    model.addAttribute("board", board);
-	}
-
-	@GetMapping("/menuget")
-	public void menuget(@RequestParam("bno") Long bno, Model model) {
-	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
-	    BoardVO board = service.menuget(bno);
-
-	    if (board == null) {
-	        System.out.println("❌ 게시글을 찾을 수 없습니다.");
-	    } else {
-	        System.out.println("✅ 게시글 조회 성공: " + board.getTitle());
-	    }
-
-	    model.addAttribute("mboard", board);
-	}
-	
-	// POST method for modifying a board
-	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
-		
-		// Call the service to update the board
-		int count = service.modify(board);
-		
-		if(count == 1) {
-			rttr.addFlashAttribute("result", "modified");
-		}
-		
-		return "redirect:/board/boardlist";
-	}
-	
-	// POST method for deleting a board
-	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
-		
-		// Call the service to delete the board
-		int count = service.remove(bno);
-		
-		if(count == 1) {
-			rttr.addFlashAttribute("result", "removed");
-		}
-		
-		return "redirect:/board/boardlist";
-	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-	    session.invalidate(); // 세션 무효화
-	    return "redirect:/board/index"; // 메인 페이지로 리디렉트
-	}
-	
-	@Controller
-	public class RootController {
-	    @GetMapping("/")
-	    public String redirectToBoardIndex() {
-	        return "redirect:/board/index";
-	    }
-	}
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletResponse response) {
+        session.invalidate();
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "redirect:/board/index";
+    }
 }
