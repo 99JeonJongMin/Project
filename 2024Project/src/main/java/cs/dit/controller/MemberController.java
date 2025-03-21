@@ -76,7 +76,7 @@ public class MemberController {
     @GetMapping("/checkUserId")
     @ResponseBody
     public String checkUserId(@RequestParam String userid) {
-        int count = MemberService.countByUserId(userid);
+        int count = service.countByUserId(userid);
         return (count == 0) ? "available" : "unavailable";
     }
     @GetMapping("/memreg")
