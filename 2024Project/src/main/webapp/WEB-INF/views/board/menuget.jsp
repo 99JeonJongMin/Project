@@ -63,13 +63,15 @@
                 <input class="form-control" name="writer" value="<c:out value='${mboard.writer}'/>" readonly>
             </div>
             <div class="form-group">
-                <!-- Modify 버튼 조건부 렌더링 -->
-                <c:if test="${mboard.writer == sessionScope.userid}">
-                    <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${mboard.bno}'/>'">수정</button>
-                </c:if>
-                 <button type="button" class="btn btn-secondary" onclick="window.location.href='list2'">목록으로</button>
             </div>
         </form>
+                <!-- 삭제 버튼 (작성자 또는 admin만 가능) -->
+        <c:if test="${board.writer == sessionScope.userid || sessionScope.userid == 'admin'}">
+            <form action="/board/remove" method="post" style="margin-top: 15px;">
+                <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>">
+                <button type="submit" class="btn btn-danger btn-block">삭제</button>
+            </form>
+        </c:if>
     </div>
 </div>
 
