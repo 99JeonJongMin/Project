@@ -15,48 +15,37 @@
     <link rel="stylesheet" href="/resources/css/sign.css">
 
     <script>
-    function validateForm() {
-        let userid = document.getElementById("userid").value;
-        let password = document.getElementById("passwd").value;
-        let confirmPassword = document.getElementById("confirmPasswd").value;
+        function validateForm() {
+            let userid = document.getElementById("userid").value.trim();
+            let password = document.getElementById("passwd").value.trim();
+            let confirmPassword = document.getElementById("confirmPasswd").value.trim();
 
-        // ✅ 아이디 정규식 검사 (영문 소문자+숫자, 4~16자)
-        let idPattern = /^[a-z0-9]{4,16}$/;
-        if (!idPattern.test(userid)) {
-            alert("아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.");
-            return false;
-        }
-
-        // ✅ 비밀번호 정규식 검사 (8~20자, 영문+숫자+특수문자)
-        let pwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
-        if (!pwPattern.test(password)) {
-            alert("비밀번호는 8~20자의 영문, 숫자, 특수문자를 포함해야 합니다.");
-            return false;
-        }
-
-        // ✅ 비밀번호 확인 일치 여부 검사
-        if (password !== confirmPassword) {
-            alert("비밀번호가 일치하지 않습니다.");
-            return false;
-        }
-
-        return true;
-    }
-    
-        function validatePassword() {
-            let password = document.getElementById("passwd").value;
-            let confirmPassword = document.getElementById("confirmPasswd").value;
-            
-            if (password !== confirmPassword) {
-                alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+            // ✅ 아이디 정규식 검사 (영문 소문자+숫자, 4~16자)
+            let idPattern = /^[a-z0-9]{4,16}$/;
+            if (!idPattern.test(userid)) {
+                alert("아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.");
                 return false;
             }
+
+            // ✅ 비밀번호 정규식 검사 (8~20자, 영문+숫자 필수, 특수문자는 선택 사항)
+            let pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
+            if (!pwPattern.test(password)) {
+                alert("비밀번호는 8~20자의 영문과 숫자를 포함해야 합니다. (특수문자는 선택 사항)");
+                return false;
+            }
+
+            // ✅ 비밀번호 확인 일치 여부 검사
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            }
+
             return true;
         }
 
         function checkUserId() {
-            let userid = document.getElementById("userid").value;
-            if (userid.trim() === "") {
+            let userid = document.getElementById("userid").value.trim();
+            if (userid === "") {
                 alert("아이디를 입력해주세요.");
                 return;
             }
@@ -92,7 +81,7 @@
             <div class="signup-form">
                 <h2 class="mb-4">회원가입</h2>
 
-                <!-- ✅ 아이디 & 이메일 중복 오류 메시지 표시 -->
+                <!-- ✅ 오류 메시지 표시 -->
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         ${error}
@@ -101,23 +90,42 @@
                 </c:if>
 
                 <form action="/board/memreg" method="post" onsubmit="return validateForm()">
-				    <div class="mb-3 form-group">
-				        <label class="form-label" for="userid">아이디</label>
-				        <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력 (4~16자 영문 소문자+숫자)" required>
-				    </div>
-				
-				    <div class="mb-3 form-group">
-				        <label class="form-label" for="passwd">비밀번호</label>
-				        <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력 (8~20자, 영문+숫자+특수문자)" required>
-				    </div>
-				
-				    <div class="mb-3 form-group">
-				        <label class="form-label" for="confirmPasswd">비밀번호 확인</label>
-				        <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control" placeholder="비밀번호 재입력" required>
-				    </div>
-				
-				    <button type="submit" class="btn-submit">회원가입</button>
-				</form>
+                    <!-- ✅ 아이디 입력 및 중복 체크 -->
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="userid">아이디</label>
+                        <div class="input-group">
+                            <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력 (4~16자 영문 소문자+숫자)" required>
+                            <button type="button" class="btn btn-secondary" onclick="checkUserId()">중복 확인</button>
+                        </div>
+                    </div>
+
+                    <!-- ✅ 이름 입력 -->
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="name">이름</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="이름 입력" required>
+                    </div>
+
+                    <!-- ✅ 이메일 입력 -->
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="email">이메일</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="이메일 입력" required>
+                    </div>
+
+                    <!-- ✅ 비밀번호 입력 -->
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="passwd">비밀번호</label>
+                        <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력 (8~20자, 영문+숫자)" required>
+                    </div>
+
+                    <!-- ✅ 비밀번호 확인 -->
+                    <div class="mb-3 form-group">
+                        <label class="form-label" for="confirmPasswd">비밀번호 확인</label>
+                        <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control" placeholder="비밀번호 재입력" required>
+                    </div>
+
+                    <!-- ✅ 회원가입 버튼 -->
+                    <button type="submit" class="btn-submit">회원가입</button>
+                </form>
             </div>
         </div>
     </div>
