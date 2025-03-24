@@ -5,12 +5,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 public class SecurityConfig {
-
+	@Bean
+	public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
+	    return new HandlerMappingIntrospector();
+	}
+	
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+    	MvcRequestMatcher.Builder mvc = new MvcRequestMatcher.Builder(introspector);
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
