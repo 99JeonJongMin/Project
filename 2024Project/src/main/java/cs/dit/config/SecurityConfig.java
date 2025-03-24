@@ -10,11 +10,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 public class SecurityConfig {
-	@Bean
-	public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
-	    return new HandlerMappingIntrospector();
-	}
-	
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
     	MvcRequestMatcher.Builder mvc = new MvcRequestMatcher.Builder(introspector);
