@@ -53,6 +53,7 @@
             fetch(`/board/checkUserId?userid=${userid}`)
                 .then(response => response.text())
                 .then(data => {
+                	data = data.trim();
                     if (data === "available") {
                         alert("사용 가능한 아이디입니다.");
                     } else {
