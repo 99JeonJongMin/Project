@@ -13,33 +13,13 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(
-	                "/", 
-	                "/board/login", 
-	                "/board/logout", 
-	                "/board/index", 
-	                "/board/**", 
-	                "/resources/**",
-	                "/test/open"
-	            ).permitAll()
-	            .anyRequest().authenticated()
+	            .anyRequest().permitAll()
 	        )
-	        .csrf(csrf -> csrf.disable())
-	        .formLogin(login -> login
-	            .loginPage("/board/login")
-	            .defaultSuccessUrl("/board/index", true)
-	            .permitAll()
-	        )
-	        .logout(logout -> logout
-	            .logoutUrl("/board/logout")
-	            .logoutSuccessUrl("/board/index")
-	            .permitAll()
-	        );
-	    System.out.println("✅ Security filter chain 설정됨");
-
+	        .csrf(csrf -> csrf.disable());
 
 	    return http.build();
 	}
+
 
     // 🔐 비밀번호 암호화를 위한 BCrypt 인코더 Bean 등록
     @Bean
