@@ -19,7 +19,8 @@ public class SecurityConfig {
 	                "/board/logout", 
 	                "/board/index", 
 	                "/board/**", 
-	                "/resources/**"
+	                "/resources/**",
+	                "/test/open"
 	            ).permitAll()
 	            .anyRequest().authenticated()
 	        )
@@ -34,6 +35,8 @@ public class SecurityConfig {
 	            .logoutSuccessUrl("/board/index")
 	            .permitAll()
 	        );
+	    System.out.println("✅ Security filter chain 설정됨");
+
 
 	    return http.build();
 	}
