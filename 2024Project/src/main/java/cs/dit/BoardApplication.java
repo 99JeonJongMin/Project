@@ -27,9 +27,4 @@ public class BoardApplication extends SpringBootServletInitializer {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-    
-    @Bean
-    public DispatcherServletPath dispatcherServletPath() {
-        return () -> "/";
-    }
 }
