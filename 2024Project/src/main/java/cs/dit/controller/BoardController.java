@@ -43,9 +43,11 @@ public class BoardController {
 	
 	
 	@GetMapping("/login")
-	public void login(Model model) {
+	public String login(Model model) {
 		model.addAttribute("login", service.getList());
+		return "board/login";
 	}
+
 	
 	@PostMapping("/register")
 	public String register(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
