@@ -16,15 +16,12 @@ public class SecurityConfig {
 
 	    http
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(
-	                mvc.pattern("/"),
-	                mvc.pattern("/board/login"),
-	                mvc.pattern("/board/logout"),
-	                mvc.pattern("/board/index"),
-	                mvc.pattern("/board/memreg"),
-	                mvc.pattern("/board/**"),
-	                mvc.pattern("/resources/**")
-	            ).permitAll()
+	        		.requestMatchers(
+	        			    mvc.pattern("/"),
+	        			    mvc.pattern("/board/index"),   // ✅ 반드시 명시적으로 추가!
+	        			    mvc.pattern("/board/**"),
+	        			    mvc.pattern("/resources/**")
+	        			).permitAll()
 	            .anyRequest().authenticated()
 	        )
 	        .csrf(csrf -> csrf.disable())
