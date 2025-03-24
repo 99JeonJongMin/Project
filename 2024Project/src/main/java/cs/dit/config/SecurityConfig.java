@@ -12,29 +12,32 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // 🔓 특정 경로는 인증 없이 접근 허용
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/board/**", "/resources/**").permitAll() // ✅ 모든 사용자 접근 허용
-                .anyRequest().authenticated() // ✅ 그 외 요청은 인증 필요
+                .requestMatchers("/", "/board/**", "/resources/**").permitAll()
+                .anyRequest().authenticated()
             )
-            .csrf(csrf -> csrf.disable()) // ✅ CSRF 보호 비활성화 (필요 시 활성화)
+            // 🚫 CSRF 비활성화 (폼 사용 시 필요에 따라 활성화 가능)
+            .csrf(csrf -> csrf.disable())
+            // 🔐 로그인 설정
             .formLogin(login -> login
-                .loginPage("/board/login") // ✅ 사용자 로그인 페이지 설정
-                .defaultSuccessUrl("/board/index", true) // ✅ 로그인 성공 후 이동할 페이지
+                .loginPage("/board/login")
+                .defaultSuccessUrl("/board/index", true)
                 .permitAll()
             )
+            // 🔐 로그아웃 설정
             .logout(logout -> logout
-                .logoutUrl("/board/logout") // ✅ 로그아웃 URL
-                .logoutSuccessUrl("/board/index") // ✅ 로그아웃 성공 후 이동할 페이지
+                .logoutUrl("/board/logout")
+                .logoutSuccessUrl("/board/index")
                 .permitAll()
             );
 
         return http.build();
     }
 
-    // ✅ BCrypt 비밀번호 인코더 설정
+    // 🔐 비밀번호 암호화를 위한 BCrypt 인코더 Bean 등록
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
- 
