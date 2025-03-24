@@ -15,11 +15,12 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/", 
-                    "/board/login",       // 🔥 로그인 페이지 직접 추가!
-                    "/board/logout",      // 🔥 로그아웃 URL도 명시적으로!
-                    "/board/index",       // 🔥 로그인 후 리디렉션 경로도 명시!
-                    "/board/**", 
-                    "/resources/**"
+                    "/board/login", 
+                    "/board/logout", 
+                    "/board/index", 
+                    "/board/memreg",        // 회원가입 페이지
+                    "/board/**",            // board 컨트롤러의 기타 URL들
+                    "/resources/**"         // 정적 리소스 (css, js 등)
                 ).permitAll()
                 .anyRequest().authenticated()
             )
