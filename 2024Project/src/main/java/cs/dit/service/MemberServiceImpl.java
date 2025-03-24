@@ -40,6 +40,12 @@ public class MemberServiceImpl implements MemberService {
         // 🔒 암호화된 비밀번호 비교
         return passwordEncoder.matches(passwd, member.getPasswd());
     }
+    
+    @Override
+    public boolean isUserIdAvailable(String userid) {
+        return mapper.findByUserId(userid) == null;
+    }
+
 
     @Override
     public boolean isEmailExists(String email) {

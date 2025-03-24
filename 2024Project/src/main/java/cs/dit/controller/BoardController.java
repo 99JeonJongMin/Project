@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
@@ -113,6 +114,14 @@ public class BoardController {
 	    }
 
 	    model.addAttribute("mboard", board);
+	}
+	
+	@GetMapping("/checkUserId")
+	@ResponseBody
+	public String checkUserId(@RequestParam("userid") String userid) {
+	    boolean isAvailable = service.isUserIdAvailable(userid); // 아이디 사용 가능 여부 확인
+
+	    return isAvailable ? "available" : "duplicate";
 	}
 	
 	// POST method for modifying a board

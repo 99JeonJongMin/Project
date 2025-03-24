@@ -8,6 +8,8 @@ public interface MemberService {
 	public boolean isEmailExists(String email);
 	public boolean isUserIdExists(String userid);
 	public int countByUserId(String userid);
+	public boolean isUserIdAvailable(String userid);
+
 }
 
  
