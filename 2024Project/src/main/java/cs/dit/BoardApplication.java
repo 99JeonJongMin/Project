@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // 🔥 Spring Security 기본 설정 제거
 @ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
 public class BoardApplication extends SpringBootServletInitializer {
 
