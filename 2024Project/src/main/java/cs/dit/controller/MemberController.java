@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.MemberVO;
@@ -47,6 +48,14 @@ public class MemberController {
         return "redirect:/board/memreg";
     }
 
+	
+	@GetMapping("/checkUserId")
+	@ResponseBody
+	public String checkUserId(@RequestParam("userid") String userid) {
+	    boolean isAvailable = service.isUserIdAvailable(userid); // 아이디 사용 가능 여부 확인
+
+	    return isAvailable ? "available" : "duplicate";
+	}
     // ✅ 로그인 처리
     @PostMapping("/login")
     public String login(@RequestParam String userid, @RequestParam String passwd, RedirectAttributes rttr, HttpSession session) {

@@ -116,14 +116,6 @@ public class BoardController {
 	    model.addAttribute("mboard", board);
 	}
 	
-	@GetMapping("/checkUserId")
-	@ResponseBody
-	public String checkUserId(@RequestParam("userid") String userid) {
-	    boolean isAvailable = service.isUserIdAvailable(userid); // 아이디 사용 가능 여부 확인
-
-	    return isAvailable ? "available" : "duplicate";
-	}
-	
 	// POST method for modifying a board
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
