@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('menuContainer').style.display = 'block';
 
             const iframe = document.createElement('iframe');
+            iframe.src = decodeURIComponent(randomMenu.videoUrl.replace(/&amp;/g, "&"));
             iframe.src = randomMenu.videoUrl;
             iframe.allowFullscreen = true;
             iframe.classList.add('responsive-video');
