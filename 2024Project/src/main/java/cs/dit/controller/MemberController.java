@@ -3,6 +3,10 @@ package cs.dit.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,13 +53,12 @@ public class MemberController {
     }
 
 	
-	@GetMapping("/checkUserId")
-	@ResponseBody
-	public String checkUserId(@RequestParam("userid") String userid) {
-	    boolean isAvailable = service.isUserIdAvailable(userid); // 아이디 사용 가능 여부 확인
-
-	    return isAvailable ? "available" : "duplicate";
-	}
+    @GetMapping("/checkUserId")
+    @ResponseBody
+    public Map<String, Boolean> checkUserId(@RequestParam("userid") String userid) {
+        boolean isAvailable = service.isUserIdAvailable(userid);
+        return Collections.singletonMap("available", isAvailable);
+    }
     // ✅ 로그인 처리
     @PostMapping("/login")
     public String login(@RequestParam String userid, @RequestParam String passwd, RedirectAttributes rttr, HttpSession session) {
