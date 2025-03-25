@@ -43,7 +43,9 @@ public class MemberServiceImpl implements MemberService {
     
     @Override
     public boolean isUserIdAvailable(String userid) {
-        return mapper.findByUserId(userid) == null;
+    	MemberVO member = mapper.findByUserId(userid);
+    	System.out.println("🔥 findByUserId 결과: " + member);
+        return member == null;
     }
 
 
