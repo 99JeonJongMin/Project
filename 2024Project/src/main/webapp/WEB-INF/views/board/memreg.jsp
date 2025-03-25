@@ -132,16 +132,22 @@
             fetch(`/board/checkUserId?userid=${userid}`)
                 .then(response => response.json())
                 .then(json => {
-                    if (json.available == true) {
+                    console.log("서버 응답:", json);
+
+                    if (json.available === true) {
                         resultMsg.textContent = "사용 가능한 아이디입니다.";
                         resultMsg.className = "form-text text-success";
-                    } else {
+                    } else if (json.available === false) {
                         resultMsg.textContent = "이미 사용 중인 아이디입니다.";
+                        resultMsg.className = "form-text text-danger";
+                    } else {
+                        // 예상치 못한 경우 (예외 처리)
+                        resultMsg.textContent = "서버 응답이 올바르지 않습니다.";
                         resultMsg.className = "form-text text-danger";
                     }
                 })
                 .catch(error => {
-                    console.error("Error:", error);
+                    console.error("중복 확인 오류:", error);
                     resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
                     resultMsg.className = "form-text text-danger";
                 });
