@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean authenticate(String userid, String passwd) {
         MemberVO member = mapper.findByUserId(userid);
-
+        System.out.println("🔥 findByUserId 결과: " + member);
         if (member == null) return false;
 
         // 🔒 암호화된 비밀번호 비교
