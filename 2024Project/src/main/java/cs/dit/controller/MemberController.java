@@ -56,6 +56,7 @@ public class MemberController {
     @GetMapping("/checkUserId")
     @ResponseBody
     public Map<String, Boolean> checkUserId(@RequestParam("userid") String userid) {
+        System.out.println("✅ checkUserId() 호출됨, 전달된 userid = " + userid);
         boolean isAvailable = service.isUserIdAvailable(userid);
         return Collections.singletonMap("available", isAvailable);
     }
