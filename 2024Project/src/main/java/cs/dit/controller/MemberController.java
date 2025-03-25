@@ -43,7 +43,7 @@ public class MemberController {
         }
 
         if (result == 1) {
-            rttr.addFlashAttribute("memreg", "registered");
+            rttr.addFlashAttribute("success", "회원가입이 완료되었습니다!");
             return "redirect:/board/login"; // 회원가입 성공 시 로그인 페이지로 이동
         }
 

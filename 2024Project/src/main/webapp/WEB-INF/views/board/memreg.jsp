@@ -121,21 +121,30 @@
 
         function checkUserId() {
             const userid = document.getElementById("userid").value.trim();
+            const resultMsg = document.getElementById("useridCheckResult");
+
             if (userid === "") {
-                alert("아이디를 입력해주세요.");
+                resultMsg.textContent = "아이디를 입력해주세요.";
+                resultMsg.className = "form-text text-danger";
                 return;
             }
 
             fetch(`/board/checkUserId?userid=${userid}`)
-            .then(response => response.json())
-            .then(json => {
-                if (json.available === true) {
-                    alert("사용 가능한 아이디입니다.");
-                } else {
-                    alert("이미 사용 중인 아이디입니다.");
-                }
-            })
-            .catch(error => console.error("Error:", error));
+                .then(response => response.json())
+                .then(json => {
+                    if (json.available == true) {
+                        resultMsg.textContent = "사용 가능한 아이디입니다.";
+                        resultMsg.className = "form-text text-success";
+                    } else {
+                        resultMsg.textContent = "이미 사용 중인 아이디입니다.";
+                        resultMsg.className = "form-text text-danger";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
+                    resultMsg.className = "form-text text-danger";
+                });
         }
     </script>
 </head>
@@ -161,14 +170,16 @@
             </c:if>
 
             <form action="/board/memreg" method="post" onsubmit="return validateForm()">
-                <div class="mb-3 form-group">
-                    <label class="form-label" for="userid">아이디</label>
-                    <div class="input-group">
-                        <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력 (4~16자 영문 소문자+숫자)" required oninput="validateUserId()">
-                        <button type="button" class="btn btn-secondary" onclick="checkUserId()">중복 확인</button>
-                    </div>
-                    <div id="useridHelp" class="form-text text-danger"></div>
-                </div>
+				<div class="mb-3 form-group">
+				    <label class="form-label" for="userid">아이디</label>
+				    <div class="input-group">
+				        <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력 (4~16자 영문 소문자+숫자)" required oninput="validateUserId()">
+				        <button type="button" class="btn btn-secondary" onclick="checkUserId()">중복 확인</button>
+				    </div>
+				    <div id="useridHelp" class="form-text text-danger"></div> <!-- 정규식 안내 -->
+				    <div id="useridCheckResult" class="form-text"></div> <!-- 중복 여부 결과 -->
+				</div>
+
 
                 <div class="mb-3 form-group">
                     <label class="form-label" for="name">이름</label>

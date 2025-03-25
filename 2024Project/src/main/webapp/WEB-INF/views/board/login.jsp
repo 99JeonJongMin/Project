@@ -131,6 +131,12 @@
   </head>
   <body>
    <%@include file="/WEB-INF/views/includes/header.jsp"%>
+   <c:if test="${not empty success}">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        ${success}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
 
     <div class="container mt-5">
       <div class="row justify-content-center">
@@ -182,5 +188,22 @@
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  // 3초 후 자동으로 alert fade-out + 제거
+  window.addEventListener("DOMContentLoaded", () => {
+    const alertEl = document.querySelector(".alert-dismissible");
+    if (alertEl) {
+      setTimeout(() => {
+        alertEl.classList.remove("show");
+        alertEl.classList.add("fade"); // 부드럽게 사라지기
+        alertEl.style.opacity = "0";
+        setTimeout(() => {
+          alertEl.remove(); // DOM에서 완전히 제거
+        }, 500); // fade-out 애니메이션 시간
+      }, 3000); // 3초 뒤에 실행
+    }
+  });
+</script>
+    
   </body>
 </html>
