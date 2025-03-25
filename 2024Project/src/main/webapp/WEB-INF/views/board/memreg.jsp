@@ -135,21 +135,18 @@
                 return;
             }
 
-            fetch(`/board/checkUserId?userid=${userid}`)
+            // ✅ 인코딩 필수!
+            fetch(`/board/checkUserId?userid=${encodeURIComponent(userid)}`)
                 .then(response => response.json())
                 .then(json => {
-                    console.log("서버 응답 전체:", json);
-                    console.log("json.available =", json.available);
-                    console.log("typeof json.available =", typeof json.available);
-
-                    if (json.available === true || json.available === "true") {
+                    if (json.available === true) {
                         resultMsg.textContent = "사용 가능한 아이디입니다.";
                         resultMsg.className = "form-text text-success";
-                    } else if (json.available === false || json.available === "false") {
+                    } else if (json.available === false) {
                         resultMsg.textContent = "이미 사용 중인 아이디입니다.";
                         resultMsg.className = "form-text text-danger";
                     } else {
-                        resultMsg.textContent = "서버 응답값이 올바르지 않습니다.";
+                        resultMsg.textContent = "서버 응답이 이상합니다.";
                         resultMsg.className = "form-text text-warning";
                     }
                 })
