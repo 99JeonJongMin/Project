@@ -126,7 +126,10 @@
             }
         }
         function checkUserId() {
-            const userid = document.getElementById("userid").value.trim();
+        	const userid = document.getElementById("userid").value.trim();
+        	console.log("✅ 전달 전 userid =", `"${userid}"`);
+        	console.log("✅ encodeURIComponent(userid) =", encodeURIComponent(userid));
+
             const resultMsg = document.getElementById("useridCheckResult");
 
             if (userid === "") {
@@ -134,9 +137,8 @@
                 resultMsg.className = "form-text text-danger";
                 return;
             }
-            const url = `/board/checkUserId?userid=${userid}`;
-            console.log("📌 요청 URL:", url);
-            fetch(url)
+
+        	fetch(`/board/checkUserId?userid=${encodeURIComponent(userid)}`)
                 .then(response => response.json())
                 .then(json => {
                     console.log("서버 응답 전체:", json);
