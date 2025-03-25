@@ -55,11 +55,15 @@ public class MemberController {
 	
     @GetMapping("/checkUserId")
     @ResponseBody
-    public Map<String, Boolean> checkUserId(@RequestParam("userid") String userid) {
-        System.out.println("✅ checkUserId() 호출됨, 전달된 userid = " + userid);
+    public Map<String, Boolean> checkUserId(@RequestParam Map<String, String> params) {
+        System.out.println("🧪 checkUserId 호출됨, 전체 파라미터: " + params);
+        String userid = params.get("userid");
+        System.out.println("🧪 userid 값 = " + userid);
+
         boolean isAvailable = service.isUserIdAvailable(userid);
         return Collections.singletonMap("available", isAvailable);
     }
+
     // ✅ 로그인 처리
     @PostMapping("/login")
     public String login(@RequestParam String userid, @RequestParam String passwd, RedirectAttributes rttr, HttpSession session) {

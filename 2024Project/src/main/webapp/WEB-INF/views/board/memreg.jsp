@@ -134,8 +134,9 @@
                 resultMsg.className = "form-text text-danger";
                 return;
             }
-
-            fetch(`/board/checkUserId?userid=${userid}`)
+            const url = `/board/checkUserId?userid=${userid}`;
+            console.log("📌 요청 URL:", url);
+            fetch(url)
                 .then(response => response.json())
                 .then(json => {
                     console.log("서버 응답 전체:", json);
