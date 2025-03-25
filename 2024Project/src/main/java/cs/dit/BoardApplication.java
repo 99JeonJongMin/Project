@@ -1,5 +1,6 @@
 package cs.dit;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // 🔥 Spring Security 기본 설정 제거
 @ServletComponentScan  // ✅ 서블릿, 필터, 리스너 자동 감지
+@MapperScan("cs.dit.mapper")
+
 public class BoardApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
