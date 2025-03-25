@@ -25,7 +25,7 @@
                 msg.textContent = "";
             }
         }
-
+	
         function validatePassword() {
             const password = document.getElementById("passwd").value.trim();
             const msg = document.getElementById("passwdHelp");
@@ -118,7 +118,13 @@
 
             return true;
         }
-
+        function resetUserIdCheckResult() {
+            const resultMsg = document.getElementById("useridCheckResult");
+            if (resultMsg.textContent !== "") {
+                resultMsg.textContent = "";
+                resultMsg.className = "form-text";  // 색상도 초기화
+            }
+        }
         function checkUserId() {
             const userid = document.getElementById("userid").value.trim();
             const resultMsg = document.getElementById("useridCheckResult");
@@ -132,18 +138,19 @@
             fetch(`/board/checkUserId?userid=${userid}`)
                 .then(response => response.json())
                 .then(json => {
-                    console.log("서버 응답:", json);
+                    console.log("서버 응답 전체:", json);
+                    console.log("json.available =", json.available);
+                    console.log("typeof json.available =", typeof json.available);
 
-                    if (json.available === true) {
+                    if (json.available === true || json.available === "true") {
                         resultMsg.textContent = "사용 가능한 아이디입니다.";
                         resultMsg.className = "form-text text-success";
-                    } else if (json.available === false) {
+                    } else if (json.available === false || json.available === "false") {
                         resultMsg.textContent = "이미 사용 중인 아이디입니다.";
                         resultMsg.className = "form-text text-danger";
                     } else {
-                        // 예상치 못한 경우 (예외 처리)
-                        resultMsg.textContent = "서버 응답이 올바르지 않습니다.";
-                        resultMsg.className = "form-text text-danger";
+                        resultMsg.textContent = "서버 응답값이 올바르지 않습니다.";
+                        resultMsg.className = "form-text text-warning";
                     }
                 })
                 .catch(error => {
@@ -179,7 +186,10 @@
 				<div class="mb-3 form-group">
 				    <label class="form-label" for="userid">아이디</label>
 				    <div class="input-group">
-				        <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디 입력 (4~16자 영문 소문자+숫자)" required oninput="validateUserId()">
+				        <input type="text" id="userid" name="userid" class="form-control"
+					       placeholder="아이디 입력 (4~16자 영문 소문자+숫자)"
+					       required
+					       oninput="validateUserId(); resetUserIdCheckResult();">
 				        <button type="button" class="btn btn-secondary" onclick="checkUserId()">중복 확인</button>
 				    </div>
 				    <div id="useridHelp" class="form-text text-danger"></div> <!-- 정규식 안내 -->
