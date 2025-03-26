@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/resources/css/sign.css">
 
     <script>
+        let isUserIdChecked = false;
+
         function validateUserId() {
             const userid = document.getElementById("userid").value.trim();
             const msg = document.getElementById("useridHelp");
@@ -80,6 +82,11 @@
             const namePattern = /^[가-힣a-zA-Z]{2,20}$/;
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+            if (!isUserIdChecked) {
+                alert("아이디 중복 확인을 해주세요.");
+                return false;
+            }
+
             if (!idPattern.test(userid)) { alert("아이디 형식이 올바르지 않습니다."); return false; }
             if (!pwPattern.test(password)) { alert("비밀번호 형식이 올바르지 않습니다."); return false; }
             if (password !== confirmPassword) { alert("비밀번호가 일치하지 않습니다."); return false; }
@@ -95,6 +102,7 @@
                 resultMsg.textContent = "";
                 resultMsg.className = "form-text";
             }
+            isUserIdChecked = false; // 아이디가 수정되면 중복확인 다시 해야 함
         }
 
         function checkUserId() {
@@ -113,15 +121,18 @@
                     if (json.available === true) {
                         resultMsg.textContent = "사용 가능한 아이디입니다.";
                         resultMsg.className = "form-text text-success";
+                        isUserIdChecked = true;
                     } else {
                         resultMsg.textContent = "이미 사용 중인 아이디입니다.";
                         resultMsg.className = "form-text text-danger";
+                        isUserIdChecked = false;
                     }
                 })
                 .catch(error => {
                     console.error("중복 확인 오류:", error);
                     resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
                     resultMsg.className = "form-text text-danger";
+                    isUserIdChecked = false;
                 });
         }
     </script>
@@ -163,7 +174,7 @@
 
                 <div class="mb-3 form-group">
                     <label class="form-label" for="email">이메일</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="이메일 입력" required oninput="validateEmail()">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="이메일 입력" required>
                     <div id="emailHelp" class="form-text text-danger"></div>
                 </div>
 
