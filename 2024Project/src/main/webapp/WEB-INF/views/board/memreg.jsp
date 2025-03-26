@@ -73,7 +73,6 @@
 
 <!-- ✅ JavaScript -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
 let isUserIdChecked = false;
 
 function validateUserId() {
@@ -200,7 +199,7 @@ function validateForm() {
     if (!emailPattern.test(email)) { alert("이메일 형식이 올바르지 않습니다."); return false; }
 
     return true;
-}});
+}
 </script>
 
 <!-- ✅ Bootstrap JS (무결성 제거됨) -->
