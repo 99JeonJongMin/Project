@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int memreg(MemberVO member) {
         if (countByUserId(member.getUserid()) > 0) return -1; // 👉 아이디 중복 체크
-        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
+//        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
 
         // 🔒 비밀번호 암호화 후 저장
         member.setPasswd(passwordEncoder.encode(member.getPasswd()));

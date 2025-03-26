@@ -37,10 +37,10 @@ public class MemberController {
             return "redirect:/board/memreg"; // 회원가입 페이지로 이동
         }
 
-        if (result == -2) {
-            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 이메일 중복 시 에러 메시지
-            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
-        }
+//        if (result == -2) {
+//            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 이메일 중복 시 에러 메시지
+//            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
+//        }
 
         if (result == 1) {
             rttr.addFlashAttribute("success", "회원가입이 완료되었습니다!");
@@ -55,11 +55,8 @@ public class MemberController {
 	
     @GetMapping("/checkUserId")
     @ResponseBody
-    public Map<String, Boolean> checkUserId(@RequestParam Map<String, String> params) {
-        System.out.println("🧪 checkUserId 호출됨, 전체 파라미터: " + params);
-        String userid = params.get("userid");
-        System.out.println("🧪 userid 값 = " + userid);
-
+    public Map<String, Boolean> checkUserId(@RequestParam("userid") String userid) {
+    	System.out.println("🧪 userid 값 = " + userid);
         boolean isAvailable = service.isUserIdAvailable(userid);
         return Collections.singletonMap("available", isAvailable);
     }
