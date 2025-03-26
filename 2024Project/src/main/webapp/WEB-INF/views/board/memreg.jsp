@@ -98,10 +98,8 @@ function resetUserIdCheckResult() {
 
 function checkUserId() {
     const useridInput = document.getElementById("userid");
-    useridInput.blur(); // ✅ 브라우저 자동완성 이슈 방지
-    const resultMsg = document.getElementById("useridCheckResult");
+    const userid = useridInput.value.trim();  // ✅ 변수명을 다르게
 
-    const userid = useridInput.value.trim();
     console.log("✅ checkUserId 실행됨, 입력값:", `'${userid}'`);
 
     if (userid === "") {
@@ -110,7 +108,7 @@ function checkUserId() {
         return;
     }
 
-    fetch(`/board/checkUserId?userid=${userid}`)
+    fetch(`/board/checkUserId?userid=${encodeURIComponent(userid)}`)
         .then(response => response.json())
         .then(json => {
             if (json.available === true) {
