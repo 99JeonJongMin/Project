@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
     // ✅ 회원가입 (아이디 & 이메일 중복 체크)
     @Override
     public int memreg(MemberVO member) {
-        if (countByUserId(member.getUserid()) > 0) return -1; // 👉 아이디 중복 체크
+        if (countByUserId(member.getUser_id()) > 0) return -1; // 👉 아이디 중복 체크
 //        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
 
         // 🔒 비밀번호 암호화 후 저장

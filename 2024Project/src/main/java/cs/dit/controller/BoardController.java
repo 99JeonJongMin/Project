@@ -82,7 +82,7 @@ public class BoardController {
 	public void menupost() {
 	}
 	
-	@GetMapping({"/get", "/modify"})
+	@GetMapping({"/get", "/boardmodify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
 	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
 	    BoardVO board = service.get(bno);
@@ -111,7 +111,7 @@ public class BoardController {
 	}
 	
 	// POST method for modifying a board
-	@PostMapping("/modify")
+	@PostMapping("/boardmodify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
 		
 		// Call the service to update the board
