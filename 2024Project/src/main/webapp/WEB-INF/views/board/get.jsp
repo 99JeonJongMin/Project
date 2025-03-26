@@ -123,7 +123,7 @@
 
             <!-- 수정 버튼 (작성자 또는 admin만 가능) -->
             <c:if test="${board.writer == sessionScope.userid}">
-                <button type="button" class="btn btn-primary" onclick="location.href='/board/modify?bno=<c:out value='${board.bno}'/>'">수정</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='/board/boardmodify?bno=<c:out value='${board.bno}'/>'">수정</button>
             </c:if>
         </div>
 
