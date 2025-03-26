@@ -102,22 +102,33 @@ function resetUserIdCheckResultMessage() {
 
 function checkUserIdAvailability() {
     const userIdInput = document.getElementById("userid");
-    userIdInput.blur();
     const userIdValue = userIdInput.value.trim();
-
+    const helpEl = document.getElementById("useridHelp");
     const resultMsg = document.getElementById("useridCheckResult");
+    const idPattern = /^[a-z0-9]{4,16}$/;
 
-    console.log("✅ userIdInput =", userIdInput);
-    console.log("✅ userIdValue =", userIdValue);
-    console.log("🚀 fetch URL =", `/board/checkUserId?userid=${userIdValue}`);
-
+    // ✅ 1. 형식 검사 먼저
     if (userIdValue === "") {
-        resultMsg.textContent = "아이디를 입력해주세요.";
-        resultMsg.className = "form-text text-danger";
+        helpEl.textContent = "아이디를 입력해주세요.";
+        resultMsg.textContent = "";
+        resultMsg.className = "form-text";
         return;
     }
+
+    if (!idPattern.test(userIdValue)) {
+        helpEl.textContent = "아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.";
+        resultMsg.textContent = "";
+        resultMsg.className = "form-text";
+        return;
+    }
+
+    // ✅ 유효성 통과 → 이전 경고 제거
+    helpEl.textContent = "";
+
+    // ✅ 2. 서버 중복 확인 요청
     const url = "/board/checkUserId?userid=" + encodeURIComponent(userIdValue);
-    console.log("🚀 FETCH URL (정확) =", url);
+    console.log("🚀 중복 확인 요청:", url);
+
     fetch(url)
         .then(response => response.text())
         .then(result => {
