@@ -99,11 +99,17 @@ function resetUserIdCheckResult() {
 function checkUserId() {
     const useridInput = document.getElementById("userid");  // ✅ 객체
     useridInput.blur();
-
+    if (!useridInput) {
+        console.error("❌ useridInput DOM 요소를 찾을 수 없습니다!");
+        return;
+    }
     const useridValue = useridInput.value.trim();  // ✅ 문자열
-
+    if (!useridValue) {
+        console.error("❌ useridValue DOM 요소를 찾을 수 없습니다!");
+        return;
+    }
     const resultMsg = document.getElementById("useridCheckResult");
-
+	
     console.log("✅ checkUserId 실행됨, 입력값:", `'${useridValue}'`);
 
     if (useridValue === "") {
