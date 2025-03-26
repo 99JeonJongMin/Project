@@ -13,7 +13,39 @@
 
     <script>
         let isUserIdChecked = false;
+		
+        function checkUserId() {
+            const userid = document.getElementById("userid").value.trim();
+            const resultMsg = document.getElementById("useridCheckResult");
+            console.log("보내는 URL:", `/board/checkUserId?userid=${userid}`);
 
+            if (userid === "") {
+                resultMsg.textContent = "아이디를 입력해주세요.";
+                resultMsg.className = "form-text text-danger";
+                return;
+            }
+
+            fetch(`/board/checkUserId?userid=${userid}`)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.available === true) {
+                        resultMsg.textContent = "사용 가능한 아이디입니다.";
+                        resultMsg.className = "form-text text-success";
+                        isUserIdChecked = true;
+                    } else {
+                        resultMsg.textContent = "이미 사용 중인 아이디입니다.";
+                        resultMsg.className = "form-text text-danger";
+                        isUserIdChecked = false;
+                    }
+                })
+                .catch(error => {
+                    console.error("중복 확인 오류:", error);
+                    resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
+                    resultMsg.className = "form-text text-danger";
+                    isUserIdChecked = false;
+                });
+        }
+        
         function validateUserId() {
             const userid = document.getElementById("userid").value.trim();
             const msg = document.getElementById("useridHelp");
@@ -105,37 +137,7 @@
             isUserIdChecked = false; // 아이디가 수정되면 중복확인 다시 해야 함
         }
 
-        function checkUserId() {
-            const userid = document.getElementById("userid").value.trim();
-            const resultMsg = document.getElementById("useridCheckResult");
-            console.log("보내는 URL:", `/board/checkUserId?userid=${userid}`);
-
-            if (userid === "") {
-                resultMsg.textContent = "아이디를 입력해주세요.";
-                resultMsg.className = "form-text text-danger";
-                return;
-            }
-
-            fetch(`/board/checkUserId?userid=${userid}`)
-                .then(response => response.json())
-                .then(json => {
-                    if (json.available === true) {
-                        resultMsg.textContent = "사용 가능한 아이디입니다.";
-                        resultMsg.className = "form-text text-success";
-                        isUserIdChecked = true;
-                    } else {
-                        resultMsg.textContent = "이미 사용 중인 아이디입니다.";
-                        resultMsg.className = "form-text text-danger";
-                        isUserIdChecked = false;
-                    }
-                })
-                .catch(error => {
-                    console.error("중복 확인 오류:", error);
-                    resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
-                    resultMsg.className = "form-text text-danger";
-                    isUserIdChecked = false;
-                });
-        }
+        
     </script>
 </head>
 <body>
