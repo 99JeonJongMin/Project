@@ -44,7 +44,7 @@ public class BoardController {
 	
 
 	
-	@PostMapping("/post")
+	@PostMapping("/boardpost")
 	public String post(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
 	    if (result.hasErrors()) {
 	        rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
@@ -70,8 +70,8 @@ public class BoardController {
 		return "redirect:/board/menulist";
 	}
 	
-	@GetMapping("/post")
-	public void post() {
+	@GetMapping("/boardpost")
+	public void boardpost() {
 	}
 	 
 	@GetMapping("/boardmodify")

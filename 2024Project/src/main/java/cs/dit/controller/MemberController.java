@@ -66,7 +66,7 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public String login(Model model) {
-		return "board/login";
+		return "member/login";
 	}
 
     // ✅ 로그인 처리
