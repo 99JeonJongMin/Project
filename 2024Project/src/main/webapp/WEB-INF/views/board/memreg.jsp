@@ -28,7 +28,7 @@
                 </div>
             </c:if>
 
-            <form action="/board/memreg" method="post" onsubmit="return validateSignupForm()">
+            <form action="/member/memreg" method="post" onsubmit="return validateSignupForm()">
                 <div class="mb-3 form-group">
                     <label class="form-label" for="userid">아이디</label>
                     <div class="input-group">
@@ -126,7 +126,7 @@ function checkUserIdAvailability() {
     helpEl.textContent = "";
 
     // ✅ 2. 서버 중복 확인 요청
-    const url = "/board/checkUserId?userid=" + encodeURIComponent(userIdValue);
+    const url = "/member/checkUserId?userid=" + encodeURIComponent(userIdValue);
     console.log("🚀 중복 확인 요청:", url);
 
     fetch(url)

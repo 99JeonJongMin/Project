@@ -147,7 +147,7 @@
                 <c:if test="${not empty error}">
                 <div class="alert alert-danger">${error}</div>
             </c:if>
-              <form class="sign-in9-form" action="/board/login" method="post">
+              <form class="sign-in9-form" action="/member/login" method="post">
 			    <div class="mb-3">
 			        <label for="userid" class="form-label">아이디</label>
 			        <input type="text" id="userid" name="userid" required placeholder="아이디" class="form-control" /> <!-- type 변경 -->
@@ -165,7 +165,7 @@
                 <span>OR</span>
                 <div class="sign-in9-divider3"></div>
               </div>
-              <a href="<c:url value='/board/memreg' />" class="sign-in9-link2">회원가입</a>
+              <a href="<c:url value='/member/memreg' />" class="sign-in9-link2">회원가입</a>
               <div class="sign-in9-container7">
                 <button class="sign-in9-button2">
                   <svg viewBox="0 0 877.7142857142857 1024">

@@ -50,11 +50,11 @@ public class BoardController {
 	}
 
 	
-	@PostMapping("/register")
-	public String register(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
+	@PostMapping("/post")
+	public String post(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
 	    if (result.hasErrors()) {
 	        rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
-	        return "redirect:/board/register";
+	        return "redirect:/board/post";
 	    }
 
 	    int count = service.register(board);
@@ -65,8 +65,8 @@ public class BoardController {
 
 	    return "redirect:/board/boardlist";
 	}
-	@PostMapping("/menuregister")
-	public String menuregister(BoardVO board, RedirectAttributes rttr) {
+	@PostMapping("/menupost")
+	public String menupost(BoardVO board, RedirectAttributes rttr) {
 		
 		int count = service.menuregister(board);
 		
@@ -76,16 +76,16 @@ public class BoardController {
 		return "redirect:/board/menulist";
 	}
 	
-	@GetMapping("/register")
-	public void register() {
+	@GetMapping("/post")
+	public void post() {
 	}
 	 
 	@GetMapping("/boardmodify")
 	public void boardmodify() {
 	}
 	
-	@GetMapping("/menumodify")
-	public void menumodify() {
+	@GetMapping("/menupost")
+	public void menupost() {
 	}
 	
 	@GetMapping({"/get", "/modify"})

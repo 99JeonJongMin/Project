@@ -1,89 +1,118 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <%@include file="../includes/header.jsp"%>
 
 <style>
-    /* 화면 중앙 정렬 스타일 */
+    body {
+        background-color: #f8f9fa; /* 부드러운 배경색 */
+    }
+
     .form-container {
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        height: 90vh;
-        padding-top: 50px;
+        align-items: center;
+        height: 100vh;
     }
 
     .form-box {
-        width: 400px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        text-align: center;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 500px;
     }
 
     .form-title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
+        text-align: center;
         margin-bottom: 20px;
-        color: #333;
+        color: #343a40;
     }
 
-    .form-box .form-group {
+    .form-group {
         margin-bottom: 15px;
     }
 
-    .form-box button {
-        width: 100%;
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .btn {
+        width: 48%;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-danger:hover {
+        background-color: #a71d2a;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #565e64;
     }
 </style>
 
-<script>
-    function validateForm() {
-        let title = document.forms["boardForm"]["title"].value.trim();
-        let content = document.forms["boardForm"]["content"].value.trim();
-
-        if (title === "" || content === "") {
-            alert("제목과 내용을 입력해주세요.");
-            return false; // 폼 제출 방지
-        }
-        return true; // 유효성 검사가 통과되면 제출 허용
-    }
-</script>
-
 <div class="form-container">
     <div class="form-box">
-        <!-- 오류 메시지 출력 -->
-        <c:if test="${not empty errorMessage}">
-            <p style="color: red; font-weight: bold; margin-bottom: 15px;">${errorMessage}</p>
-        </c:if>
-
         <!-- 폼 제목 -->
-        <div class="form-title">게시글 작성</div>
+        <div class="form-title">게시글 수정</div>
         
-        <!-- 폼 시작 -->
-        <form name="boardForm" action="/board/register" method="post" onsubmit="return validateForm()">
+        <!-- 게시글 수정 폼 -->
+        <form role="form" action="/board/modify" method="post">
             <div class="form-group">
                 <label>제목</label>
-                <input class="form-control" name="title" placeholder="제목을 입력하세요">
+                <input class="form-control" name="title" value="<c:out value='${board.title}'/>">
             </div>
 
             <div class="form-group">
                 <label>내용</label>
-                <textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="5" name="content"><c:out value="${board.content}"/></textarea>
             </div>
 
             <div class="form-group">
                 <label>작성자</label>
-                <!-- 세션에서 userid 값을 가져와 value에 설정 -->
-                <input class="form-control" name="writer" value="<c:out value='${sessionScope.userid}'/>" readonly />
-            </div> 
+                <input class="form-control" name="writer" value="<c:out value='${board.writer}'/>" readonly>
+            </div>
 
-            <button type="submit" class="btn btn-primary">작성하기</button>
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist'">목록으로</button>
+            <input type="hidden" name="bno" value="<c:out value='${board.bno}'/>"> <!-- 게시글 번호를 hidden 필드로 전달 -->
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">수정</button> <!-- 수정 버튼 -->
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist">목록으로</button>
+            </div>
         </form>
-        <!-- 폼 종료 -->
     </div>
 </div>
 

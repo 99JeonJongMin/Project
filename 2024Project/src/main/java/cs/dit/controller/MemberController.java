@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
 
-@RequestMapping("/board")  // ✅ 컨트롤러 전체에 /board 경로 설정
+@RequestMapping("/member")  // ✅ 컨트롤러 전체에 /member 경로 설정
 @Controller
 public class MemberController {
 

@@ -31,11 +31,11 @@
                         String user = (String) session.getAttribute("userid");
                         if (user != null) { 
                     %>
-                        <li class="nav-item"><a class="nav-link active" href="/board/logout">로그아웃</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/member/logout">로그아웃</a></li>
                     <% 
                         } else { 
                     %>
-                        <li class="nav-item"><a class="nav-link active" href="/board/login">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/member/login">로그인</a></li>
                     <% 
                         } 
                     %>
