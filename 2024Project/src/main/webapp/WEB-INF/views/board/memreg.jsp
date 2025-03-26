@@ -72,6 +72,8 @@
     </div>
 </div>
 
+<!-- ✅ Bootstrap JS (무결성 제거됨) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- ✅ JavaScript -->
 <script>
 let isUserIdChecked = false;
@@ -114,7 +116,6 @@ function checkUserIdAvailability() {
         resultMsg.className = "form-text text-danger";
         return;
     }
-    const userIdValue = userIdInput.value.trim();
     const url = "/board/checkUserId?userid=" + encodeURIComponent(userIdValue);
     console.log("🚀 FETCH URL (정확) =", url);
     fetch(url)
@@ -197,7 +198,5 @@ function validateSignupForm() {
 
 
 
-<!-- ✅ Bootstrap JS (무결성 제거됨) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
