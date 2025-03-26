@@ -25,9 +25,9 @@ public class MemberController {
     // ✅ 회원가입 (아이디 & 이메일 중복 체크 추가)
     @PostMapping("/memreg")
     public String memreg(MemberVO member, RedirectAttributes rttr) {
-
+    		
         int result = service.memreg(member);
-
+        System.out.println("회원가입 요청 정보: " + member);
         if (result == -1) {
             rttr.addFlashAttribute("error", "이미 사용 중인 아이디입니다."); // 아이디 중복 시 에러 메시지
             return "redirect:/member/memreg"; // 회원가입 페이지로 이동

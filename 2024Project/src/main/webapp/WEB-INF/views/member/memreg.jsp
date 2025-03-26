@@ -44,7 +44,9 @@
 
                 <div class="mb-3 form-group">
                     <label class="form-label" for="name">이름</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="이름 입력" required oninput="validateName()">
+                    <input type="text" id="name" name="name" class="form-control"
+				       placeholder="이름 입력" required
+				       oninput="validateNameInput()">
                     <div id="nameHelp" class="form-text text-danger"></div>
                 </div>
 
@@ -56,13 +58,17 @@
 
                 <div class="mb-3 form-group">
                     <label class="form-label" for="passwd">비밀번호</label>
-                    <input type="password" id="passwd" name="passwd" class="form-control" placeholder="비밀번호 입력 (8~20자, 영문+숫자)" required oninput="validatePassword()">
+                    <input type="password" id="passwd" name="passwd" class="form-control"
+				       placeholder="비밀번호 입력 (8~20자, 영문+숫자)" required
+				       oninput="validatePasswordInput()">
                     <div id="passwdHelp" class="form-text text-danger"></div>
                 </div>
 
                 <div class="mb-3 form-group">
                     <label class="form-label" for="confirmPasswd">비밀번호 확인</label>
-                    <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control" placeholder="비밀번호 재입력" required oninput="validatePasswordConfirm()">
+                   <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control"
+				       placeholder="비밀번호 재입력" required
+				       oninput="validatePasswordConfirmInput()">
                     <div id="confirmPasswdHelp" class="form-text text-danger"></div>
                 </div>
 
