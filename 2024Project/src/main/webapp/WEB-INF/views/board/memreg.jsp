@@ -98,7 +98,9 @@ function resetUserIdCheckResult() {
 
 function checkUserId() {
     const useridInput = document.getElementById("userid");
-    const userid = useridInput.value.trim();  // ✅ 변수명을 다르게
+    const userid = useridInput.value.trim();
+
+    const resultMsg = document.getElementById("useridCheckResult");  // ✅ 이거 빠졌음!! 꼭 넣어야 돼
 
     console.log("✅ checkUserId 실행됨, 입력값:", `'${userid}'`);
 
