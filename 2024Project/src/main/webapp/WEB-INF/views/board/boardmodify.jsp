@@ -90,7 +90,7 @@
         <div class="form-title">게시글 수정</div>
         
         <!-- 게시글 수정 폼 -->
-        <form role="form" action="/board/modify" method="post">
+        <form role="form" action="/board/boardmodify" method="post">
             <div class="form-group">
                 <label>제목</label>
                 <input class="form-control" name="title" value="<c:out value='${board.title}'/>">
