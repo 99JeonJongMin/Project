@@ -55,10 +55,10 @@ public class MemberController {
 	
     @GetMapping("/checkUserId")
     @ResponseBody
-    public Map<String, Boolean> checkUserId(@RequestParam("userid") String userid) {
-    	System.out.println("🧪 userid 값 = " + userid);
+    public String checkUserId(@RequestParam("userid") String userid) {
+        System.out.println("🧪 userid 값 = " + userid);
         boolean isAvailable = service.isUserIdAvailable(userid);
-        return Collections.singletonMap("available", isAvailable);
+        return isAvailable ? "AVAILABLE" : "TAKEN";
     }
 
     // ✅ 로그인 처리

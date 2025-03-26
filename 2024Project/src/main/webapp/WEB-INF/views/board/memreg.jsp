@@ -100,7 +100,7 @@ function checkUserId() {
     const useridInput = document.getElementById("userid");
     const userid = useridInput.value.trim();
 
-    const resultMsg = document.getElementById("useridCheckResult");  // ✅ 이거 빠졌음!! 꼭 넣어야 돼
+    const resultMsg = document.getElementById("useridCheckResult");
 
     console.log("✅ checkUserId 실행됨, 입력값:", `'${userid}'`);
 
@@ -110,10 +110,10 @@ function checkUserId() {
         return;
     }
 
-    fetch(`/board/checkUserId?userid=${encodeURIComponent(userid)}`)
-        .then(response => response.json())
-        .then(json => {
-            if (json.available === true) {
+    fetch(`/board/checkUserId?userid=${userid}`)  // 🎯 encodeURIComponent 제거
+        .then(response => response.text())
+        .then(result => {
+            if (result === "AVAILABLE") {
                 resultMsg.textContent = "사용 가능한 아이디입니다.";
                 resultMsg.className = "form-text text-success";
                 isUserIdChecked = true;
