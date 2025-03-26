@@ -98,12 +98,8 @@ function resetUserIdCheckResult() {
 
 function checkUserId() {
     const useridInput = document.getElementById("userid");
+    useridInput.blur(); // ✅ 브라우저 자동완성 이슈 방지
     const resultMsg = document.getElementById("useridCheckResult");
-
-    if (!useridInput) {
-        alert("아이디 입력창을 찾을 수 없습니다.");
-        return;
-    }
 
     const userid = useridInput.value.trim();
     console.log("✅ checkUserId 실행됨, 입력값:", `'${userid}'`);
@@ -134,6 +130,7 @@ function checkUserId() {
             isUserIdChecked = false;
         });
 }
+
 
 function validatePassword() {
     const password = document.getElementById("passwd").value.trim();
