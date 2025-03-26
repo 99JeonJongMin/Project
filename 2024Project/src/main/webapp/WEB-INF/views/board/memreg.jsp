@@ -97,21 +97,22 @@ function resetUserIdCheckResult() {
 }
 
 function checkUserId() {
-    const useridInput = document.getElementById("userid");
+    const useridInput = document.getElementById("userid");  // ✅ 객체
     useridInput.blur();
-    const userid = useridInput.value.trim();
+
+    const useridValue = useridInput.value.trim();  // ✅ 문자열
 
     const resultMsg = document.getElementById("useridCheckResult");
 
-    console.log("✅ checkUserId 실행됨, 입력값:", `'${userid}'`);
+    console.log("✅ checkUserId 실행됨, 입력값:", `'${useridValue}'`);
 
-    if (userid === "") {
+    if (useridValue === "") {
         resultMsg.textContent = "아이디를 입력해주세요.";
         resultMsg.className = "form-text text-danger";
         return;
     }
 
-    fetch(`/board/checkUserId?userid=${userid}`)  // 🎯 encodeURIComponent 제거
+    fetch(`/board/checkUserId?userid=${useridValue}`)
         .then(response => response.text())
         .then(result => {
             if (result === "AVAILABLE") {
