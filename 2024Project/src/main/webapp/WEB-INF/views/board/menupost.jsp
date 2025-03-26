@@ -80,7 +80,7 @@
         <div class="form-title">게시글 작성</div>
         
         <!-- 폼 시작 -->
-        <form name="boardForm" action="/board/menuregister" method="post" onsubmit="return validateForm()">
+        <form name="boardForm" action="/board/menupost" method="post" onsubmit="return validateForm()">
             <div class="form-group">
                 <label>제목</label>
                 <input class="form-control" name="title" placeholder="제목을 입력하세요">
