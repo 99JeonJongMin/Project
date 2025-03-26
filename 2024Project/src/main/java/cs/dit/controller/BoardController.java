@@ -42,12 +42,6 @@ public class BoardController {
 	    return "board/index"; // 📌 JSP 뷰를 명시적으로 지정
 	}
 	
-	
-	@GetMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("login", service.getList());
-		return "board/login";
-	}
 
 	
 	@PostMapping("/post")
