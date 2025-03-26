@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="/resources/css/sign.css">
 
     
-
-        
-    </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
@@ -68,7 +65,13 @@
                     <input type="password" id="confirmPasswd" name="confirmPasswd" class="form-control" placeholder="비밀번호 재입력" required oninput="validatePasswordConfirm()">
                     <div id="confirmPasswdHelp" class="form-text text-danger"></div>
                 </div>
-				<script>
+
+                <button type="submit" class="btn-submit">회원가입</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
         let isUserIdChecked = false;
 		
         function checkUserId() {
@@ -193,12 +196,9 @@
             }
             isUserIdChecked = false; // 아이디가 수정되면 중복확인 다시 해야 함
         }
-                <button type="submit" class="btn-submit">회원가입</button>
-            </form>
-        </div>
-    </div>
-</div>
 
+        
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
