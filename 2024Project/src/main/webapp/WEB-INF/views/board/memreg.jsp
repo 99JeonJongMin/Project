@@ -62,9 +62,10 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     let isUserIdChecked = false;
 
-    function checkUserId() {
+    window.checkUserId = function () {
         const useridInput = document.getElementById("userid");
         const resultMsg = document.getElementById("useridCheckResult");
 
@@ -72,7 +73,7 @@
         console.log("📦 useridInput DOM 객체:", useridInput);
 
         if (!useridInput) {
-            alert("❌ userid input 요소를 찾을 수 없습니다. id 확인 필요!");
+            alert("❌ userid input 요소를 찾을 수 없습니다.");
             return;
         }
 
@@ -106,99 +107,10 @@
                 resultMsg.className = "form-text text-danger";
                 isUserIdChecked = false;
             });
-    }
-
-    function validateUserId() {
-        const userid = document.getElementById("userid").value.trim();
-        const msg = document.getElementById("useridHelp");
-        const idPattern = /^[a-z0-9]{4,16}$/;
-
-        if (userid === "") {
-            msg.textContent = "아이디를 입력해주세요.";
-        } else if (!idPattern.test(userid)) {
-            msg.textContent = "아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.";
-        } else {
-            msg.textContent = "";
-        }
-    }
-
-    function validatePassword() {
-        const password = document.getElementById("passwd").value.trim();
-        const msg = document.getElementById("passwdHelp");
-        const pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
-
-        if (password === "") {
-            msg.textContent = "비밀번호를 입력해주세요.";
-        } else if (!pwPattern.test(password)) {
-            msg.textContent = "8~20자의 영문과 숫자를 포함해야 합니다.";
-        } else {
-            msg.textContent = "";
-        }
-    }
-
-    function validatePasswordConfirm() {
-        const password = document.getElementById("passwd").value.trim();
-        const confirm = document.getElementById("confirmPasswd").value.trim();
-        const msg = document.getElementById("confirmPasswdHelp");
-
-        if (confirm === "") {
-            msg.textContent = "비밀번호를 다시 입력해주세요.";
-        } else if (password !== confirm) {
-            msg.textContent = "비밀번호가 일치하지 않습니다.";
-        } else {
-            msg.textContent = "";
-        }
-    }
-
-    function validateName() {
-        const name = document.getElementById("name").value.trim();
-        const msg = document.getElementById("nameHelp");
-        const namePattern = /^[가-힣a-zA-Z]{2,20}$/;
-
-        if (name === "") {
-            msg.textContent = "이름을 입력해주세요.";
-        } else if (!namePattern.test(name)) {
-            msg.textContent = "이름은 2~20자의 한글 또는 영문만 입력 가능합니다.";
-        } else {
-            msg.textContent = "";
-        }
-    }
-
-    function validateForm() {
-        const userid = document.getElementById("userid").value.trim();
-        const password = document.getElementById("passwd").value.trim();
-        const confirmPassword = document.getElementById("confirmPasswd").value.trim();
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-
-        const idPattern = /^[a-z0-9]{4,16}$/;
-        const pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
-        const namePattern = /^[가-힣a-zA-Z]{2,20}$/;
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!isUserIdChecked) {
-            alert("아이디 중복 확인을 해주세요.");
-            return false;
-        }
-
-        if (!idPattern.test(userid)) { alert("아이디 형식이 올바르지 않습니다."); return false; }
-        if (!pwPattern.test(password)) { alert("비밀번호 형식이 올바르지 않습니다."); return false; }
-        if (password !== confirmPassword) { alert("비밀번호가 일치하지 않습니다."); return false; }
-        if (!namePattern.test(name)) { alert("이름 형식이 올바르지 않습니다."); return false; }
-        if (!emailPattern.test(email)) { alert("이메일 형식이 올바르지 않습니다."); return false; }
-
-        return true;
-    }
-
-    function resetUserIdCheckResult() {
-        const resultMsg = document.getElementById("useridCheckResult");
-        if (resultMsg.textContent !== "") {
-            resultMsg.textContent = "";
-            resultMsg.className = "form-text";
-        }
-        isUserIdChecked = false;
-    }
+    };
+});
 </script>
+
 
 <!-- Bootstrap JS (no integrity) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
