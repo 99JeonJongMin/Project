@@ -32,7 +32,7 @@
                 <div class="mb-3 form-group">
                     <label class="form-label" for="userid">아이디</label>
                     <div class="input-group">
-                        <input type="text" id="userid" name="userid" class="form-control"
+                        <input type="text" id="userid" name="user_id" class="form-control"
 					       placeholder="아이디 입력 (4~16자 영문+숫자)" required
 					       oninput="validateUserIdInput(); resetUserIdCheckResultMessage();">
 					<button type="button" class="btn btn-secondary" onclick="checkUserIdAvailability()">중복 확인</button>
@@ -76,118 +76,102 @@
 <script>
 let isUserIdChecked = false;
 
-// 아이디 유효성 검사
 function validateUserIdInput() {
-    const userIdInputEl = document.getElementById("userid");
-    const userId = userIdInputEl.value.trim();
-    const userIdHelpEl = document.getElementById("useridHelp");
+    const userIdEl = document.getElementById("userid");
+    const userId = userIdEl.value.trim();
+    const helpEl = document.getElementById("useridHelp");
     const idPattern = /^[a-z0-9]{4,16}$/;
 
     if (userId === "") {
-        userIdHelpEl.textContent = "아이디를 입력해주세요.";
+        helpEl.textContent = "아이디를 입력해주세요.";
     } else if (!idPattern.test(userId)) {
-        userIdHelpEl.textContent = "아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.";
+        helpEl.textContent = "아이디는 4~16자의 영문 소문자 및 숫자로만 입력해야 합니다.";
     } else {
-        userIdHelpEl.textContent = "";
+        helpEl.textContent = "";
     }
 }
 
-// 아이디 중복 확인 결과 리셋
 function resetUserIdCheckResultMessage() {
-    const resultMsgEl = document.getElementById("useridCheckResult");
-    resultMsgEl.textContent = "";
-    resultMsgEl.className = "form-text";
+    const msgEl = document.getElementById("useridCheckResult");
+    msgEl.textContent = "";
+    msgEl.className = "form-text";
     isUserIdChecked = false;
 }
 
-// 아이디 중복 확인
 function checkUserIdAvailability() {
-    const userIdInputEl = document.getElementById("userid");
-    userIdInputEl.blur();
-    const userId = userIdInputEl.value.trim();
-    const resultMsgEl = document.getElementById("useridCheckResult");
+    const userIdInput = document.getElementById("userid");
+    userIdInput.blur();
+    const userIdValue = userIdInput.value.trim();
 
-    console.log("🧪 userId =", userId);
+    const resultMsg = document.getElementById("useridCheckResult");
 
-    if (userId === "") {
-        resultMsgEl.textContent = "아이디를 입력해주세요.";
-        resultMsgEl.className = "form-text text-danger";
+    console.log("✅ userIdInput =", userIdInput);
+    console.log("✅ userIdValue =", userIdValue);
+    console.log("🚀 fetch URL =", `/board/checkUserId?userid=${userIdValue}`);
+
+    if (userIdValue === "") {
+        resultMsg.textContent = "아이디를 입력해주세요.";
+        resultMsg.className = "form-text text-danger";
         return;
     }
 
-    fetch(`/board/checkUserId?userid=${userId}`)
+    fetch(`/board/checkUserId?userid=${userIdValue}`)
         .then(response => response.text())
         .then(result => {
             if (result === "AVAILABLE") {
-                resultMsgEl.textContent = "사용 가능한 아이디입니다.";
-                resultMsgEl.className = "form-text text-success";
+                resultMsg.textContent = "사용 가능한 아이디입니다.";
+                resultMsg.className = "form-text text-success";
                 isUserIdChecked = true;
             } else {
-                resultMsgEl.textContent = "이미 사용 중인 아이디입니다.";
-                resultMsgEl.className = "form-text text-danger";
+                resultMsg.textContent = "이미 사용 중인 아이디입니다.";
+                resultMsg.className = "form-text text-danger";
                 isUserIdChecked = false;
             }
         })
         .catch(error => {
             console.error("❌ 중복 확인 오류:", error);
-            resultMsgEl.textContent = "중복 확인 중 오류가 발생했습니다.";
-            resultMsgEl.className = "form-text text-danger";
+            resultMsg.textContent = "중복 확인 중 오류가 발생했습니다.";
+            resultMsg.className = "form-text text-danger";
             isUserIdChecked = false;
         });
 }
 
-// 비밀번호 유효성 검사
 function validatePasswordInput() {
     const pw = document.getElementById("passwd").value.trim();
-    const pwHelp = document.getElementById("passwdHelp");
+    const msg = document.getElementById("passwdHelp");
     const pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
 
-    if (pw === "") {
-        pwHelp.textContent = "비밀번호를 입력해주세요.";
-    } else if (!pwPattern.test(pw)) {
-        pwHelp.textContent = "8~20자의 영문과 숫자를 포함해야 합니다.";
-    } else {
-        pwHelp.textContent = "";
-    }
+    msg.textContent = pw === ""
+        ? "비밀번호를 입력해주세요."
+        : (!pwPattern.test(pw) ? "8~20자의 영문과 숫자를 포함해야 합니다." : "");
 }
 
-// 비밀번호 확인 유효성 검사
 function validatePasswordConfirmInput() {
     const pw = document.getElementById("passwd").value.trim();
     const confirm = document.getElementById("confirmPasswd").value.trim();
     const msg = document.getElementById("confirmPasswdHelp");
 
-    if (confirm === "") {
-        msg.textContent = "비밀번호를 다시 입력해주세요.";
-    } else if (pw !== confirm) {
-        msg.textContent = "비밀번호가 일치하지 않습니다.";
-    } else {
-        msg.textContent = "";
-    }
+    msg.textContent = confirm === ""
+        ? "비밀번호를 다시 입력해주세요."
+        : (pw !== confirm ? "비밀번호가 일치하지 않습니다." : "");
 }
 
-// 이름 유효성 검사
 function validateNameInput() {
-    const nameEl = document.getElementById("name").value.trim();
-    const nameHelpEl = document.getElementById("nameHelp");
-    const namePattern = /^[가-힣a-zA-Z]{2,20}$/;
+    const name = document.getElementById("name").value.trim();
+    const msg = document.getElementById("nameHelp");
+    const pattern = /^[가-힣a-zA-Z]{2,20}$/;
 
-    if (nameEl === "") {
-        nameHelpEl.textContent = "이름을 입력해주세요.";
-    } else if (!namePattern.test(nameEl)) {
-        nameHelpEl.textContent = "이름은 2~20자의 한글 또는 영문만 입력 가능합니다.";
-    } else {
-        nameHelpEl.textContent = "";
-    }
+    msg.textContent = name === ""
+        ? "이름을 입력해주세요."
+        : (!pattern.test(name) ? "이름은 2~20자의 한글 또는 영문만 입력 가능합니다." : "");
 }
 
-// 전체 폼 유효성 검사
 function validateSignupForm() {
     const userId = document.getElementById("userid").value.trim();
-    const password = document.getElementById("passwd").value.trim();
-    const confirmPassword = document.getElementById("confirmPasswd").value.trim();
-    const userName = document.getElementById("name").value.trim();
-    const userEmail = document.getElementById("email").value.trim();
+    const pw = document.getElementById("passwd").value.trim();
+    const confirmPw = document.getElementById("confirmPasswd").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
 
     const idPattern = /^[a-z0-9]{4,16}$/;
     const pwPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,20}$/;
@@ -199,15 +183,16 @@ function validateSignupForm() {
         return false;
     }
 
-    if (!idPattern.test(userId)) { alert("아이디 형식이 올바르지 않습니다."); return false; }
-    if (!pwPattern.test(password)) { alert("비밀번호 형식이 올바르지 않습니다."); return false; }
-    if (password !== confirmPassword) { alert("비밀번호가 일치하지 않습니다."); return false; }
-    if (!namePattern.test(userName)) { alert("이름 형식이 올바르지 않습니다."); return false; }
-    if (!emailPattern.test(userEmail)) { alert("이메일 형식이 올바르지 않습니다."); return false; }
+    if (!idPattern.test(userId)) return alert("아이디 형식이 올바르지 않습니다.") || false;
+    if (!pwPattern.test(pw)) return alert("비밀번호 형식이 올바르지 않습니다.") || false;
+    if (pw !== confirmPw) return alert("비밀번호가 일치하지 않습니다.") || false;
+    if (!namePattern.test(name)) return alert("이름 형식이 올바르지 않습니다.") || false;
+    if (!emailPattern.test(email)) return alert("이메일 형식이 올바르지 않습니다.") || false;
 
     return true;
 }
 </script>
+
 
 
 <!-- ✅ Bootstrap JS (무결성 제거됨) -->
