@@ -114,8 +114,10 @@ function checkUserIdAvailability() {
         resultMsg.className = "form-text text-danger";
         return;
     }
-
-    fetch(`/board/checkUserId?userid=${userIdValue}`)
+    const userIdValue = userIdInput.value.trim();
+    const url = "/board/checkUserId?userid=" + encodeURIComponent(userIdValue);
+    console.log("🚀 FETCH URL (정확) =", url);
+    fetch(url)
         .then(response => response.text())
         .then(result => {
             if (result === "AVAILABLE") {
