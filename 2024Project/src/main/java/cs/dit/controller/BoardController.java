@@ -73,10 +73,6 @@ public class BoardController {
 	@GetMapping("/boardpost")
 	public void boardpost() {
 	}
-	 
-	@GetMapping("/boardmodify")
-	public void boardmodify() {
-	}
 	
 	@GetMapping("/menupost")
 	public void menupost() {
