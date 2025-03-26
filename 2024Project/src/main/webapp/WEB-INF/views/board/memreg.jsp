@@ -100,19 +100,12 @@ function checkUserId() {
     const useridInput = document.getElementById("userid");  // ✅ 객체
     useridInput.blur();
     console.log("useridInput" , useridInput);
-    if (userInput = "") {
-        console.log("❌ useridInput DOM 요소를 찾을 수 없습니다!");
-        return;
-    }
   
     const useridValue = useridInput.value.trim();  // ✅ 문자열
     console.log("useridvalue" , useridValue);
-    if (useridValue = "") {
-        console.log("❌ useridValue DOM 요소를 찾을 수 없습니다!");
-        return;
-    }
+    
+    
     const resultMsg = document.getElementById("useridCheckResult");
-	
     console.log("✅ checkUserId 실행됨, 입력값:", `'${useridValue}'`);
 
     if (useridValue === "") {
