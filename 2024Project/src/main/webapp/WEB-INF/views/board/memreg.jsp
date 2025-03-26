@@ -108,6 +108,7 @@
         function checkUserId() {
             const userid = document.getElementById("userid").value.trim();
             const resultMsg = document.getElementById("useridCheckResult");
+            console.log("보내는 URL:", `/board/checkUserId?userid=${userid}`);
 
             if (userid === "") {
                 resultMsg.textContent = "아이디를 입력해주세요.";
