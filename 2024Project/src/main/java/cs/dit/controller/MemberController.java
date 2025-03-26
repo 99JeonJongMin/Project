@@ -35,7 +35,7 @@ public class MemberController {
 
         if (result == -1) {
             rttr.addFlashAttribute("error", "이미 사용 중인 아이디입니다."); // 아이디 중복 시 에러 메시지
-            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
+            return "redirect:/member/memreg"; // 회원가입 페이지로 이동
         }
 
 //        if (result == -2) {
@@ -45,12 +45,12 @@ public class MemberController {
 
         if (result == 1) {
             rttr.addFlashAttribute("success", "회원가입이 완료되었습니다!");
-            return "redirect:/board/login"; // 회원가입 성공 시 로그인 페이지로 이동
+            return "redirect:/member/login"; // 회원가입 성공 시 로그인 페이지로 이동
         }
 
         // 만약 예상치 못한 오류가 발생했을 경우
         rttr.addFlashAttribute("error", "회원가입 중 오류가 발생했습니다.");
-        return "redirect:/board/memreg";
+        return "redirect:/member/memreg";
     }
 
 	
@@ -79,7 +79,7 @@ public class MemberController {
             return "redirect:/board/index"; // 로그인 성공 시 메인 페이지로 이동
         } else {
             rttr.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "redirect:/board/login"; // 로그인 페이지로 이동
+            return "redirect:/member/login"; // 로그인 페이지로 이동
         }
     }
 
@@ -96,7 +96,7 @@ public class MemberController {
 
     @GetMapping("/memreg")
     public String memreg() {  
-        return "board/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
+        return "member/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
     }
 
     
