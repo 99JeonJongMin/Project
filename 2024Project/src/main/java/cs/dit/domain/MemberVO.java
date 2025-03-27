@@ -6,7 +6,7 @@ public class MemberVO {
 	private String user_id, passwd, name,email;
 	private Date date;
 	
-	public String delete(String userid) {
+	public String delete(String user_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

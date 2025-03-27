@@ -100,7 +100,7 @@ public class MemberController {
     
     @GetMapping("/edit")
     public String editForm(Model model, HttpSession session) {
-    	String userid = (String) session.getAttribute("user_id");
+    	String userid = (String) session.getAttribute("userid");
     	MemberVO member = service.findByUserId(userid);
         model.addAttribute("member", member);
         return "member/edit";
