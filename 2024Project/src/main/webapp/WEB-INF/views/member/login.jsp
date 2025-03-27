@@ -168,27 +168,27 @@
       </div>
     </div>
 
-<!-- 🔐 비밀번호 찾기 모달 -->
+<!-- 🔐 비밀번호 찾기 모달 (꾸민 버전) -->
 <div class="modal fade" id="findPwModal" tabindex="-1" aria-labelledby="findPwModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <form action="/member/findpw" method="post">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="findPwModalLabel">비밀번호 찾기</h5>
+        <div class="modal-header custom-bg text-white">
+          <h5 class="modal-title" id="findPwModalLabel">비밀번호 찾기 🔑</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">아이디</label>
-            <input type="text" name="userid" class="form-control" required>
+            <input type="text" name="userid" class="form-control" placeholder="아이디를 입력하세요" required>
           </div>
           <div class="mb-3">
             <label class="form-label">이름</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" placeholder="이름을 입력하세요" required>
           </div>
           <div class="mb-3">
             <label class="form-label">이메일</label>
-            <input type="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -210,7 +210,7 @@
       <div class="modal-body text-center">
         <p class="fs-5">📢 발급된 임시 비밀번호:</p>
         <p class="fw-bold fs-4 text-success">${tempPassword}</p>
-        <p class="text-muted">로그인 후 만능시 비밀번호를 변경해주세요.</p>
+        <p class="text-muted">로그인 후 반드시 비밀번호를 변경해주세요.</p>
       </div>
     </div>
   </div>
