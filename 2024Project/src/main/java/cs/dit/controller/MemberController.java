@@ -115,7 +115,7 @@ public class MemberController {
         System.out.println("🔥 service.findByUserId(userid) 결과: " + success);
         if (success) {
             redirectAttributes.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
-            return "redirect:/member/info";
+            return "redirect:/member/edit";
         } else {
             redirectAttributes.addFlashAttribute("error", "비밀번호가 틀렸습니다.");
             return "redirect:/member/edit";
