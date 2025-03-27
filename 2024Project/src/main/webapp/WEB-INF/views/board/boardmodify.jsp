@@ -110,7 +110,8 @@
 
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary">수정</button> <!-- 수정 버튼 -->
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist">목록으로</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/board/boardlist'">목록으로</button>
+
             </div>
         </form>
     </div>

@@ -24,5 +24,15 @@ public interface MemberMapper {
     
     @Select("SELECT * FROM member WHERE userid = #{user_id}")
     MemberVO findByUserId(String user_id);
+    
+    @Select("SELECT * FROM member WHERE name = #{name}")
+    MemberVO findByUsername(String name);
+    
+    @Update("UPDATE member SET passwd = #{passwd}, name = #{name}, email = #{email} WHERE userid = #{user_id}")
+    int update(MemberVO member);
+    
+    @Update("UPDATE member SET passwd = #{passwd} WHERE userid = #{user_id}")
+    int updatePassword(MemberVO member);
+
 }
  

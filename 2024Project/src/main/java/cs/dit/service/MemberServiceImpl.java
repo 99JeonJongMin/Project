@@ -55,12 +55,33 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean isUserIdExists(String userid) {
-        return mapper.countByUserId(userid) > 0;
+    public boolean isUserIdExists(String user_id) {
+        return mapper.countByUserId(user_id) > 0;
     }
 
     @Override
-    public int countByUserId(String userid) {
-        return mapper.countByUserId(userid);
+    public int countByUserId(String user_id) {
+        return mapper.countByUserId(user_id);
     }
+    public MemberVO findByUserId(String user_id) {
+    	return mapper.findByUserId(user_id);
+    }
+    public boolean updateMember(MemberVO updatedMember, String currentPassword) {
+        MemberVO existingMember = mapper.findByUserId(updatedMember.getUser_id());
+        
+        if (!passwordEncoder.matches(currentPassword, existingMember.getPasswd())) {
+            return false;
+        }
+
+        // 새 비밀번호가 입력된 경우만 변경
+        if (updatedMember.getPasswd() != null && !updatedMember.getPasswd().isEmpty()) {
+            updatedMember.setPasswd(passwordEncoder.encode(updatedMember.getPasswd()));
+        } else {
+            updatedMember.setPasswd(existingMember.getPasswd());
+        }
+
+        mapper.update(updatedMember); // 실제 업데이트 실행
+        return true;
+    }
+
 }

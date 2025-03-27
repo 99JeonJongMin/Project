@@ -23,12 +23,16 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="/board/menulist">메뉴추천게시판</a></li>
                     <li class="nav-item"><a class="nav-link" href="/board/boardlist">자유게시판</a></li>
+                         <% 
+                         String user = (String) session.getAttribute("userid");
+                         if (user != null) { %>
+				        <li class="nav-item"><a class="nav-link" href="/member/edit">회원정보 수정</a></li>
+				    <% } %>
                     <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">관리자</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <% 
                         // 세션에서 로그인 정보 확인
-                        String user = (String) session.getAttribute("userid");
                         if (user != null) { 
                     %>
                         <li class="nav-item"><a class="nav-link active" href="/member/logout">로그아웃</a></li>

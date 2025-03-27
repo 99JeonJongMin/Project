@@ -3,10 +3,14 @@ package cs.dit.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,6 +97,29 @@ public class MemberController {
     public String memreg() {  
         return "member/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
     }
+    
+    @GetMapping("/edit")
+    public String editForm(Model model, HttpSession session) {
+    	String userid = (String) session.getAttribute("user_id");
+    	MemberVO member = service.findByUserId(userid);
+        model.addAttribute("member", member);
+        return "member/edit";
+    }
+
+    @PostMapping("/edit")
+    public String updateMember(@ModelAttribute MemberVO member, 
+                               @RequestParam("currentPassword") String currentPassword, 
+                               RedirectAttributes redirectAttributes) {
+        boolean success = service.updateMember(member, currentPassword);
+        if (success) {
+            redirectAttributes.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
+            return "redirect:/member/info";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "비밀번호가 틀렸습니다.");
+            return "redirect:/member/edit";
+        }
+    }
+
 
     
 }
