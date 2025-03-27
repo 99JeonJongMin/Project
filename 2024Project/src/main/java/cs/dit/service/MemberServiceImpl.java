@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
     // ✅ 회원가입 (아이디 & 이메일 중복 체크)
     @Override
     public int memreg(MemberVO member) {
-        if (countByUserId(member.getUser_id()) > 0) return -1; // 👉 아이디 중복 체크
+        if (countByUserId(member.getUserid()) > 0) return -1; // 👉 아이디 중복 체크
 //        if (mapper.countByEmail(member.getEmail()) > 0) return -2; // 👉 이메일 중복 체크
 
         // 🔒 비밀번호 암호화 후 저장
@@ -55,19 +55,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean isUserIdExists(String user_id) {
-        return mapper.countByUserId(user_id) > 0;
+    public boolean isUserIdExists(String userid) {
+        return mapper.countByUserId(userid) > 0;
     }
 
     @Override
-    public int countByUserId(String user_id) {
-        return mapper.countByUserId(user_id);
+    public int countByUserId(String userid) {
+        return mapper.countByUserId(userid);
     }
-    public MemberVO findByUserId(String user_id) {
-    	return mapper.findByUserId(user_id);
+    public MemberVO findByUserId(String userid) {
+    	return mapper.findByUserId(userid);
     }
     public boolean updateMember(MemberVO updatedMember, String currentPassword) {
-        MemberVO existingMember = mapper.findByUserId(updatedMember.getUser_id());
+        MemberVO existingMember = mapper.findByUserId(updatedMember.getUserid());
         
         if (!passwordEncoder.matches(currentPassword, existingMember.getPasswd())) {
             return false;

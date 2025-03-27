@@ -32,7 +32,7 @@
                 <div class="mb-3 form-group">
                     <label class="form-label" for="userid">아이디</label>
                     <div class="input-group">
-                        <input type="text" id="userid" name="user_id" class="form-control"
+                        <input type="text" id="userid" name="userid" class="form-control"
 					       placeholder="아이디 입력 (4~16자 영문+숫자)" required
 					       oninput="validateUserIdInput(); resetUserIdCheckResultMessage();">
 					<button type="button" class="btn btn-secondary" onclick="checkUserIdAvailability()">중복 확인</button>

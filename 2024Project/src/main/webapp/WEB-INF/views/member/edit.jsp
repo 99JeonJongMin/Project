@@ -42,7 +42,7 @@
             </c:if>
 
             <form action="/member/edit" method="post">
-              <input type="hidden" name="user_id" value="${member.user_id}" />
+              <input type="hidden" name="userid" value="${member.userid}" />
               ${member.user_id}
 
               <div class="mb-3">
