@@ -42,7 +42,8 @@
             </c:if>
 
             <form action="/member/edit" method="post">
-              <input type="hidden" name="user_id" value="${member.userid}" />
+              <input type="hidden" name="user_id" value="${member.user_id}" />
+              ${member.user_id}
 
               <div class="mb-3">
                 <label class="form-label">이름</label>
