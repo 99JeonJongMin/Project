@@ -83,5 +83,26 @@ public class MemberServiceImpl implements MemberService {
         mapper.update(updatedMember); // 실제 업데이트 실행
         return true;
     }
+    
+    public String resetPassword(String userid, String name, String email) {
+        MemberVO member = mapper.findByUserId(userid);
+
+        if (member != null && member.getName().equals(name) && member.getEmail().equals(email)) {
+            String tempPassword = generateSimpleTempPassword(); // 쉬운 임시비번 생성
+            String encoded = passwordEncoder.encode(tempPassword);
+            member.setPasswd(encoded);
+
+            mapper.updatePassword(member);
+            return tempPassword; // 사용자가 볼 수 있도록 리턴
+        }
+
+        return null;
+    }
+
+    public String generateSimpleTempPassword() {
+        int num = (int)(Math.random() * 9000) + 1000; // 1000~9999
+        return "temp" + num;
+    }
+
 
 }

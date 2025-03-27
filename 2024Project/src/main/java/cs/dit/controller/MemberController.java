@@ -121,6 +121,31 @@ public class MemberController {
             return "redirect:/member/edit";
         }
     }
+    
+    @GetMapping("/findpw")
+    public String findPasswordForm() {
+        return "member/findpw"; // 비밀번호 찾기 폼
+    }
+
+    @PostMapping("/findpw")
+    public String findPassword(@RequestParam String userid,
+                               @RequestParam String name,
+                               @RequestParam String email,
+                               Model model,
+                               RedirectAttributes rttr) {
+
+        String tempPassword = service.resetPassword(userid, name, email);
+
+        if (tempPassword != null) {
+            model.addAttribute("tempPassword", tempPassword); // JSP에서 보여줄 임시비밀번호
+        } else {
+            rttr.addFlashAttribute("error", "일치하는 정보가 없습니다.");
+            return "redirect:/member/findpw";
+        }
+
+        return "member/findpw";
+    }
+
 
 
     

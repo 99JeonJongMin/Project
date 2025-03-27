@@ -11,6 +11,8 @@ public interface MemberService {
 	public boolean isUserIdAvailable(String userid);
 	MemberVO findByUserId(String userid);
 	public boolean updateMember(MemberVO updatedMember, String currentPassword);
+	public String resetPassword(String userid, String name, String email);
+	public String generateSimpleTempPassword();
 }
 
  
