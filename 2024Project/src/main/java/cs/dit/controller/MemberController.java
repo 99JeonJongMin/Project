@@ -131,20 +131,21 @@ public class MemberController {
     public String findPassword(@RequestParam String userid,
                                @RequestParam String name,
                                @RequestParam String email,
-                               Model model,
-                               RedirectAttributes rttr) {
+                               RedirectAttributes rttr,
+                               Model model) {
 
         String tempPassword = service.resetPassword(userid, name, email);
 
         if (tempPassword != null) {
-            model.addAttribute("tempPassword", tempPassword); // JSP에서 보여줄 임시비밀번호
+            // ✅ 로그인 페이지로 이동 + 임시 비밀번호 전달
+            model.addAttribute("tempPassword", tempPassword);
+            return "member/login"; // ★ login.jsp를 그대로 렌더링
         } else {
             rttr.addFlashAttribute("error", "일치하는 정보가 없습니다.");
-            return "redirect:/member/findpw";
+            return "redirect:/member/login"; // 실패 시 리디렉션
         }
-
-        return "member/findpw";
     }
+
 
 
 
