@@ -41,7 +41,7 @@
               <div class="alert alert-success">${msg}</div>
             </c:if>
 
-            <form action="/member/edit" method="post">
+            <form action="/member/edit" method="post" id="editForm">
               <input type="hidden" name="userid" value="${member.userid}" />
               <div class="mb-3">
                 <label class="form-label">이름</label>
@@ -60,7 +60,12 @@
 
               <div class="mb-3">
                 <label class="form-label">새 비밀번호</label>
-                <input type="password" name="passwd" class="form-control" placeholder="변경하지 않으려면 비워두세요">
+                <input type="password" id="newPassword" name="passwd" class="form-control" placeholder="변경하지 않으려면 비워두세요">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">비밀번호 확인</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="위와 동일하게 입력">
               </div>
 
               <button type="submit" class="btn btn-primary w-100">정보 수정</button>
@@ -71,5 +76,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("editForm");
+        const newPassword = document.getElementById("newPassword");
+        const confirmPassword = document.getElementById("confirmPassword");
+
+        form.addEventListener("submit", function (e) {
+          if (newPassword.value && newPassword.value !== confirmPassword.value) {
+            e.preventDefault();
+            alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
