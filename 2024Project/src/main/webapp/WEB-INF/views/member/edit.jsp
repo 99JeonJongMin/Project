@@ -43,7 +43,7 @@
 
             <form action="/member/edit" method="post">
               <input type="hidden" name="userid" value="${member.userid}" />
-              ${member.user_id}
+              ${member.userid}
 
               <div class="mb-3">
                 <label class="form-label">이름</label>
