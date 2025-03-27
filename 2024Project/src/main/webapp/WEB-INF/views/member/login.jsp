@@ -109,6 +109,10 @@
         width: 20px;
         margin-right: 10px;
       }
+      .modal-title{
+      font-weight: bold;
+      color: black;
+      }
     </style>
   </head>
   <body>
