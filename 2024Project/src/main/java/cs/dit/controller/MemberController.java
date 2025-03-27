@@ -102,6 +102,7 @@ public class MemberController {
     public String editForm(Model model, HttpSession session) {
     	String userid = (String) session.getAttribute("userid");
     	MemberVO member = service.findByUserId(userid);
+    	System.out.println("🔥 service.findByUserId(userid) 결과: " + member);
         model.addAttribute("member", member);
         return "member/edit";
     }
@@ -111,6 +112,7 @@ public class MemberController {
                                @RequestParam("currentPassword") String currentPassword, 
                                RedirectAttributes redirectAttributes) {
         boolean success = service.updateMember(member, currentPassword);
+        System.out.println("🔥 service.findByUserId(userid) 결과: " + success);
         if (success) {
             redirectAttributes.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
             return "redirect:/member/info";
