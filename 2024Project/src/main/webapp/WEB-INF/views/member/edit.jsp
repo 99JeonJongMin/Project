@@ -43,8 +43,6 @@
 
             <form action="/member/edit" method="post">
               <input type="hidden" name="userid" value="${member.userid}" />
-              ${member.userid}
-
               <div class="mb-3">
                 <label class="form-label">이름</label>
                 <input type="text" name="name" class="form-control" value="${member.name}" required>
