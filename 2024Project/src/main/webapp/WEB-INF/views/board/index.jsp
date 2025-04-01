@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const channelDisplay = document.getElementById('channelDisplay');
             channelDisplay.innerText = `📺 채널명: ${randomMenu.channelName}`;
+            console.log(randomMenu.channelName);
             channelDisplay.style.display = 'block';
 
             document.getElementById('videoContainer').style.display = 'block';
