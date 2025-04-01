@@ -13,17 +13,17 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    max-width: 700px; /* ✅ 6개 정렬을 위한 크기 조정 */
+    max-width: 700px;
     margin: auto;
 }
 
 /* ✅ 버튼 그룹 (6개씩 정렬) */
 .category-group {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* ✅ 6개씩 정렬 */
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     width: 100%;
-    max-width: 700px; /* ✅ 버튼 그룹 크기 확대 */
+    max-width: 700px;
 }
 
 /* ✅ 버튼 디자인 */
@@ -70,14 +70,13 @@ body {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* ✅ 버튼 클릭 및 호버 효과 */
 #recommendButton:hover {
     background-color: #007bff;
     color: white;
     box-shadow: 3px 3px 10px rgba(0, 123, 255, 0.3);
 }
 
-/* ✅ 반응형 - 모바일에서도 6개 정렬 유지 but 더 작은 화면에서는 3개씩 */
+/* ✅ 반응형 - 모바일 대응 */
 @media screen and (max-width: 768px) {
     .category-section {
         gap: 10px;
@@ -86,7 +85,7 @@ body {
     }
 
     .category-group {
-        grid-template-columns: repeat(3, 1fr); /* ✅ 작은 화면에서는 3개씩 정렬 */
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         max-width: 95%;
     }
@@ -105,20 +104,24 @@ body {
     }
 }
 
-/* ✅ YouTube 영상 크기 최적화 */
+/* ✅ YouTube 영상 컨테이너 */
 .video-wrapper {
-    position: relative;
     width: 100%;
-    max-width: 800px; /* ✅ 데스크탑에서 영상 크기 확대 */
-    aspect-ratio: 16 / 9;
-    margin: 20px auto;
+    max-width: 800px;
+    margin: 30px auto 10px;
+    text-align: center;
 }
 
+/* ✅ 유튜브 iframe */
 .responsive-video {
     width: 100%;
-    height: 100%;
+    height: 450px;
     border: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+}
+
+/* ✅ 채널명 스타일 (JS에서도 덮어쓰기되긴 함) */
+.video-wrapper p {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #555;
 }
