@@ -108,7 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 채널명 출력
             const channelInfo = document.createElement('p');
-            channelInfo.textContent = randomMenu.channelName.trim();
+            const cname = randomMenu.channelName.trim();
+            channelInfo.textContent = "출처: " + cname;
             channelInfo.classList.add('channel-info');
 
             // 콘텐츠 삽입
