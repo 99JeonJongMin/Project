@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             document.getElementById('videoContent').innerHTML = '';
             document.getElementById('videoContent').appendChild(iframe);
+            document.getElementById('videoContent').appendChild(channelInfo);
             document.getElementById('videoContainer').style.display = 'block';
             const channelInfo = document.createElement('p');
             channelInfo.innerText = `📺 채널명: ${randomMenu.channelName}`;
