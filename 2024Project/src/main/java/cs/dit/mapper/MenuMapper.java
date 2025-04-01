@@ -10,7 +10,7 @@ public interface MenuMapper {
 
     // ✅ 모든 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channelName AS channelName,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_Name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         LEFT JOIN menu_time mt ON m.id = mt.menu_id
@@ -23,7 +23,7 @@ public interface MenuMapper {
 
     // ✅ 특정 카테고리 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channelName AS channelName,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_Name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         LEFT JOIN menu_time mt ON m.id = mt.menu_id
@@ -37,7 +37,7 @@ public interface MenuMapper {
 
     // ✅ 특정 시간대 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channelName AS channelName,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_Name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         JOIN menu_time mt ON m.id = mt.menu_id
