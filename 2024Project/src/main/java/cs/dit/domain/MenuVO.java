@@ -10,5 +10,5 @@ public class MenuVO {
     private String category;
     private String videoUrl;
     private List<String> times; // ✅ 여러 시간대를 저장할 리스트 추가
-    private String channel_name;
+    private String channelName;
 }

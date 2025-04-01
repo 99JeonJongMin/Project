@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // ✅ 채널명 요소 먼저 생성
             const channelInfo = document.createElement('p');
-            channelInfo.innerText = `📺 채널명: ${randomMenu.channel_name}`;
+            channelInfo.innerText = `📺 채널명: ${randomMenu.channelName}`;
             channelInfo.style.marginTop = '10px';
             channelInfo.style.textAlign = 'center';
             channelInfo.style.fontSize = '1rem';

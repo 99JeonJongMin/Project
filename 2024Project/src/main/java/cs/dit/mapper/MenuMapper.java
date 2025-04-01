@@ -10,7 +10,7 @@ public interface MenuMapper {
 
     // ✅ 모든 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         LEFT JOIN menu_time mt ON m.id = mt.menu_id
@@ -24,7 +24,7 @@ public interface MenuMapper {
 
     // ✅ 특정 카테고리 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         LEFT JOIN menu_time mt ON m.id = mt.menu_id
@@ -39,7 +39,7 @@ public interface MenuMapper {
 
     // ✅ 특정 시간대 메뉴 가져오기
     @Select("""
-        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name,
+        SELECT m.id, m.name, m.category, m.video_url AS videoUrl, m.channel_name AS channelName,
                GROUP_CONCAT(mt.time) AS times
         FROM menu m
         JOIN menu_time mt ON m.id = mt.menu_id
@@ -54,7 +54,7 @@ public interface MenuMapper {
 
     // ✅ 메뉴 추가 (video_url)
     @Insert("""
-        INSERT INTO menu (name, category, video_url)
+        INSERT INTO menu (name, category, video_url )
         VALUES (#{name}, #{category}, #{videoUrl})
     """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
