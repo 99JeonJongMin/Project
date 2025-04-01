@@ -92,26 +92,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (filteredMenus.length > 0) {
             const randomMenu = filteredMenus[Math.floor(Math.random() * filteredMenus.length)];
-            document.getElementById('recommendedMenu').innerText = randomMenu.name;
+
+            // 메뉴명 출력
+            const menuTitle = document.getElementById('recommendedMenu');
+            menuTitle.innerText = randomMenu.name;
             document.getElementById('menuContainer').style.display = 'block';
 
+            // 영상 iframe 생성
             const iframe = document.createElement('iframe');
             iframe.src = decodeURIComponent(randomMenu.videoUrl.replace(/&amp;/g, "&"));
             iframe.allowFullscreen = true;
             iframe.classList.add('responsive-video');
 
+            // 채널명 출력
             const channelInfo = document.createElement('p');
             channelInfo.textContent = `📺 채널명: ${randomMenu.channelName}`;
-            console.log(`[${randomMenu.channelName}]`);  // 디버깅용
-            console.log(randomMenu.channelName);
             channelInfo.classList.add('channel-info');
 
+            // 콘텐츠 삽입
             const videoContent = document.getElementById('videoContent');
             videoContent.innerHTML = '';
             videoContent.appendChild(iframe);
             videoContent.appendChild(channelInfo);
 
             document.getElementById('videoContainer').style.display = 'block';
+
+            // 로그
+            console.log(`[${randomMenu.channelName}]`);
         } else {
             alert("선택한 조건에 맞는 메뉴가 없습니다.");
         }
