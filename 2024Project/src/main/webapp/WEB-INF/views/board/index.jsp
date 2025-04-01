@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             menuData = data;
+            console.log(menuData);
         })
         .catch(error => console.error("메뉴 데이터를 불러오는 중 오류 발생:", error));
 
