@@ -122,20 +122,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const iframe = document.createElement('iframe');
             iframe.src = decodeURIComponent(randomMenu.videoUrl.replace(/&amp;/g, "&"));
-            iframe.src = randomMenu.videoUrl;
             iframe.allowFullscreen = true;
             iframe.classList.add('responsive-video');
 
-            document.getElementById('videoContent').innerHTML = '';
-            document.getElementById('videoContent').appendChild(iframe);
-            document.getElementById('videoContent').appendChild(channelInfo);
-            document.getElementById('videoContainer').style.display = 'block';
+            // ✅ 채널명 요소 먼저 생성
             const channelInfo = document.createElement('p');
             channelInfo.innerText = `📺 채널명: ${randomMenu.channelName}`;
             channelInfo.style.marginTop = '10px';
             channelInfo.style.textAlign = 'center';
             channelInfo.style.fontSize = '1rem';
             channelInfo.style.color = '#555';
+
+            const videoContent = document.getElementById('videoContent');
+            videoContent.innerHTML = '';
+            videoContent.appendChild(iframe);
+            videoContent.appendChild(channelInfo);
+
+            document.getElementById('videoContainer').style.display = 'block';
         } else {
             alert('선택한 카테고리에 맞는 메뉴가 없습니다.');
         }
