@@ -129,6 +129,12 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('videoContent').innerHTML = '';
             document.getElementById('videoContent').appendChild(iframe);
             document.getElementById('videoContainer').style.display = 'block';
+            const channelInfo = document.createElement('p');
+            channelInfo.innerText = `📺 채널명: ${randomMenu.channelName}`;
+            channelInfo.style.marginTop = '10px';
+            channelInfo.style.textAlign = 'center';
+            channelInfo.style.fontSize = '1rem';
+            channelInfo.style.color = '#555';
         } else {
             alert('선택한 카테고리에 맞는 메뉴가 없습니다.');
         }
