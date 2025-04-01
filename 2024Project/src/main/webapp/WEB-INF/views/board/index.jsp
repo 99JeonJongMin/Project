@@ -40,8 +40,10 @@
     <div id="videoContainer" style="display: none;">
         <div class="video-wrapper" id="videoContent">
             <!-- iframe + 채널명 JS에서 append -->
+            
         </div>
     </div>
+    
 </main>
 
 <!-- ✅ 스크립트 -->
@@ -106,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 채널명 출력
             const channelInfo = document.createElement('p');
-            channelInfo.textContent = `📺 채널명: ${randomMenu.channelName.trim()}`;
+            channelInfo.textContent = randomMenu.channelName.trim();
             channelInfo.classList.add('channel-info');
 
             // 콘텐츠 삽입
