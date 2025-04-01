@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 채널명 출력
             const channelInfo = document.createElement('p');
-            channelInfo.textContent = `📺 채널명: ${randomMenu.channelName}`;
+            channelInfo.textContent = `📺 채널명: ${randomMenu.channelName.trim() || "(정보 없음)"}`;
             channelInfo.classList.add('channel-info');
 
             // 콘텐츠 삽입
