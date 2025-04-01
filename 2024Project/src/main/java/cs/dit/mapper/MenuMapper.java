@@ -17,7 +17,9 @@ public interface MenuMapper {
         GROUP BY m.id
     """)
     @Results({
-        @Result(property = "times", column = "times", javaType = List.class, typeHandler = cs.dit.utils.StringToListHandler.class)
+        @Result(property = "channelName", column = "channelName"),
+        @Result(property = "times", column = "times", javaType = List.class,
+                typeHandler = cs.dit.utils.StringToListHandler.class)
     })
     List<MenuVO> getAllMenus();
 
@@ -31,7 +33,9 @@ public interface MenuMapper {
         GROUP BY m.id
     """)
     @Results({
-        @Result(property = "times", column = "times", javaType = List.class, typeHandler = cs.dit.utils.StringToListHandler.class)
+        @Result(property = "channelName", column = "channelName"),
+        @Result(property = "times", column = "times", javaType = List.class,
+                typeHandler = cs.dit.utils.StringToListHandler.class)
     })
     List<MenuVO> getMenusByCategory(String category);
 
@@ -45,7 +49,9 @@ public interface MenuMapper {
         GROUP BY m.id
     """)
     @Results({
-        @Result(property = "times", column = "times", javaType = List.class, typeHandler = cs.dit.utils.StringToListHandler.class)
+        @Result(property = "channelName", column = "channelName"),
+        @Result(property = "times", column = "times", javaType = List.class,
+                typeHandler = cs.dit.utils.StringToListHandler.class)
     })
     List<MenuVO> getMenusByTime(String time);
 
