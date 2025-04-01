@@ -152,20 +152,6 @@
                 <div class="sign-in9-divider3"></div>
               </div>
               <a href="<c:url value='/member/memreg' />" class="sign-in9-link2">회원가입</a>
-              <div class="sign-in9-container7">
-                <button class="sign-in9-button2">
-                  <svg viewBox="0 0 877.7142857142857 1024">
-                    <path d="..."/>
-                  </svg>
-                  페이스북으로 로그인하기
-                </button>
-                <button class="sign-in9-button3">
-                  <svg viewBox="0 0 860.0137142857142 1024">
-                    <path d="..."/>
-                  </svg>
-                  구글계정으로 로그인하기
-                </button>
-              </div>
             </div>
           </div>
         </div>
