@@ -101,9 +101,9 @@ document.addEventListener("DOMContentLoaded", function () {
             iframe.classList.add('responsive-video');
 
             const channelInfo = document.createElement('p');
-            channelDisplay.textContent = `📺 채널명: ${randomMenu.channelName}`;
+            channelInfo.textContent = `📺 채널명: ${randomMenu.channelName}`;
             console.log(`[${randomMenu.channelName}]`);  // 디버깅용
-            console.log(randomeMenu.channelName);
+            console.log(randomMenu.channelName);
             channelInfo.classList.add('channel-info');
 
             const videoContent = document.getElementById('videoContent');
