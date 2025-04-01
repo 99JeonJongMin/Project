@@ -36,11 +36,11 @@
         <h2 id="recommendedMenu"></h2>
     </div>
 
+    <!-- 영상 및 채널명 출력 컨테이너 -->
     <div id="videoContainer" style="display: none;">
-        <div class="video-wrapper">
-            <div id="videoContent"></div>
+        <div class="video-wrapper" id="videoContent">
+            <!-- iframe + 채널명 JS에서 append -->
         </div>
-        <p id="channelDisplay" class="channel-info" style="display: none;"></p>
     </div>
 </main>
 
@@ -61,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener('click', function () {
             document.querySelectorAll('.nation-button').forEach(btn => btn.classList.remove('selected'));
             document.querySelector('.all-button-nation').classList.remove('selected');
-            if (this.classList.contains('all-button-nation')) this.classList.add('selected');
-            else this.classList.add('selected');
+            this.classList.add('selected');
         });
     });
 
@@ -70,8 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener('click', function () {
             document.querySelectorAll('.time-button').forEach(btn => btn.classList.remove('selected'));
             document.querySelector('.all-button-time').classList.remove('selected');
-            if (this.classList.contains('all-button-time')) this.classList.add('selected');
-            else this.classList.add('selected');
+            this.classList.add('selected');
         });
     });
 
@@ -102,14 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
             iframe.allowFullscreen = true;
             iframe.classList.add('responsive-video');
 
+            const channelInfo = document.createElement('p');
+            channelInfo.innerText = `📺 채널명: ${randomMenu.channelName}`;
+            channelInfo.classList.add('channel-info');
+
             const videoContent = document.getElementById('videoContent');
             videoContent.innerHTML = '';
             videoContent.appendChild(iframe);
-
-            const channelDisplay = document.getElementById('channelDisplay');
-            channelDisplay.innerText = `📺 채널명: ${randomMenu.channelName}`;
-            console.log(randomMenu.channelName);
-            channelDisplay.style.display = 'block';
+            videoContent.appendChild(channelInfo);
 
             document.getElementById('videoContainer').style.display = 'block';
         } else {
