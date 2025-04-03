@@ -3,7 +3,6 @@ package cs.dit.service;
 import cs.dit.domain.MenuVO;
 import cs.dit.mapper.MenuMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -23,10 +22,18 @@ public class MenuService {
     }
 
     public int addMenu(MenuVO menu) {
-        return menuMapper.insertMenu(menu);
+        int menuId = menuMapper.insertMenu(menu);
+        if (menu.getTimes() != null && !menu.getTimes().isEmpty()) {
+            menuMapper.insertMenuTimes(menuId, menu.getTimes());
+        }
+        return menuId;
     }
 
     public int deleteMenu(int id) {
         return menuMapper.deleteMenu(id);
+    }
+
+    public List<MenuVO> getMenusByTime(String time) {
+        return menuMapper.getMenusByTime(time);
     }
 }

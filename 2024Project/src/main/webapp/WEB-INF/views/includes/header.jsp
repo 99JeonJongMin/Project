@@ -23,19 +23,23 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="/board/menulist">메뉴추천게시판</a></li>
                     <li class="nav-item"><a class="nav-link" href="/board/boardlist">자유게시판</a></li>
+                         <% 
+                         String user = (String) session.getAttribute("userid");
+                         if (user != null) { %>
+				        <li class="nav-item"><a class="nav-link" href="/member/edit">회원정보 수정</a></li>
+				    <% } %>
                     <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">관리자</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <% 
                         // 세션에서 로그인 정보 확인
-                        String user = (String) session.getAttribute("userid");
                         if (user != null) { 
                     %>
-                        <li class="nav-item"><a class="nav-link active" href="/logout">로그아웃</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/member/logout">로그아웃</a></li>
                     <% 
                         } else { 
                     %>
-                        <li class="nav-item"><a class="nav-link active" href="/board/login">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/member/login">로그인</a></li>
                     <% 
                         } 
                     %>
@@ -43,14 +47,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- 로그아웃 처리를 위한 logout.jsp -->
-    <%
-        if (request.getRequestURI().contains("logout")) {
-            session.invalidate();
-            response.sendRedirect("index");
-        }
-    %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYVxA1fOMpY1zFpGxjLYzE2wrKQ1hD3zpGnJlJx04pT3MCqJ6v5PH0t6" 

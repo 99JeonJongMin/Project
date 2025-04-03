@@ -46,16 +46,9 @@ public class BoardServiceImpl implements BoardService {
 	public int menuregister(BoardVO board) {
 		// TODO Auto-generated method stub
 		
-		
 		int i = mapper.menuinsert(board);
-		
-		
-		
 		return i;
 	}
-
-	
-
 
 	@Override
 	public BoardVO get(Long bno) {
@@ -68,9 +61,6 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.menuread(bno);
 	}
-
-
-
 
 	@Override
 	public int modify(BoardVO board) {
@@ -86,6 +76,13 @@ public class BoardServiceImpl implements BoardService {
 	public int remove(Long bno) {
 		// TODO Auto-generated method stub
 		return mapper.delete(bno);
+
+	}
+	
+	@Override
+	public int menuremove(Long bno) {
+		// TODO Auto-generated method stub
+		return mapper.menudelete(bno);
 
 	}
 

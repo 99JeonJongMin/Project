@@ -20,5 +20,19 @@ public interface MemberMapper {
 
     // ✅ 아이디 중복 체크 추가
     @Select("SELECT COUNT(*) FROM member WHERE userid = #{userid}")
-    int countByUserId(String userid);
+    int countByUserId(String user_id);
+    
+    @Select("SELECT * FROM member WHERE userid = #{userid}")
+    MemberVO findByUserId(String user_id);
+    
+    @Select("SELECT * FROM member WHERE name = #{name}")
+    MemberVO findByUsername(String name);
+    
+    @Update("UPDATE member SET passwd = #{passwd}, name = #{name}, email = #{email} WHERE userid = #{userid}")
+    int update(MemberVO member);
+    
+    @Update("UPDATE member SET passwd = #{passwd} WHERE userid = #{userid}")
+    int updatePassword(MemberVO member);
+
 }
+ 

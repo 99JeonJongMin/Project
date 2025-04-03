@@ -3,14 +3,18 @@ package cs.dit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cs.dit.domain.BoardVO;
 import cs.dit.service.BoardService;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/board")
 @Controller
@@ -37,25 +41,26 @@ public class BoardController {
 	    model.addAttribute("index", service.getList());
 	    return "board/index"; // 📌 JSP 뷰를 명시적으로 지정
 	}
+	
 
 	
-	@GetMapping("/login")
-	public void login(Model model) {
-		model.addAttribute("login", service.getList());
+	@PostMapping("/boardpost")
+	public String post(@Validated BoardVO board, BindingResult result, RedirectAttributes rttr) {
+	    if (result.hasErrors()) {
+	        rttr.addFlashAttribute("errorMessage", "제목과 내용을 입력해주세요.");
+	        return "redirect:/board/post";
+	    }
+
+	    int count = service.register(board);
+
+	    if (count == 1) {
+	        rttr.addFlashAttribute("result", "registered");
+	    }
+
+	    return "redirect:/board/boardlist";
 	}
-	
-	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
-		
-		int count = service.register(board);
-		
-		if(count==1)
-			rttr.addFlashAttribute("result", "registered");
-		
-		return "redirect:/board/boardlist";
-	}
-	@PostMapping("/menuregister")
-	public String menuregister(BoardVO board, RedirectAttributes rttr) {
+	@PostMapping("/menupost")
+	public String menupost(BoardVO board, RedirectAttributes rttr) {
 		
 		int count = service.menuregister(board);
 		
@@ -65,19 +70,15 @@ public class BoardController {
 		return "redirect:/board/menulist";
 	}
 	
-	@GetMapping("/register")
-	public void register() {
-	}
-	 
-	@GetMapping("/boardmodify")
-	public void boardmodify() {
+	@GetMapping("/boardpost")
+	public void boardpost() {
 	}
 	
-	@GetMapping("/menumodify")
-	public void menumodify() {
+	@GetMapping("/menupost")
+	public void menupost() {
 	}
 	
-	@GetMapping({"/get", "/modify"})
+	@GetMapping({"/get", "/boardmodify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
 	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
 	    BoardVO board = service.get(bno);
@@ -91,7 +92,7 @@ public class BoardController {
 	    model.addAttribute("board", board);
 	}
 
-	@GetMapping({"/menuget", "/menumodify"})
+	@GetMapping("/menuget")
 	public void menuget(@RequestParam("bno") Long bno, Model model) {
 	    System.out.println("✅ GET 요청 받음 - bno: " + bno);
 	    BoardVO board = service.menuget(bno);
@@ -106,7 +107,7 @@ public class BoardController {
 	}
 	
 	// POST method for modifying a board
-	@PostMapping("/modify")
+	@PostMapping("/boardmodify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
 		
 		// Call the service to update the board
@@ -116,7 +117,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "modified");
 		}
 		
-		return "redirect:/board/list2";
+		return "redirect:/board/boardlist";
 	}
 	
 	// POST method for deleting a board
@@ -130,7 +131,19 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "removed");
 		}
 		
-		return "redirect:/board/list";
+		return "redirect:/board/boardlist";
+	}
+	@PostMapping("/menuremove")
+	public String menuremove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+		
+		// Call the service to delete the board
+		int count = service.menuremove(bno);
+		
+		if(count == 1) {
+			rttr.addFlashAttribute("result", "removed");
+		}
+		
+		return "redirect:/board/menulist";
 	}
 	
 	@Controller

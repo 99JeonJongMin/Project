@@ -7,5 +7,12 @@ public interface MemberService {
 	public boolean authenticate(String userid, String passwd);
 	public boolean isEmailExists(String email);
 	public boolean isUserIdExists(String userid);
+	public int countByUserId(String userid);
+	public boolean isUserIdAvailable(String userid);
+	MemberVO findByUserId(String userid);
+	public boolean updateMember(MemberVO updatedMember, String currentPassword);
+	public String resetPassword(String userid, String name, String email);
+	public String generateSimpleTempPassword();
 }
 
+ 

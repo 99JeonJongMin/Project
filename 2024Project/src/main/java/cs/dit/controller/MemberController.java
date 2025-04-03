@@ -1,19 +1,25 @@
 package cs.dit.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import cs.dit.domain.MemberVO;
 import cs.dit.service.MemberService;
 
-@RequestMapping("/board")  // ✅ 컨트롤러 전체에 /board 경로 설정
+@RequestMapping("/member")  // ✅ 컨트롤러 전체에 /member 경로 설정
 @Controller
 public class MemberController {
 
@@ -23,28 +29,44 @@ public class MemberController {
     // ✅ 회원가입 (아이디 & 이메일 중복 체크 추가)
     @PostMapping("/memreg")
     public String memreg(MemberVO member, RedirectAttributes rttr) {
-
+    		
         int result = service.memreg(member);
-
+        System.out.println("회원가입 요청 정보: " + member);
         if (result == -1) {
             rttr.addFlashAttribute("error", "이미 사용 중인 아이디입니다."); // 아이디 중복 시 에러 메시지
-            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
+            return "redirect:/member/memreg"; // 회원가입 페이지로 이동
         }
 
-        if (result == -2) {
-            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 이메일 중복 시 에러 메시지
-            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
-        }
+//        if (result == -2) {
+//            rttr.addFlashAttribute("error", "이미 등록된 이메일입니다."); // 이메일 중복 시 에러 메시지
+//            return "redirect:/board/memreg"; // 회원가입 페이지로 이동
+//        }
 
         if (result == 1) {
-            rttr.addFlashAttribute("memreg", "registered");
-            return "redirect:/board/login"; // 회원가입 성공 시 로그인 페이지로 이동
+            rttr.addFlashAttribute("success", "회원가입이 완료되었습니다!");
+            return "redirect:/member/login"; // 회원가입 성공 시 로그인 페이지로 이동
         }
 
         // 만약 예상치 못한 오류가 발생했을 경우
         rttr.addFlashAttribute("error", "회원가입 중 오류가 발생했습니다.");
-        return "redirect:/board/memreg";
+        return "redirect:/member/memreg";
     }
+
+	
+    @GetMapping("/checkUserId")
+    @ResponseBody
+    public String checkUserId(@RequestParam("userid") String userid) {
+        System.out.println("🧪 userid 값 = " + userid);
+        boolean isAvailable = service.isUserIdAvailable(userid);
+        return isAvailable ? "AVAILABLE" : "TAKEN";
+    }
+    
+
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "member/login";
+	}
 
     // ✅ 로그인 처리
     @PostMapping("/login")
@@ -56,21 +78,76 @@ public class MemberController {
             return "redirect:/board/index"; // 로그인 성공 시 메인 페이지로 이동
         } else {
             rttr.addFlashAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "redirect:/board/login"; // 로그인 페이지로 이동
+            return "redirect:/member/login"; // 로그인 페이지로 이동
         }
     }
 
     // ✅ 로그아웃 처리
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, HttpServletResponse response) {
         session.invalidate();
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return "redirect:/board/index";
     }
 
     @GetMapping("/memreg")
     public String memreg() {  
-        return "board/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
+        return "member/memreg";  // ✅ 올바른 JSP 뷰 경로 지정
     }
+    
+    @GetMapping("/edit")
+    public String editForm(Model model, HttpSession session) {
+    	String userid = (String) session.getAttribute("userid");
+    	MemberVO member = service.findByUserId(userid);
+    	System.out.println("🔥 service.findByUserId(userid) 결과: " + member);
+        model.addAttribute("member", member);
+        return "member/edit";
+    }
+
+    @PostMapping("/edit")
+    public String updateMember(@ModelAttribute MemberVO member, 
+                               @RequestParam("currentPassword") String currentPassword, 
+                               RedirectAttributes redirectAttributes) {
+        boolean success = service.updateMember(member, currentPassword);
+        System.out.println("🔥 service.findByUserId(userid) 결과: " + success);
+        if (success) {
+            redirectAttributes.addFlashAttribute("msg", "회원정보가 수정되었습니다.");
+            return "redirect:/member/edit";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "비밀번호가 틀렸습니다.");
+            return "redirect:/member/edit";
+        }
+    }
+    
+    @GetMapping("/findpw")
+    public String findPasswordForm() {
+        return "member/findpw"; // 비밀번호 찾기 폼
+    }
+
+    @PostMapping("/findpw")
+    public String findPassword(@RequestParam String userid,
+                               @RequestParam String name,
+                               @RequestParam String email,
+                               RedirectAttributes rttr,
+                               Model model) {
+
+        String tempPassword = service.resetPassword(userid, name, email);
+
+        if (tempPassword != null) {
+            // ✅ 로그인 페이지로 이동 + 임시 비밀번호 전달
+            model.addAttribute("tempPassword", tempPassword);
+            return "member/login"; // ★ login.jsp를 그대로 렌더링
+        } else {
+            rttr.addFlashAttribute("error", "일치하는 정보가 없습니다.");
+            return "redirect:/member/login"; // 실패 시 리디렉션
+        }
+    }
+
+
+
 
     
 }

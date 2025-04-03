@@ -15,6 +15,6 @@ public class BoardVO {
 	}
 	public static BoardVO read(long bno) {
 		// TODO Auto-generated method stub
-		return null;
+		return null; 
 	}
 }

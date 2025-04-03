@@ -15,7 +15,7 @@ public class MemberVO {
     
 	public static MemberVO read(String userid) {
 		// TODO Auto-generated method stub
-		return null;
+		return null; 
 	}
 	
 	 public MemberVO(String userid, String passwd, String name, String email) {
