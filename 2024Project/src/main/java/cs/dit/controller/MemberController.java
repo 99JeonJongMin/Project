@@ -99,10 +99,17 @@ public class MemberController {
     }
     
     @GetMapping("/edit")
-    public String editForm(Model model, HttpSession session) {
-    	String userid = (String) session.getAttribute("userid");
-    	MemberVO member = service.findByUserId(userid);
-    	System.out.println("🔥 service.findByUserId(userid) 결과: " + member);
+    public String editForm(Model model, HttpSession session, RedirectAttributes rttr) {
+        String userid = (String) session.getAttribute("userid");
+
+        // 로그인하지 않은 경우 로그인 페이지로 리디렉션
+        if (userid == null) {
+            rttr.addFlashAttribute("error", "로그인 후 이용 가능합니다.");
+            return "redirect:/member/login";
+        }
+
+        MemberVO member = service.findByUserId(userid);
+        System.out.println("🔥 service.findByUserId(userid) 결과: " + member);
         model.addAttribute("member", member);
         return "member/edit";
     }
